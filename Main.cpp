@@ -13,10 +13,17 @@ int main() {
 	float posMaxAcc = 1;
 	float negMaxAcc = -1;
 
-	sf::RenderWindow window(sf::VideoMode(800, 800), "ScrumBums SFML: Look it works!");
-	sf::CircleShape shape(30.f);
-	shape.setFillColor(sf::Color::Green);
+	sf::Texture texture1;
+	texture1.loadFromFile("Mauler.jpg");
+	sf::Sprite sprite;
+	sprite.setTexture(texture1);
+	sprite.setScale(.2f, .2f);
+	sprite.setColor(sf::Color::Green);
 
+	sf::RenderWindow window(sf::VideoMode(800, 800), "ScrumBums SFML: Look it works!");
+	//sf::CircleShape shape(20.f);
+	//shape.setFillColor(sf::Color::Green);
+	
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -35,7 +42,7 @@ int main() {
 					movL = true;
 					movR = false;
 				}	
-				if (event.key.code == sf::Keyboard::Up) {
+				if (event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::Numpad8) {
 					movU = true;
 					movD = false;
 				}
@@ -43,13 +50,16 @@ int main() {
 					movD = true;
 					movU = false;
 				}
+				if (event.key.code == sf::Keyboard::H) {
+					sprite.setPosition(window.getSize().x / 2,window.getSize().y / 2);
+				}
 				break;
 			case sf::Event::KeyReleased:
 				if (event.key.code == sf::Keyboard::Right)
 					movR = false;
 				if (event.key.code == sf::Keyboard::Left)
 					movL = false;
-				if (event.key.code == sf::Keyboard::Up)
+				if (event.key.code == sf::Keyboard::Up || event.key.code == sf::Keyboard::Numpad8)
 					movU = false;
 				if (event.key.code == sf::Keyboard::Down)
 					movD = false;
@@ -86,9 +96,11 @@ int main() {
 			velocity.y = 0;
 		}
 		
-		shape.move(velocity);
+		//shape.move(velocity);
+		sprite.move(velocity);
 		window.clear();
-		window.draw(shape);
+		window.draw(sprite);
+		//window.draw(shape);
 		window.display();
 	}
 
