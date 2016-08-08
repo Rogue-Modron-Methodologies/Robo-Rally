@@ -1,6 +1,7 @@
 //  SFML Demo
 
 #include <SFML/Graphics.hpp>
+#include "Game.h"
 #include <iostream>
 #include <string>
 

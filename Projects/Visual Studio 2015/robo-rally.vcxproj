@@ -21,6 +21,9 @@
   <ItemGroup>
     <ClCompile Include="..\..\Main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Game.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{135262C6-05A8-41A2-9DCB-DDDB88B128A6}</ProjectGuid>
     <RootNamespace>starshipgraphics</RootNamespace>
