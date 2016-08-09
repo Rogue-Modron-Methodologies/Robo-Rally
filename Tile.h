@@ -1,11 +1,14 @@
 // Tile Header
 // Represents a single square on the board
+//
+
 
 #ifndef TILE_H
 #define TILE_H
 
 #include <vector>
 #include <string>
+//#include "Object.h"
 //#include "TileFeature.h"
 
 class Header /* public : Object */ {
