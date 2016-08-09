@@ -23,16 +23,25 @@
     <ClInclude Include="..\..\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
+    <ClInclude Include="..\..\Card.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Card.h">
+    <ClInclude Include="..\..\Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MoveCard.h">
+    <ClInclude Include="..\..\MoveCard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UpgradeCard.h">
+    <ClInclude Include="..\..\UpgradeCard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
