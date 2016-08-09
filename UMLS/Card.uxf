@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>160</x>
+      <y>280</y>
+      <w>290</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>Card
+--
+
+--
++Card(filename : string)</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

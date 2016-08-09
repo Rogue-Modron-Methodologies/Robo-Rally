@@ -10,10 +10,10 @@
 //#include "Board.h"
 
 
-class Header {
+class Map {
 	//std::vector<std::vector<Board>> map;
-
-	//Header(std::string filename);
+public:
+	//Map(std::string filename);
 };
 
-#endif // MAP_F
+#endif // MAP_H
