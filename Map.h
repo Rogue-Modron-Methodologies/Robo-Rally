@@ -7,13 +7,14 @@
 
 #include <vector>
 #include <string>
-//#include "Board.h"
+#include "Board.h"
 
 
 class Map {
-	//std::vector<std::vector<Board>> map;
+	std::vector<std::vector<Board>> map;
+
 public:
-	//Map(std::string filename);
+	Map(std::string filename) {};
 };
 
 #endif // MAP_H

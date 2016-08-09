@@ -6,12 +6,12 @@
 #define UPGRADECARD_H
 
 #include <string>
-//#include "Card.h"
+#include "Card.h"
 
-class UpgradeCard /*: public Card*/ {
+class UpgradeCard : public Card {
 
 public:
-	//UpgradeCard(std::string filename);
+	UpgradeCard(std::string filename) : Card(filename) {};
 };
 
 #endif // UPGRADECARD_H

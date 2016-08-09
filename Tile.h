@@ -7,15 +7,14 @@
 #define TILE_H
 
 #include <vector>
-#include <string>
-//#include "Object.h"
-//#include "TileFeature.h"
+#include "TileFeature.h"
 
-class Header /* public : Object */ {
-	//std::string name;
-	//vector<TileFeature> features;
+class Tile {
+	
+	std::vector<TileFeature> features;
+
 public:
-	//Tile(std::string filename);
+	Tile(std::string filename) {};
 };
 
 #endif // TILE_H

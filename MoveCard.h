@@ -6,12 +6,12 @@
 #define MOVECARD_H
 
 #include <string>
-//#include "Card.h"
+#include "Card.h"
 
-class MoveCard /*: public Card*/ {
+class MoveCard : public Card {
 
 public:
-	//MoveCard(std::string filename);
+	MoveCard(std::string filename) : Card(filename) {};
 };
 
 #endif // MOVECARD_H

@@ -8,13 +8,12 @@
 
 #include <vector>
 #include <string>
-//#include "Object.h"
-//#include "Tile.h"
+#include "Tile.h"
 
-class Board /* public : Object */ {
-	//std::vector<std::vector<Tile>> board;
+class Board {
+	std::vector<std::vector<Tile>> board;
 public:
-	//Board(std::string filename);
+	Board(std::string filename) {};
 
 };
 

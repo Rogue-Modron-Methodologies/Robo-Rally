@@ -7,16 +7,16 @@
 
 #include <vector>
 #include <string>
-//#include "Robot.h"
-//#include "Card.h"
+#include "Robot.h"
+#include "Card.h"
 
-class Header /* public : Object */ {
-	//std::string name;
-	//vector<Card> hand;
-	//Robot robot;
+class Player : public Object  {
+	std::string name;
+	std::vector<Card> hand;
+	Robot robot;
 public:
-	//Player(std::string filename);
-	//void programRobot();
+	Player(std::string filename) : robot(filename) {};
+	void programRobot() {};
 };
 
 #endif // PLAYER_H

@@ -3,12 +3,15 @@
 //  Jamie and Jordan
 
 
-#include <SFML/Graphics.hpp>
+
 #include "Game.h"
 #include <iostream>
 #include <string>
 
 int main() {
+
+	Game game("RobotStew.txt");
+
 	bool movR, movL, movU, movD;
 	movR = movL = movU = movD = false;
 	

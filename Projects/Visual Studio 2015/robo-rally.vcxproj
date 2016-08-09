@@ -22,19 +22,19 @@
     <ClCompile Include="..\..\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Board.h" />
     <ClInclude Include="..\..\Card.h" />
+    <ClInclude Include="..\..\Deck.h" />
     <ClInclude Include="..\..\Game.h" />
     <ClInclude Include="..\..\Map.h" />
     <ClInclude Include="..\..\MoveCard.h" />
+    <ClInclude Include="..\..\Object.h" />
     <ClInclude Include="..\..\Player.h" />
     <ClInclude Include="..\..\ResourceManager.h" />
+    <ClInclude Include="..\..\Robot.h" />
     <ClInclude Include="..\..\Tile.h" />
+    <ClInclude Include="..\..\TileFeature.h" />
     <ClInclude Include="..\..\UpgradeCard.h" />
-    <ClInclude Include="Board.h" />
-    <ClInclude Include="Deck.h" />
-    <ClInclude Include="Object.h" />
-    <ClInclude Include="Robot.h" />
-    <ClInclude Include="TileFeature.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{135262C6-05A8-41A2-9DCB-DDDB88B128A6}</ProjectGuid>

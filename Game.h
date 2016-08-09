@@ -3,24 +3,26 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <SFML/Graphics.hpp>
 #include <vector>
-//#include "Map.h"
-//#include "Player.h"
-//#include "Deck.h"
-//#include "ResourceManager.h"
+#include "Map.h"
+#include "Player.h"
+#include "Deck.h"
+#include "ResourceManager.h"
 
-//enum class DeckType { movement = 0, upgrade = 1 };
-//enum class ResourceType { textures = 0, sounds = 1, fonts = 2 };
+enum class DeckType { movement = 0, upgrade = 1 };
+enum class ResourceType { textures = 0, sounds = 1, fonts = 2 };
 
 
 class Game {
-	//Map map;
-	//vector<Player> playerList;
-	//vector<Deck> decks;
-	//vector<ResourceManager> resources;
+	Map map;
+	std::vector<Player> playerList;
+	std::vector<Deck> decks;
+	std::vector<ResourceManager<sf::Texture>> textureList;
 
 public:
-	//Game(){};
+	Game(std::string filename ) : map(filename) {
+	};
 
 
 };

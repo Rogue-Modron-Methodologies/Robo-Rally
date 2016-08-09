@@ -5,12 +5,12 @@
 #define CARD_H
 
 #include <string>
-//#include "Object.h"
+#include "Object.h"
 
-class Card /*: public Object*/ {
+class Card : public Object {
 
 public:
-	//Card(std::string filename);
+	Card(std::string filename) {};
 };
 
 #endif // CARD_H
