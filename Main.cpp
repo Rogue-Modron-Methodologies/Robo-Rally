@@ -1,4 +1,5 @@
-//  SFML Demo
+//  Robo Rally Game
+//  Need to get License Info
 
 #include <SFML/Graphics.hpp>
 #include "Game.h"
