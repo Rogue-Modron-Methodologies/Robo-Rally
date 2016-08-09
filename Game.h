@@ -28,7 +28,7 @@ public:
 
 //void fun(DeckType type)
 //{
-//	decks[type].shuffle();;
+//	decks[type].shuffle();
 //}
 
 #endif // GAME_H

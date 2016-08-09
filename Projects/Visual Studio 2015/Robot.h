@@ -1,5 +1,5 @@
 // Robot header
-// 
+// what is needed to make robots rally
 //
 
 #ifndef ROBOT_H
