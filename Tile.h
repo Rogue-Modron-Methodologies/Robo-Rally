@@ -9,7 +9,7 @@
 #include <vector>
 #include "TileFeature.h"
 
-class Tile {
+class Tile : public Object {
 	
 	std::vector<TileFeature> features;
 
