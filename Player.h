@@ -15,7 +15,9 @@ class Player : public Object  {
 	std::vector<Card> hand;
 	Robot robot;
 public:
-	Player(std::string filename) : robot(filename) {};
+	Player(std::string filename, sf::Vector2f pos, sf::Vector2f sPos, sf::Vector2f sSize = CARD_SOURCE_SIZE) 
+		: Object(filename, pos, sPos, sSize), robot(filename, pos, sPos) {};
+
 	void programRobot() {};
 };
 

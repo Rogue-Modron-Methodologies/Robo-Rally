@@ -13,14 +13,9 @@
 class Board {
 	std::vector<std::vector<Tile>> board;
 public:
-	Board(std::string filename) {};
+	Board(std::string filename, sf::Vector2f pos) {};
 
 };
-
-
-
-
-
 
 #endif // BOARD_H
 

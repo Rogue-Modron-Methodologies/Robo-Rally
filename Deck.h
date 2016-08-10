@@ -9,7 +9,7 @@ class Deck : public Object  {
 	std::vector<Card> deck;
 	
 public:
-	Deck(){};
+	Deck(std::string filename) : Object(filename) {};
 	void deal() {};
 	void shuffle() {};
 

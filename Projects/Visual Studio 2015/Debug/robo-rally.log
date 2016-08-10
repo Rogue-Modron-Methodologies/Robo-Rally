@@ -1,4 +1,3 @@
 ﻿  Main.cpp
-c:\users\melly\desktop\github\robo-rally\main.cpp(61): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-  robo-rally.vcxproj -> C:\Users\Melly\Desktop\GitHub\robo-rally\Projects\Visual Studio 2015\Debug\robo-rally.exe
-  robo-rally.vcxproj -> C:\Users\Melly\Desktop\GitHub\robo-rally\Projects\Visual Studio 2015\Debug\robo-rally.pdb (Partial PDB)
+  robo-rally.vcxproj -> C:\Users\GameBabe\Documents\GitHub\robo-rally\Projects\Visual Studio 2015\Debug\robo-rally.exe
+  robo-rally.vcxproj -> C:\Users\GameBabe\Documents\GitHub\robo-rally\Projects\Visual Studio 2015\Debug\robo-rally.pdb (Partial PDB)

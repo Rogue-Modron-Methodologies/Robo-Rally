@@ -2,11 +2,7 @@
 //  Need to get License Info
 //  Jamie and Jordan
 
-
-
 #include "Game.h"
-#include <iostream>
-#include <string>
 
 int main() {
 
@@ -58,7 +54,7 @@ int main() {
 					movU = false;
 				}
 				if (event.key.code == sf::Keyboard::H) {
-					sprite.setPosition(window.getSize().x / 2,window.getSize().y / 2);
+					sprite.setPosition(window.getSize().x / 2.f, window.getSize().y / 2.f);
 				}
 				break;
 			case sf::Event::KeyReleased:

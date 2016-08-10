@@ -16,7 +16,7 @@ class Robot : public TileFeature {
 	std::vector<Card> upgrades;
 
 public:
-	Robot(std::string filename) : TileFeature(filename) {};
+	Robot(std::string filename, sf::Vector2f pos, sf::Vector2f sPos) : TileFeature(filename, pos, sPos) {};
 
 
 };

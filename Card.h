@@ -7,10 +7,12 @@
 #include <string>
 #include "Object.h"
 
+const sf::Vector2f CARD_SOURCE_SIZE = { 150, 150 };  //  ??????? Just a Guess
+
 class Card : public Object {
 
 public:
-	Card(std::string filename) {};
+	Card(std::string filename) : Object(filename) {};
 };
 
 #endif // CARD_H

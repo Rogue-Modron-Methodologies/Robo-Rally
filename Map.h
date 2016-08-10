@@ -14,7 +14,7 @@ class Map {
 	std::vector<std::vector<Board>> map;
 
 public:
-	Map(std::string filename) {};
+	Map(std::string filename, sf::Vector2f pos) {};
 };
 
 #endif // MAP_H
