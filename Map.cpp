@@ -53,6 +53,7 @@ void Map::drawMap(/*sf::RenderWindow &window*/) {
 			col->drawBoard(/*window*/);
 			j++;
 		}
+		j = 0;
 		i++;
 	}
 

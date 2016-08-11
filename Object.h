@@ -37,7 +37,7 @@ public:
 	sf::Vector2f getScale() const { return sprite->getScale(); }
 	void draw(sf::RenderWindow &window) { window.draw(*sprite); }
 	// Prototypes
-	bool isTargeted(sf::RenderWindow &gWindow);
+	bool isTargeted(sf::RenderWindow &window);
 
 
 private:
