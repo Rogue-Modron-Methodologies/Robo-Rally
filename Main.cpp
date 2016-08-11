@@ -6,7 +6,7 @@
 
 int main() {
 
-	Game game("maps/robotstew.csv");
+	Game game("robotstew.csv");
 
 	bool movR, movL, movU, movD;
 	movR = movL = movU = movD = false;

@@ -8,7 +8,8 @@
 // Loops through file and creates 2D Vector of Board Objects
 void Map::loadMap(std::string filename, sf::Vector2f pos) {
 
-	std::fstream inFile(filename.c_str());
+	std::string fullFilename = MAP_HEADER + filename;
+	std::fstream inFile(fullFilename.c_str());
 	if (!inFile)
 		std::cout << "Error Opening " << filename << "\n\t\tTerminating Program\n", exit(EXIT_FAILURE);
 
@@ -69,8 +70,8 @@ void Map::loadMap(std::string filename, sf::Vector2f pos) {
 //*************************************************************
 // Loops through 2D vector and calls drawMap on each element
 // 
-void Map::drawMap(/*sf::RenderWindow &window*/) {
+void Map::drawMap(sf::RenderWindow &window) {
 	for (auto row = map.begin(); row != map.end(); ++row)
 		for (auto col = row->begin(); col != row->end(); ++col) 
-			col->drawBoard(/*window*/);
+			col->drawBoard(window);
 }

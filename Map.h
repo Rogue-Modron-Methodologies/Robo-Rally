@@ -10,6 +10,7 @@
 #include <iostream>
 #include "Board.h"
 
+const std::string MAP_HEADER = "resources/maps/";
 
 class Map {
 	std::vector<std::vector<Board>> map;
@@ -18,7 +19,7 @@ class Map {
 public:
 	Map(std::string filename, sf::Vector2f pos) { loadMap(filename, pos); }
 	~Map() { unloadMap(); }
-	void drawMap(/*sf::RenderWindow &window*/);
+	void drawMap(sf::RenderWindow &window);
 private:
 	void loadMap(std::string filename, sf::Vector2f pos);
 	void unloadMap() { map.clear(); }
