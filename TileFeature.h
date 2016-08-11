@@ -8,7 +8,7 @@
 #include <string>
 #include "Object.h"
 
-const sf::Vector2i TILE_SOURCE_SIZE = { 150, 150 };
+const sf::Vector2i TILE_SOURCE_SIZE = { 50, 50 };
 
 class TileFeature : public Object  {
 	std::string featureName;

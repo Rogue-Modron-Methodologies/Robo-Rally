@@ -68,7 +68,7 @@ void Map::loadMap(std::string filename, sf::Vector2f pos) {
 }
 
 //*************************************************************
-// Loops through 2D vector and calls drawMap on each element
+// Loops through 2D vector and calls draw on each element
 // 
 void Map::drawMap(sf::RenderWindow &window) {
 	for (auto row = map.begin(); row != map.end(); ++row)
