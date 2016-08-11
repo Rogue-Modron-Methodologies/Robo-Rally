@@ -13,19 +13,29 @@
 class Board {
 	std::vector<std::vector<Tile>> board;
 	std::string name;
+	std::string spriteSheet;
 	int orientation;
 	sf::Vector2i pos;
+	sf::Vector2i dimensions;
 public:
-	Board(std::string filename, sf::Vector2i pos, int orientation) {
-		this->name = filename;
+	Board(sf::Vector2i pos, sf::Vector2i dimensions, int orientation) {
 		this->orientation = orientation;
+		this->dimensions = dimensions;
 		this->pos = pos;
 	};
-	void drawBoard() {
-		std::cout << "Board: ";
-		std::cout << name << " " << pos.x << "," << pos.y << " " << orientation << std::endl;
+	Board(std::string filename, sf::Vector2i pos, sf::Vector2i dimensions, int orientation) {
+		this->name = filename;
+		this->orientation = orientation;
+		this->dimensions = dimensions;
+		this->pos = pos;
+	};
+	void Board::loadBoard(std::string filename, sf::Vector2f pos);
+	void drawBoard(/*sf::RenderWindow &window*/);
+	int getOrientation() { return orientation; }
+	sf::Vector2i getDimensions() {
+		//return orientation == up || orientation == down ? dimensions : sf::Vector2i(dimensions.y, dimensions.x);
+		return dimensions;
 	}
-
 };
 
 #endif // BOARD_H

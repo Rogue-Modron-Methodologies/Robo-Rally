@@ -1,0 +1,13 @@
+BaseSpriteSheet ,,,,,,,,,,,
+repair 0 1 ,floor ,floor wall 0 0,conv 0 2,floor wall 0 0,conv 180 2,conv 0 1,floor wall 0 0,conv 180 1,floor wall 0 0,floor ,floor 
+floor ,pit,floor wall 90 0,conv 0 2 laser 270 1,floor laser 270 1,conv 180 2 laser 270 1 wall 90 0,conv 0 1,floor ,conv 180 1,convbl 180 1,conv 270 1,conv 270 1
+floor wall 270 0,floor ,floor laser 0 1  wall 0 0,convhr 0 2,conv 270 2,convbr 180 2,conv 0 1,floor ,conv 180 1,conv 180 1,floor ,floor wall 90 0
+floor ,floor ,floor laser 0 1  ,conv 0 2,floor ,floor wall 180 0 wall 270 0,conv 0 1,floor ,floor ,pit,floor ,floor 
+floor wall 270 0,floor ,floor laser 0 1  ,conv 0 2,floor ,conv 90 1 wall 0 0,gear 0 1,floor ,floor laser 0 1 wall 0 0,repair 0 2,floor ,floor wall 90 0
+floor ,floor ,gear 0 0 laser 0 1,conv 0 2,floor ,repair 0 2 wall 90 0,convbl 180 1 wall 270 0,conv 270 1,gear 0 0 laser 0 1,conv 270 1,conv 270 1,conv 270 1
+conv 270 1,conv 270 1,gear 0 1 laser 0 1,conv 0 2,floor ,floor ,conv 180 1,pit,floor laser 0 1 wall 180 0,floor ,floor wall 180 0,floor 
+conv 90 1 wall 270 0,convbr 180 1,floor laser 0 1  wall 180 0,conv 0 2,floor ,floor ,conv 180 1,floor ,floor ,floor ,floor ,floor wall 90 0
+floor ,conv 180 1,floor wall 90 0,floor laser 270 2,gear 0 0 laser 270 2,gear 0 1 laser 270 2,floor laser 270 2 wall 90 0,floor ,gear 0 1,conv 270 1,conv 270 1,conv 270 1
+floor wall 270 0,conv 180 1,repair 0 2,conv 0 1,floor ,pit,floor ,floor ,conv 180 1,pit,floor ,floor wall 90 0
+floor ,floor laser 270 3 wall 90 0 wall 270 0,floor ,conv 0 1,floor ,floor ,floor ,floor laser 90 1 wall 270 0,conv 180 1 laser 90 1,floor laser 90 1,floor wall 270 0,floor 
+floor ,conv 180 1,floor wall 180 0,conv 0 1,floor wall 180 0,floor ,floor ,floor wall 180 0,conv 180 1,floor wall 180 0,floor ,repair 0 1 

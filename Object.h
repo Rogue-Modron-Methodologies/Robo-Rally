@@ -23,8 +23,8 @@ public:
 
 	Object(	std::string filename, 
 			sf::Vector2f pos = { 0, 0 }, 
-			sf::Vector2f srcPos = { 0, 0 },
-			sf::Vector2f srcSize = { 0, 0 } ) { loadObject(filename, pos, srcPos, srcSize); }
+			sf::Vector2i srcPos = { 0, 0 },
+			sf::Vector2i srcSize = { 0, 0 } ) { loadObject(filename, pos, srcPos, srcSize); }
 	~Object() { unloadObject(); };
 
 	void setScale(sf::Vector2f scale) { sprite->setScale(scale); }
@@ -44,7 +44,7 @@ private:
 	// Inline Functions
 	void unloadObject() { delete sprite; }
 	// Prototypes
-	void loadObject(std::string filename, sf::Vector2f pos, sf::Vector2f srcPos, sf::Vector2f srcSize);
+	void loadObject(std::string filename, sf::Vector2f pos, sf::Vector2i srcPos, sf::Vector2i srcSize);
 	sf::Vector2f convertCoord(sf::RenderWindow &gWindow);
 	virtual void updateTextRect();
 

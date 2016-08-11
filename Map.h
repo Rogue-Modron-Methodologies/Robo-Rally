@@ -13,6 +13,7 @@
 
 class Map {
 	std::vector<std::vector<Board>> map;
+	sf::Vector2i mapBounds;
 
 public:
 	Map(std::string filename, sf::Vector2f pos) { loadMap(filename, pos); }
