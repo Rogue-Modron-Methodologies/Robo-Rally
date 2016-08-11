@@ -24,7 +24,7 @@ class Game {
 	ResourceManager<sf::Int16> soundList;					// https://gist.github.com/eXpl0it3r/c4edb9bcc1f00e29a79b
 
 public:
-	Game(std::string filename ) : map(filename, START_LOC) { };
+	Game(std::string filename) : map(filename, START_LOC) { map.drawMap(); };
 
 
 };

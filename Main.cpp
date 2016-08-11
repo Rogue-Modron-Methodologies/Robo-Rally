@@ -6,7 +6,7 @@
 
 int main() {
 
-	Game game("RobotStew.txt");
+	Game game("robotstew.csv");
 
 	bool movR, movL, movU, movD;
 	movR = movL = movU = movD = false;
@@ -23,7 +23,7 @@ int main() {
 	sprite.setScale(.2f, .2f);
 	sprite.setColor(sf::Color::Green);
 
-	sf::RenderWindow window(sf::VideoMode(800, 800), "ScrumBums SFML: Look it works!");
+	sf::RenderWindow window(sf::VideoMode(800, 800), "It works!");
 	//sf::CircleShape shape(20.f);
 	//shape.setFillColor(sf::Color::Green);
 	
