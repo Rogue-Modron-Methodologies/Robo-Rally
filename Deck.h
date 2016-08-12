@@ -7,7 +7,7 @@
 #include "ProgramCard.h"
 #include "OptionCard.h"
 
-enum class DeckType { program = 0, option = 1 };
+enum DeckType { program = 0, option = 1 };
 const std::string LIST_HEADER = "resources/lists/";
 
 class Deck : public Object  {

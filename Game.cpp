@@ -7,12 +7,17 @@
 void Game::loadGame() {
 	window.create(sf::VideoMode(SCREEN_DIM.x, SCREEN_DIM.y), "RoboRally!");
 	decks.push_back(Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(0, 700), DeckType::program)); /////////////  CHANGE POS TO VARIABLE
+	decks.push_back(Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(200, 700), DeckType::option)); /////////////  CHANGE POS TO VARIABLE
+	decks[DeckType::option].setColor(sf::Color::Blue);  // only being used to differentiate decks until spritesheets are created
  }
 
 //*************************************************************
 //  Unload Game
 void Game::unloadGame() {
-
+	window.close();
+	map.unloadMap();
+	playerList.clear();
+	decks.clear();
 }
 
 //*************************************************************

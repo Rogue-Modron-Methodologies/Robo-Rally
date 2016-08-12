@@ -20,19 +20,10 @@ class Board {
 	sf::Vector2i pos;
 	int orientation;
 public:
-	Board(sf::Vector2i pos, sf::Vector2i dimensions, int orientation) {
-		this->orientation = orientation;
-		this->dimensions = dimensions;
-		this->pos = pos;
-	};
-	Board(std::string filename, sf::Vector2i pos, sf::Vector2i dimensions, int orientation) {
-		this->name = filename;
-		this->orientation = orientation;
-		this->dimensions = dimensions;
-		this->pos = pos;
-		loadBoard(filename, pos, dimensions, orientation);
-	};
+	Board(sf::Vector2i pos, sf::Vector2i dimensions, int orientation);
+	Board(std::string filename, sf::Vector2i pos, sf::Vector2i dimensions, int orientation);
 	void loadBoard(std::string filename, sf::Vector2i pos, sf::Vector2i dimensions, int orientation);
+	void unloadBoard();
 	void drawBoard(sf::RenderWindow &window);
 	int getOrientation() { return orientation; }
 	sf::Vector2i getDimensions() { 	return dimensions; }

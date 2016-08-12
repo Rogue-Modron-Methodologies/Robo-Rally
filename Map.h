@@ -20,7 +20,6 @@ public:
 	Map(std::string filename, sf::Vector2f pos) { loadMap(filename, pos); }
 	~Map() { unloadMap(); }
 	void drawMap(sf::RenderWindow &window);
-private:
 	void loadMap(std::string filename, sf::Vector2f pos);
 	void unloadMap() { map.clear(); }
 };

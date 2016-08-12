@@ -37,6 +37,7 @@ public:
 	void setSrcPos(sf::Vector2i source) { this->srcPos = source; updateTextRect(); }
 	void setSrcPosX(int num) { this->srcPos.x = num; updateTextRect(); }
 	void setSrcPosY(int num) { this->srcPos.y = num; updateTextRect(); }
+	void setColor(sf::Color color) { sprite->setColor(color); }
 	sf::Vector2i getSrcPos() const { return srcPos; }
 	sf::Vector2f getPosition() const { return sprite->getPosition(); }
 	sf::Vector2f getScale() const { return sprite->getScale(); }

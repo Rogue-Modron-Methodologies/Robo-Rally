@@ -5,6 +5,26 @@
 #define DEFAULTSHEET "steel.png"
 
 //*************************************************************
+// Empty Board Constructor
+// Has Dimensions, Position, and Orientation
+// Vector of Tiles is empty so no tiles
+Board::Board(sf::Vector2i pos, sf::Vector2i dimensions, int orientation) {
+	this->orientation = orientation;
+	this->dimensions = dimensions;
+	this->pos = pos;
+};
+
+//*************************************************************
+// Fulle Board Constructor
+Board::Board(std::string filename, sf::Vector2i pos, sf::Vector2i dimensions, int orientation) {
+	this->name = filename;
+	this->orientation = orientation;
+	this->dimensions = dimensions;
+	this->pos = pos;
+	loadBoard(filename, pos, dimensions, orientation);
+};
+
+//*************************************************************
 // Opens the file (checks for validity)
 // Loops through file and creates 2D Vector of Tile Objects
 void Board::loadBoard(std::string filename, sf::Vector2i pos, sf::Vector2i dimensions, int orientation) {
@@ -47,6 +67,19 @@ void Board::loadBoard(std::string filename, sf::Vector2i pos, sf::Vector2i dimen
 	}
 
 	inFile.close();
+}
+
+//*************************************************************
+// Releases dynamically allocated vector of Tiles.
+void Board::unloadBoard() {
+	if (board.size() == 0) return;
+	for (int i = 0; i < dimensions.x; ++i)
+		for (int j = 0; j < dimensions.y; ++j)
+			delete(board[i][j]);
+
+	for (auto it = board.begin(); it != board.end(); ++it)
+		it->clear();
+	board.clear();
 }
 
 //*************************************************************

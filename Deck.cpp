@@ -19,6 +19,7 @@ void Deck::loadDeck(std::string spriteSheet, std::string cardList, sf::Vector2f 
 		ss << buffer;
 		ss >> cardQty;
 		std::getline(ss, cardText);
+
 		if(type == DeckType::program)
 			deck.push_back(ProgramCard(spriteSheet, pos, cardText, cardQty));
 		else if (type == DeckType::option)
