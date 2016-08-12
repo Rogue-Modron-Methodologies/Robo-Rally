@@ -6,11 +6,13 @@ ResourceManager<sf::Texture> GLOBAL::textureList;
 //*************************************************************
 // Creates the sprite for the object.  
 // Sets the inital scale, source position, and screen position.
-void Object::loadObject(std::string filename, sf::Vector2f pos, sf::Vector2i sPos, sf::Vector2i sSize) {
+void Object::loadObject(std::string filename/*, int colorCodeR, int colorCodeG, int colorCodeB*/, sf::Vector2f pos, sf::Vector2i sPos, sf::Vector2i sSize) {
 	this->srcSize = sSize;
 	this->srcPos = sPos;
 	sprite = new sf::Sprite;
+
 	sprite->setTexture(GLOBAL::textureList.getResource(filename));
+	//sprite->setColor(sf::Color(colorCodeR, colorCodeG, colorCodeB));
 	updateTextRect();
 	sprite->setPosition(pos);
 }

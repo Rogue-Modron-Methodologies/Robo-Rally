@@ -19,12 +19,15 @@ class Object {
 	sf::Vector2i srcSize;		// file source size
 	sf::Vector2i srcPos;		// file source position
 
+	int colorCodeR, colorCodeG, colorCodeB;
+
 public:
 
 	Object(	std::string filename, 
+			/*int colorCodeR, int colorCodeG, int colorCodeB,*/
 			sf::Vector2f pos = { 0, 0 }, 
 			sf::Vector2i srcPos = { 0, 0 },
-			sf::Vector2i srcSize = { 0, 0 } ) { loadObject(filename, pos, srcPos, srcSize); }
+			sf::Vector2i srcSize = { 0, 0 }) { loadObject(filename/*, colorCodeR, colorCodeG, colorCodeB*/, pos, srcPos, srcSize); }
 	~Object() { unloadObject(); };
 
 	void setScale(sf::Vector2f scale) { sprite->setScale(scale); }
@@ -44,7 +47,7 @@ private:
 	// Inline Functions
 	void unloadObject() { /*delete sprite;*/ }
 	// Prototypes
-	void loadObject(std::string filename, sf::Vector2f pos, sf::Vector2i srcPos, sf::Vector2i srcSize);
+	void loadObject(std::string filename/*, int colorCodeR, int colorCodeG, int colorCodeB*/, sf::Vector2f pos, sf::Vector2i srcPos, sf::Vector2i srcSize);
 	sf::Vector2f convertCoord(sf::RenderWindow &gWindow);
 	virtual void updateTextRect();
 
