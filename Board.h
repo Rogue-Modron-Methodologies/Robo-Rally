@@ -11,7 +11,6 @@
 #include "Tile.h"
 
 const std::string BOARD_HEADER = "resources/boards/";
-const std::string SPRITESHEET_HEADER = "resources/images/";
 
 class Board {
 	std::vector<std::vector<Tile *>> board;

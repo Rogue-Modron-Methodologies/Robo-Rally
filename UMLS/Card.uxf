@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.1.1">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>160</x>
       <y>280</y>
-      <w>290</w>
+      <w>500</w>
       <h>210</h>
     </coordinates>
     <panel_attributes>Card
 --
-
+text : string
+qty : int
 --
-+Card(filename : string)</panel_attributes>
++Card(filename : string, pos : vector2f, srcPos : vector2i, text : string, qty : int)	
++setQty(num : int) : void
++setString(str : string) : void
++getQty() : int
++string getText() : string</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

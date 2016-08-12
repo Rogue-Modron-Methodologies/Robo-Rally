@@ -10,11 +10,17 @@
 #include "Player.h"
 #include "Deck.h"
 
-enum class DeckType { movement = 0, upgrade = 1 };
+
 enum class ResourceType { textures = 0, sounds = 1, fonts = 2 };
+
+#define PROGRAM_CARD_LIST "ProgramList.txt"
+#define PROGRAM_SPRITESHEET "ProgramSpriteSheet.png"
+#define OPTION_CARD_LIST "OptionList.txt"
+#define OPTION_SPRITESHEET "OptionSpriteSheet.png"
 
 const sf::Vector2f START_LOC = { 0, 0 }; ////////////  For Now
 const sf::Vector2i SCREEN_DIM = { 1000, 1000 };
+
 
 
 class Game {
@@ -26,32 +32,14 @@ class Game {
 	ResourceManager<sf::Int16> soundList;					// https://gist.github.com/eXpl0it3r/c4edb9bcc1f00e29a79b
 
 public:
-	Game(std::string filename) : map(filename, START_LOC) {
-		window.create(sf::VideoMode(SCREEN_DIM.x, SCREEN_DIM.y), "RoboRally!");
-	}
+	Game(std::string filename) : map(filename, START_LOC) { loadGame(); }
 
-	void playGame() {
-		map.drawMap(window);			//  Debug:  Only Draws Once  : Uncomment Code in each draw function to use
-		while (window.isOpen()) {
-			sf::Event event;
-			while (window.pollEvent(event)) {
-				switch (event.type) {
-				case sf::Event::Closed:
-					window.close();
-					break;
-				}
-			}
-			window.clear();
-			map.drawMap(window);
-			window.display();
-		}
-	}
+	void playGame();
+private:
+	void loadGame();
+	void unloadGame();
+
+
 };
-
-
-//void fun(DeckType type)
-//{
-//	decks[type].shuffle();
-//}
 
 #endif // GAME_H

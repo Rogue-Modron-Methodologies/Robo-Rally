@@ -14,6 +14,8 @@
 namespace GLOBAL { extern ResourceManager<sf::Texture> textureList; }
 enum orientation { up = 0, right = 90, down = 180, left = 270 };
 
+const std::string IMAGE_HEADER = "resources/images/";
+
 class Object {
 	sf::Sprite *sprite;
 	sf::Vector2i srcSize;		// file source size
@@ -25,7 +27,7 @@ public:
 
 	Object(	std::string filename, 
 			/*int colorCodeR, int colorCodeG, int colorCodeB,*/
-			sf::Vector2f pos = { 0, 0 }, 
+			sf::Vector2f pos, 
 			sf::Vector2i srcPos = { 0, 0 },
 			sf::Vector2i srcSize = { 0, 0 }) { loadObject(filename/*, colorCodeR, colorCodeG, colorCodeB*/, pos, srcPos, srcSize); }
 	~Object() { unloadObject(); };

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.1.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>190</x>
+      <y>200</y>
+      <w>550</w>
+      <h>210</h>
+    </coordinates>
+    <panel_attributes>OptionCard
+--
+
+--
++OptionCard(filename : string, pos : vector2f, text : string, qty : int, srcPos : vector2i)</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

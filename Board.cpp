@@ -2,7 +2,7 @@
 
 #include "Board.h"
 
-#define DEFAULTSHEET "resources/images/steel.png"
+#define DEFAULTSHEET "steel.png"
 
 //*************************************************************
 // Opens the file (checks for validity)
@@ -17,8 +17,7 @@ void Board::loadBoard(std::string filename, sf::Vector2i pos, sf::Vector2i dimen
 	std::stringstream ss;
 
 	int temp;
-	std::getline(inFile, buffer);
-	spriteSheet = SPRITESHEET_HEADER + buffer;
+	std::getline(inFile, spriteSheet);
 
 	switch (orientation)
 	{

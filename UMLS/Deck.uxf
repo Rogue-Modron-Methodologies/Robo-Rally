@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.2">
+<diagram program="umlet" version="14.1.1">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>70</x>
-      <y>120</y>
-      <w>330</w>
+      <y>110</y>
+      <w>630</w>
       <h>190</h>
     </coordinates>
     <panel_attributes>_Deck_
 --
-
 -deck : vector&lt;Card&gt;
 
 --
-
-+Deck()
++Deck(spriteSheet : string, cardList : string, pos : Vector2f, type : DeckType)
 +deal() : void
-+shuffle() : void</panel_attributes>
++shuffle() : void
+-loadDeck(spriteSheet : string, cardList : string, pos : Vector2f, type : DeckType) : void
+-unloadDeck() : void</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
