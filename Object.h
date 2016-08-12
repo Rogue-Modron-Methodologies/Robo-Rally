@@ -35,7 +35,7 @@ public:
 	sf::Vector2i getSrcPos() const { return srcPos; }
 	sf::Vector2f getPosition() const { return sprite->getPosition(); }
 	sf::Vector2f getScale() const { return sprite->getScale(); }
-	void draw(sf::RenderWindow &window) { window.draw(*sprite); std::cout << "Sprite Pos: " << sprite->getPosition().x << "," << sprite->getPosition().y << std::endl; }
+	void draw(sf::RenderWindow &window) { window.draw(*sprite); /*std::cout << "Sprite Pos: " << sprite->getPosition().x << "," << sprite->getPosition().y << std::endl;*/ }
 	// Prototypes
 	bool isTargeted(sf::RenderWindow &window);
 

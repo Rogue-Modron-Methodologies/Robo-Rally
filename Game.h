@@ -42,11 +42,10 @@ public:
 				}
 			}
 			window.clear();
-			//map.drawMap(window);
+			map.drawMap(window);
 			window.display();
 		}
 	}
-
 };
 
 

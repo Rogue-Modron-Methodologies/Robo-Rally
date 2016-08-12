@@ -30,14 +30,14 @@ void Map::loadMap(std::string filename, sf::Vector2f pos) {
 					ssCell >> boardDims.x;
 					ssCell >> boardDims.y;
 					ssCell >> orientation;
-					row.push_back(Board(boardName, sf::Vector2i(mapBounds.x * TILE_SOURCE_SIZE.x, rowDim * TILE_SOURCE_SIZE.y), boardDims, orientation));
+					row.push_back(Board(boardName, sf::Vector2i(pos.x + mapBounds.x * TILE_SOURCE_SIZE.x, pos.y + rowDim * TILE_SOURCE_SIZE.y), boardDims, orientation));
 				}
 				else
 				{
 					boardDims.x = map[boardPos.x - 1][boardPos.y].getDimensions().x;
-					boardDims.y = map[boardPos.x - 1][boardPos.y + 1].getDimensions().x;
-					orientation = map[boardPos.x - 1][boardPos.y].getOrientation();
-					row.push_back(Board(sf::Vector2i(mapBounds.x * TILE_SOURCE_SIZE.x, rowDim * TILE_SOURCE_SIZE.y), boardDims, orientation));  //  Empty Board
+					boardDims.y = map[boardPos.x - 1][boardPos.y].getDimensions().y;
+					orientation = 0;
+					row.push_back(Board(sf::Vector2i(pos.x + mapBounds.x * TILE_SOURCE_SIZE.x, pos.y + rowDim * TILE_SOURCE_SIZE.y), boardDims, orientation));  //  Empty Board
 				}
 
 				if (orientation == up || orientation == down)
