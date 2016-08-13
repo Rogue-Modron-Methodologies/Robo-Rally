@@ -2,7 +2,7 @@
 
 #include "Board.h"
 
-#define DEFAULTSHEET "steel.png"
+#define DEFAULTSHEET "spritesheet.png"
 
 //*************************************************************
 // Empty Board Constructor
@@ -62,6 +62,9 @@ void Board::loadBoard(std::string filename, sf::Vector2i pos, sf::Vector2i dimen
 			board[i][j] = new Tile(buffer, DEFAULTSHEET, sf::Vector2f((float)pos.y + j * TILE_SOURCE_SIZE.y, (float)pos.x + i * TILE_SOURCE_SIZE.x), orientation);
 			//std::cout << board[i][j]->getPosition().x << "," << board[i][j]->getPosition().y << std::endl;
 		}
+
+		ss << "";
+		ss.clear();
 	}
 	inFile.close();
 }

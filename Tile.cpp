@@ -7,6 +7,9 @@
 
 //i am not understanding something about the load file go below it to see work around
 
+
+//*********************This function needs to exist
+//*********************It is a constructor.  It needs to set all initial values. The sprite, texture, position, etc
 //void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrientation) {
 //
 //	std::string tileName;
@@ -17,7 +20,7 @@
 //
 //	std::getline(sstile, tileName, ' ');
 //
-//	if (tileName == "floor") {
+//	if (tileName == "floor") {			
 //
 //
 //	}
@@ -72,6 +75,9 @@
 //};
 
 
+
+//****************What does this function do?
+//****************Why are you returning a Color?  
 //simpler function (for a simpler coder? ;) ) to test logic, includes testing code
 //adding color hues to the existing tiles to check logic (now also used to check orientation code in board.cpp)
 
@@ -90,7 +96,7 @@ sf::Color Tile::tileType(std::string tileInformation) {
 
 	}
 	else if (tileName == "pit") {
-
+		setSrcPosX(1);			//******************************************* Won't be a literal for long.  Will create an enum.
 		return sf::Color(128, 128, 128);		//dark grey
 
 	}

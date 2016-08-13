@@ -14,10 +14,10 @@
 class Tile : public Object {
 
 	std::vector<TileFeature> features;
-	std::string tileInformation, spriteSheetFilename;
-	sf::Vector2f pos;
+	std::string tileInformation, spriteSheetFilename; // THese aren't needed
+	sf::Vector2f pos;	// This isn't needed
 	sf::Vector2f sPos;
-	int boardOrientation;
+	int boardOrientation; // This isn't needed
 
 	sf::Color repType;			// used for testing logic of tile constructor (and now orientation logic in board.cpp)
 
