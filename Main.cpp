@@ -10,8 +10,7 @@
 
 int main() {
 
-	//Game game("robotstew.csv");
-	Game game("debugWithDockingBay.csv");
+	Game game("robotstew.csv");
 	game.playGame();
 
 
