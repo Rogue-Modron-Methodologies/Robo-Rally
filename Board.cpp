@@ -42,9 +42,9 @@ void Board::loadBoard(std::string filename, sf::Vector2i pos, sf::Vector2i dimen
 
 	//begin tempBoard experiment
 
-	//std::vector<std::vector<Tile *>> tempBoard;
+	//std::vector<std::vector<Tile *>> tempBoard;  // no longer using tempBoard in tempBoard experiment . . . 
 
-	switch (orientation)
+	switch (orientation)		//setting temp values for sizing 2d vector and iterators for filling 2d vector in correct order
 	{
 	case up:
 		tempX = dimensions.x;
@@ -76,9 +76,9 @@ void Board::loadBoard(std::string filename, sf::Vector2i pos, sf::Vector2i dimen
 	//for (auto row = tempBoard.begin(); row != tempBoard.end(); ++row)
 	//	row->resize(this->dimensions.y);
 
-	board.resize(tempX);
+	board.resize(tempX);				//sizing 2d vector to correct orientation
 
-	for (auto row = board.begin(); row != board.end(); ++row)
+	for (auto row = board.begin(); row != board.end(); ++row)				//sizing 2d vector to correct orientation
 		row->resize(tempY);
 
 
@@ -91,9 +91,20 @@ void Board::loadBoard(std::string filename, sf::Vector2i pos, sf::Vector2i dimen
 			std::getline(ss, tileBuffer, ',');
 			//tempBoard[i][j] = new Tile(tileBuffer, DEFAULTSHEET, sf::Vector2f((float)pos.y + j * TILE_SOURCE_SIZE.y, (float)pos.x + i * TILE_SOURCE_SIZE.x), orientation);
 
+			/*
+			switch statement below is used to migrate data from .csv file (with a fixed orientation) to a 2d vector (which is oriented as needed)
+			
+			nested for-loop uses i and j to traverse .csv and/or track position in .csv
+			
+			iX and iY used to traverse and/or track position in 2d vector
+			
+			i started working on calculation/tracking where the tiles should be printed to the screen THIS might be the problem at the moment
+			
+			i also might be going out of bounds of the 2d vector, but its possible i fixed that
 
+			*/
 
-			switch (orientation)
+			switch (orientation)			//there must be a better way
 			{
 			case up:
 				board[i][j] = new Tile(tileBuffer, DEFAULTSHEET, sf::Vector2f((float)pos.y + j * TILE_SOURCE_SIZE.y, (float)pos.x + i * TILE_SOURCE_SIZE.x), orientation);

@@ -19,7 +19,7 @@ class Tile : public Object {
 	sf::Vector2f sPos;
 	int boardOrientation;
 
-	sf::Color repType;
+	sf::Color repType;			// used for testing logic of tile constructor (and now orientation logic in board.cpp)
 
 
 public:
@@ -30,7 +30,7 @@ public:
 		this->pos = pos;
 		this->boardOrientation = boardOrientation;
 
-		repType = tileType(tileInformation);
+		repType = tileType(tileInformation);			// used for testing logic of tile constructor (and now orientation logic in board.cpp)
 
 		//loadTile(tileInformation, pos, boardOrientation);
 	};   //sf::Vector2f(0,0) is passing a (0,0) to the object constructor, needs to be replaced with sPos (source position)
@@ -39,9 +39,9 @@ public:
 	//void loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrientation);
 	void unloadTile() {};
 
-	sf::Color getType() { return repType; };
+	sf::Color getType() { return repType; };			// used for testing logic of tile constructor (and now orientation logic in board.cpp)
 
-	sf::Color tileType(std::string tileInformation);
+	sf::Color tileType(std::string tileInformation);			// used for testing logic of tile constructor (and now orientation logic in board.cpp)
 
 };
 

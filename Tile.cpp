@@ -5,6 +5,8 @@
 
 
 
+//i am not understanding something about the load file go below it to see work around
+
 //void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrientation) {
 //
 //	std::string tileName;
@@ -69,6 +71,9 @@
 //
 //};
 
+
+//simpler function (for a simpler coder? ;) ) to test logic, includes testing code
+//adding color hues to the existing tiles to check logic (now also used to check orientation code in board.cpp)
 
 sf::Color Tile::tileType(std::string tileInformation) {
 	std::string tileName;
