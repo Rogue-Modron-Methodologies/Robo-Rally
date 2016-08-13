@@ -15,7 +15,7 @@ Board::Board(sf::Vector2i pos, sf::Vector2i dimensions, int orientation) {
 };
 
 //*************************************************************
-// Fulle Board Constructor
+// Full Board Constructor
 Board::Board(std::string filename, sf::Vector2i pos, sf::Vector2i dimensions, int orientation) {
 	this->name = filename;
 	this->orientation = orientation;
@@ -29,42 +29,162 @@ Board::Board(std::string filename, sf::Vector2i pos, sf::Vector2i dimensions, in
 // Loops through file and creates 2D Vector of Tile Objects
 void Board::loadBoard(std::string filename, sf::Vector2i pos, sf::Vector2i dimensions, int orientation) {
 
-	std::string buffer;
+
+	std::string lineBuffer, tileBuffer;
 	std::string fullFilename = BOARD_HEADER + filename;
 	std::fstream inFile(fullFilename.c_str());
 	if (!inFile)
 		std::cout << "Error Opening " << filename << "\n\t\tTerminating Program\n", exit(EXIT_FAILURE);
 	std::stringstream ss;
 
-	int temp;
+	int /*temp, */tempX, tempY, iX, jY;
 	std::getline(inFile, spriteSheet);
+
+	//begin tempBoard experiment
+
+	//std::vector<std::vector<Tile *>> tempBoard;
 
 	switch (orientation)
 	{
+	case up:
+		tempX = dimensions.x;
+		tempY = dimensions.y; 
+		iX = jY = 0;
 	case right:
+		tempX = dimensions.y;
+		tempY = dimensions.x;
+		iX = 0;
+		jY = tempY - 1;
+		break;
+	case down:
+		tempX = dimensions.x;
+		tempY = dimensions.y;
+		iX = tempX - 1;
+		jY = tempY - 1;
+		break;
 	case left:
+		tempX = dimensions.y;
+		tempY = dimensions.x;
+		iX = tempX - 1;
+		jY = 0;
+		break;
+	}
+
+
+	//tempBoard.resize(this->dimensions.x);
+
+	//for (auto row = tempBoard.begin(); row != tempBoard.end(); ++row)
+	//	row->resize(this->dimensions.y);
+
+	board.resize(tempX);
+
+	for (auto row = board.begin(); row != board.end(); ++row)
+		row->resize(tempY);
+
+
+	for (int i = 0; i < this->dimensions.x; ++i) {
+
+		std::getline(inFile, lineBuffer);
+		ss << lineBuffer;
+
+		for (int j = 0; j < this->dimensions.y; ++j) {
+			std::getline(ss, tileBuffer, ',');
+			//tempBoard[i][j] = new Tile(tileBuffer, DEFAULTSHEET, sf::Vector2f((float)pos.y + j * TILE_SOURCE_SIZE.y, (float)pos.x + i * TILE_SOURCE_SIZE.x), orientation);
+
+
+
+			switch (orientation)
+			{
+			case up:
+				board[i][j] = new Tile(tileBuffer, DEFAULTSHEET, sf::Vector2f((float)pos.y + j * TILE_SOURCE_SIZE.y, (float)pos.x + i * TILE_SOURCE_SIZE.x), orientation);
+				board[i][j]->setColor(board[i][j]->getType());		//test parcing and logic for base tile type
+				break;
+			case right:
+				board[iX][jY] = new Tile(tileBuffer, DEFAULTSHEET, sf::Vector2f((float)pos.y + jY * TILE_SOURCE_SIZE.y, (float)pos.x + iX * TILE_SOURCE_SIZE.x), orientation);
+				board[iX][jY]->setColor(board[iX][jY]->getType());		//test parcing and logic for base tile type
+				if (iX < tempX - 1)
+					++iX;
+				else
+					iX = 0;
+				if (jY > 0)
+					--jY;
+				else
+					jY = tempY - 1;
+				break;
+			case down:
+				board[iX][jY] = new Tile(tileBuffer, DEFAULTSHEET, sf::Vector2f((float)pos.y + jY * TILE_SOURCE_SIZE.y, (float)pos.x + iX * TILE_SOURCE_SIZE.x), orientation);
+				board[iX][jY]->setColor(board[iX][jY]->getType());		//test parcing and logic for base tile type
+				if (iX > 0)
+					--iX;
+				else
+					iX = tempX - 1;
+				if (jY > 0)
+					--jY;
+				else
+					jY = tempY - 1;
+				break;
+			case left:
+				board[iX][jY] = new Tile(tileBuffer, DEFAULTSHEET, sf::Vector2f((float)pos.y + jY * TILE_SOURCE_SIZE.y, (float)pos.x + iX * TILE_SOURCE_SIZE.x), orientation);
+				board[iX][jY]->setColor(board[iX][jY]->getType());		//test parcing and logic for base tile type
+				if (iX > 0)
+					--iX;
+				else
+					iX = tempX - 1;
+				if (jY < tempY - 1)
+					++jY;
+				else
+					jY = 0;
+				break;
+			}
+
+		}
+	}
+
+
+
+
+	//end tempBoard experiment
+
+	/*  commented to save
+
+	switch (orientation)		//jordan messed with this
+	{
+	case up:
+	case right:
 		temp = dimensions.y;
 		this->dimensions.y = dimensions.x;
 		this->dimensions.x = temp;
 	case down:
-	case up:
+	case left:
+		temp = dimensions.y;
+		this->dimensions.y = dimensions.x;
+		this->dimensions.x = temp;
 		break;
 	}
 
 	board.resize(this->dimensions.x);
+
 	for (auto row = board.begin(); row != board.end(); ++row)
 		row->resize(this->dimensions.y);
 
 	for (int i = 0; i < this->dimensions.x; ++i) {
-		std::getline(inFile, buffer);
-		ss << buffer;
+
+		std::getline(inFile, lineBuffer);
+		ss << lineBuffer;
+
 		for (int j = 0; j < this->dimensions.y; ++j) {
-			std::getline(ss, buffer, ',');
-			board[i][j] = new Tile(buffer, DEFAULTSHEET, sf::Vector2f((float)pos.y + j * TILE_SOURCE_SIZE.y, (float)pos.x + i * TILE_SOURCE_SIZE.x), orientation);
+			std::getline(ss, tileBuffer, ',');
+			board[i][j] = new Tile(tileBuffer, DEFAULTSHEET, sf::Vector2f((float)pos.y + j * TILE_SOURCE_SIZE.y, (float)pos.x + i * TILE_SOURCE_SIZE.x), orientation);
+
+			board[i][j]->setColor(board[i][j]->getType());		//test parcing and logic for base tile type
+
 			//std::cout << board[i][j]->getPosition().x << "," << board[i][j]->getPosition().y << std::endl;
 
 		}
 	}
+
+	*/
+
 
 	inFile.close();
 }

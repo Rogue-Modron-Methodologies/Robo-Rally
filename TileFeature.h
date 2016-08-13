@@ -20,7 +20,7 @@ class TileFeature : public Object  {
 
 public:
 	TileFeature(std::string filename, sf::Vector2f pos, sf::Vector2i sPos, sf::Vector2i sSize = TILE_SOURCE_SIZE) 
-		: Object(filename/*int colorCodeR, int colorCodeG, int colorCodeB,*/, pos, sPos, sSize) {};
+		: Object(filename, pos, sPos, sSize) {};
 
 };
 

@@ -19,7 +19,8 @@ class Tile : public Object {
 	sf::Vector2f sPos;
 	int boardOrientation;
 
-	int colorCodeR, colorCodeG, colorCodeB;
+	sf::Color repType;
+
 
 public:
 	Tile(std::string tileInformation, std::string spriteSheetFilename, sf::Vector2f pos, int boardOrientation /*, sf::Vector2f sPos, sf::Vector2f sSize = TILE_SOURCE_SIZE*/)    //commented out because i will find sPos through parsing etc
@@ -29,12 +30,18 @@ public:
 		this->pos = pos;
 		this->boardOrientation = boardOrientation;
 
-		//loadTile(tileInformation, pos, boardOrientation, colorCodeR, colorCodeG, colorCodeB);
+		repType = tileType(tileInformation);
+
+		//loadTile(tileInformation, pos, boardOrientation);
 	};   //sf::Vector2f(0,0) is passing a (0,0) to the object constructor, needs to be replaced with sPos (source position)
 	/*void drawTile(sf::RenderWindow &window) { }*/  //remember tile is an Object and Object already has a draw
 
-	void loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrientation , int colorCodeR, int colorCodeG, int colorCodeB);
+	//void loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrientation);
 	void unloadTile() {};
+
+	sf::Color getType() { return repType; };
+
+	sf::Color tileType(std::string tileInformation);
 
 };
 
