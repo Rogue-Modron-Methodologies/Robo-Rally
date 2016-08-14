@@ -4,7 +4,8 @@
 
 
 //*************************************************************
-//  Game Loop
+//  Loads a Deck from a cardList file.  
+//  Sets deck sprite to cardBack Image
 void Deck::loadDeck(std::string spriteSheet, std::string cardList, sf::Vector2f pos, DeckType type) {
 	std::string fullFilename = LIST_HEADER + cardList;
 	std::fstream inFile(fullFilename.c_str());

@@ -10,7 +10,6 @@
 #include "Player.h"
 #include "Deck.h"
 
-
 enum class ResourceType { textures = 0, sounds = 1, fonts = 2 };
 
 #define PROGRAM_CARD_LIST "ProgramList.txt"
@@ -20,8 +19,6 @@ enum class ResourceType { textures = 0, sounds = 1, fonts = 2 };
 
 const sf::Vector2f START_LOC = { 0, 0 }; ////////////  For Now
 const sf::Vector2i SCREEN_DIM = { 1000, 1000 };
-
-
 
 class Game {
 	sf::RenderWindow window;
@@ -38,7 +35,7 @@ public:
 private:
 	void loadGame();
 	void unloadGame();
-
+	void drawGame();
 
 };
 

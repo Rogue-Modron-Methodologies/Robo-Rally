@@ -7,8 +7,8 @@
 void Game::loadGame() {
 	window.create(sf::VideoMode(SCREEN_DIM.x, SCREEN_DIM.y), "RoboRally!");
 	decks.push_back(Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(0, 700), DeckType::program)); /////////////  CHANGE POS TO VARIABLE
-	decks.push_back(Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(200, 700), DeckType::option)); /////////////  CHANGE POS TO VARIABLE
-	decks[DeckType::option].setColor(sf::Color::Blue);  // only being used to differentiate decks until spritesheets are created
+	//decks.push_back(Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(200, 700), DeckType::option)); /////////////  CHANGE POS TO VARIABLE
+	//decks[DeckType::option].setColor(sf::Color::Blue);  // only being used to differentiate decks until spritesheets are created
  }
 
 //*************************************************************
@@ -31,13 +31,22 @@ void Game::playGame() {
 			case sf::Event::Closed:
 				window.close();
 				break;
+			case sf::Event::MouseButtonPressed:
+				if (decks[0].isTargeted(window))
+					std::cout << "Click" << std::endl;
+				break;
 			}
 		}
 		window.clear();
-		map.drawMap(window);
-		for (auto it = decks.begin(); it != decks.end(); ++it)
-			it->draw(window);
-			
+		drawGame();
 		window.display();
 	}
+}
+//*************************************************************
+//  Draws all game members
+void Game::drawGame() {
+	map.drawMap(window);
+	for (auto it = decks.begin(); it != decks.end(); ++it)
+		it->draw(window);
+
 }
