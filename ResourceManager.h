@@ -16,8 +16,9 @@ private:
 	std::map<std::string, T> resources;
 
 public:
-	ResourceManager();
-	~ResourceManager();
+	ResourceManager() : resources() {}
+	~ResourceManager() { unloadAllResources(); }
+	void unloadAllResources() { resources.clear(); }
 	const T& getResource(const std::string &fileName);
 	void unloadResource(const T &resource);
 	void unloadResource(const std::string &filename);
@@ -26,12 +27,6 @@ private:
 	ResourceManager(const ResourceManager &temp) = delete;
 	ResourceManager& operator =(const ResourceManager &temp) = delete;
 };
-
-template <class T>
-ResourceManager<T>::ResourceManager() : resources() {}
-
-template <class T>
-ResourceManager<T>::~ResourceManager() { resources.clear(); }
 
 template <class T>
 const T& ResourceManager<T>::getResource(const std::string &filename)

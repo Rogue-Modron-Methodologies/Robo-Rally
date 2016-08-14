@@ -14,6 +14,7 @@ int main() {
 	game.playGame();
 
 
+	GLOBAL::textureList.unloadAllResources();
 	#ifdef _MSC_VER
 		printf(_CrtDumpMemoryLeaks() ? "Memory Leak\n" : "No Memory Leak\n");
 	#endif
