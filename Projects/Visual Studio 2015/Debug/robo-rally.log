@@ -1,4 +1,3 @@
-﻿  Tile.cpp
-c:\users\thega\desktop\github stuff\robo-rally\tile.cpp(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+﻿  Board.cpp
   robo-rally.vcxproj -> C:\Users\thega\Desktop\Github Stuff\robo-rally\Projects\Visual Studio 2015\Debug\robo-rally.exe
   robo-rally.vcxproj -> C:\Users\thega\Desktop\Github Stuff\robo-rally\Projects\Visual Studio 2015\Debug\robo-rally.pdb (Partial PDB)

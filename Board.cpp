@@ -2,8 +2,6 @@
 
 #include "Board.h"
 
-#define DEFAULTSHEET "spritesheet.png"
-
 //*************************************************************
 // Empty Board Constructor
 // Has Dimensions, Position, and Orientation
@@ -38,6 +36,8 @@ void Board::loadBoard(std::string filename, sf::Vector2i pos, sf::Vector2i dimen
 
 	int temp;
 	std::getline(inFile, spriteSheet);
+	std::replace(spriteSheet.begin(), spriteSheet.end(), ',', ' ');
+	std::cout << spriteSheet << std::endl;
 
 	switch (orientation){
 	case left:
@@ -59,10 +59,9 @@ void Board::loadBoard(std::string filename, sf::Vector2i pos, sf::Vector2i dimen
 		ss << buffer;
 		for (int j = 0; j < this->dimensions.y; ++j) {
 			std::getline(ss, buffer, ',');
-			board[i][j] = new Tile(buffer, DEFAULTSHEET, sf::Vector2f((float)pos.y + j * TILE_SOURCE_SIZE.y, (float)pos.x + i * TILE_SOURCE_SIZE.x), orientation);
+			board[i][j] = new Tile(buffer, spriteSheet, sf::Vector2f((float)pos.y + j * TILE_SOURCE_SIZE.y, (float)pos.x + i * TILE_SOURCE_SIZE.x), orientation);
 			//std::cout << board[i][j]->getPosition().x << "," << board[i][j]->getPosition().y << std::endl;
 		}
-
 		ss << "";
 		ss.clear();
 	}

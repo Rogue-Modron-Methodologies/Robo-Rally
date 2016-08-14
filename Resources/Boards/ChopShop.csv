@@ -1,4 +1,4 @@
-BaseSpriteSheet 
+BoardSpriteSheet.png,,,,,,,,,,,
 repair 0 1 ,floor ,floor wall 0 0,conv 0 2,floor wall 0 0,conv 180 2,conv 0 1,floor wall 0 0,conv 180 1,floor wall 0 0,floor ,floor 
 floor ,pit,floor wall 90 0,conv 0 2 laser 270 1,floor laser 270 1,conv 180 2 laser 270 1 wall 90 0,conv 0 1,floor ,conv 180 1,convbl 180 1,conv 270 1,conv 270 1
 floor wall 270 0,floor ,floor laser 0 1  wall 0 0,convhr 0 2,conv 270 2,convbr 180 2,conv 0 1,floor ,conv 180 1,conv 180 1,floor ,floor wall 90 0
