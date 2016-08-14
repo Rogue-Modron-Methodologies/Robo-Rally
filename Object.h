@@ -53,5 +53,5 @@ private:
 	virtual void updateTextRect();
 
 };
-z
+
 #endif // OBJECT_H
