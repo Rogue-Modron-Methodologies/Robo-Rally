@@ -120,26 +120,7 @@ bool Board::boardTargeted(sf::RenderWindow &window) {
 	return false;
 }
 
-//
-////*************************************************************
-//// Opens the file (checks for validity)
-//// Loops through file and creates 2D Vector of Tile Objects
-//void Board::loadBoard(std::string filename, sf::Vector2i pos, sf::Vector2i dimensions, int orientation) {
-//
-//
-//	std::string lineBuffer, tileBuffer;
-//	std::string fullFilename = BOARD_HEADER + filename;
-//	std::fstream inFile(fullFilename.c_str());
-//	if (!inFile)
-//		std::cout << "Error Opening " << filename << "\n\t\tTerminating Program\n", exit(EXIT_FAILURE);
-//	std::stringstream ss;
-//
-//	int /*temp, */tempX, tempY, iX, jY;
-//	std::getline(inFile, spriteSheet);
-//
-//	//begin tempBoard experiment
-//
-//	//std::vector<std::vector<Tile *>> tempBoard;  // no longer using tempBoard in tempBoard experiment . . . 
+
 //
 //	switch (orientation)		//setting temp values for sizing 2d vector and iterators for filling 2d vector in correct order
 //	{
@@ -247,52 +228,3 @@ bool Board::boardTargeted(sf::RenderWindow &window) {
 //
 //		}
 //	}
-//
-//
-//
-//
-//	//end tempBoard experiment
-//
-//	/*  commented to save
-//
-//	switch (orientation)		//jordan messed with this
-//	{
-//	case up:
-//	case right:
-//	temp = dimensions.y;
-//	this->dimensions.y = dimensions.x;
-//	this->dimensions.x = temp;
-//	case down:
-//	case left:
-//	temp = dimensions.y;
-//	this->dimensions.y = dimensions.x;
-//	this->dimensions.x = temp;
-//	break;
-//	}
-//
-//	board.resize(this->dimensions.x);
-//
-//	for (auto row = board.begin(); row != board.end(); ++row)
-//	row->resize(this->dimensions.y);
-//
-//	for (int i = 0; i < this->dimensions.x; ++i) {
-//
-//	std::getline(inFile, lineBuffer);
-//	ss << lineBuffer;
-//
-//	for (int j = 0; j < this->dimensions.y; ++j) {
-//	std::getline(ss, tileBuffer, ',');
-//	board[i][j] = new Tile(tileBuffer, DEFAULTSHEET, sf::Vector2f((float)pos.y + j * TILE_SOURCE_SIZE.y, (float)pos.x + i * TILE_SOURCE_SIZE.x), orientation);
-//
-//	board[i][j]->setColor(board[i][j]->getType());		//test parcing and logic for base tile type
-//
-//	//std::cout << board[i][j]->getPosition().x << "," << board[i][j]->getPosition().y << std::endl;
-//
-//	}
-//	}
-//
-//	*/
-//
-//
-//	inFile.close();
-//}

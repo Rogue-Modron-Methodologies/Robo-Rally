@@ -81,5 +81,7 @@ void Map::drawMap(sf::RenderWindow &window) {
 bool Map::mapTargeted(sf::RenderWindow &window) {
 	for (auto row = map.begin(); row != map.end(); ++row)
 		for (auto col = row->begin(); col != row->end(); ++col)
-			return col->boardTargeted(window) ? true : false;
+			if (col->boardTargeted(window))
+				return true;
+		return  false;
 }
