@@ -39,6 +39,8 @@ void Board::loadBoard(std::string filename, sf::Vector2i pos, sf::Vector2i dimen
 	std::replace(spriteSheet.begin(), spriteSheet.end(), ',', ' ');
 	std::cout << spriteSheet << std::endl;
 
+
+	// Add additional orientation options here.
 	switch (orientation){
 	case left:
 	case right:
