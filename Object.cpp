@@ -38,3 +38,9 @@ bool Object::isTargeted(sf::RenderWindow &gWindow) {
 void Object::updateTextRect() {
 	sprite->setTextureRect(sf::IntRect(srcPos.x * srcSize.x, srcPos.y * srcSize.y, srcSize.x, srcSize.y));
 }
+
+//*************************************************************
+//  Calculates the center of the sprite and sets that to the origin for all transformations 
+void Object::setOrigin() {
+	sprite->setOrigin(sprite->getGlobalBounds().width / 2,sprite->getGlobalBounds().height / 2);
+}

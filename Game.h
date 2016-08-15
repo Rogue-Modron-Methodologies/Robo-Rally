@@ -17,7 +17,7 @@ enum class ResourceType { textures = 0, sounds = 1, fonts = 2 };
 #define OPTION_CARD_LIST "OptionList.txt"
 #define OPTION_SPRITESHEET "OptionSpriteSheet.png"
 
-const sf::Vector2f START_LOC = { 0, 0 }; ////////////  For Now
+const sf::Vector2f START_LOC = { 25, 25 }; ////////////  For Now
 const sf::Vector2i SCREEN_DIM = { 1000, 1000 };
 
 class Game {
