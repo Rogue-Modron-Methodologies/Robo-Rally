@@ -23,7 +23,7 @@ void Game::unloadGame() {
 //*************************************************************
 //  Game Loop
 void Game::playGame() {
-	map.drawMap(window);			//  Debug:  Only Draws Once  : Uncomment Code in each draw function to use
+	//map.drawMap(window);			//  Debug:  Only Draws Once  : Uncomment Code in each draw function to use
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -33,7 +33,9 @@ void Game::playGame() {
 				break;
 			case sf::Event::MouseButtonPressed:
 				if (decks[0].isTargeted(window))
-					std::cout << "Click" << std::endl;
+					std::cout << "Deck Clicked" << std::endl;
+				if (map.mapTargeted(window))
+					std::cout << "Tile Clicked" << std::endl;
 				break;
 			}
 		}

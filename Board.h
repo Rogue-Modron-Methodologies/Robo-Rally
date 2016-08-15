@@ -27,6 +27,7 @@ public:
 	void drawBoard(sf::RenderWindow &window);
 	int getOrientation() { return orientation; }
 	sf::Vector2i getDimensions() { 	return dimensions; }
+	bool boardTargeted(sf::RenderWindow &window);
 };
 
 #endif // BOARD_H

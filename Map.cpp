@@ -74,3 +74,12 @@ void Map::drawMap(sf::RenderWindow &window) {
 		for (auto col = row->begin(); col != row->end(); ++col) 
 			col->drawBoard(window);
 }
+
+//*************************************************************
+// Loops through 2D vector and calls isTargeted on each element
+// 
+bool Map::mapTargeted(sf::RenderWindow &window) {
+	for (auto row = map.begin(); row != map.end(); ++row)
+		for (auto col = row->begin(); col != row->end(); ++col)
+			return col->boardTargeted(window) ? true : false;
+}

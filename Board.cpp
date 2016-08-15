@@ -97,6 +97,27 @@ void Board::drawBoard(sf::RenderWindow &window) {
 
 }
 
+//*************************************************************
+// Loops through 2D vector and calls isTargeted on each element
+// 
+bool Board::boardTargeted(sf::RenderWindow &window) {
+
+	if (board.size() == 0) return false;
+	sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
+	sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+	// returns false if click is outside of board dimensions.  Won't bother checking each tile individually.
+	if (worldPos.x < pos.x || worldPos.y < pos.y || 
+		worldPos.x > pos.x + dimensions.x * TILE_SOURCE_SIZE.x || 
+		worldPos.y > pos.y + dimensions.y * TILE_SOURCE_SIZE.y)
+		return false;
+
+	for (int i = 0; i < dimensions.x; ++i)
+		for (int j = 0; j < dimensions.y; ++j)
+			if (board[i][j]->isTargeted(window))
+				return true; 
+	return false;
+}
+
 //
 ////*************************************************************
 //// Opens the file (checks for validity)
