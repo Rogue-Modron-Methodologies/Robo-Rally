@@ -7,7 +7,7 @@
 #include <string>
 #include "Object.h"
 
-const sf::Vector2i CARD_SOURCE_SIZE = { 150, 250 };  //  ??????? Just a Guess
+const sf::Vector2i CARD_SOURCE_SIZE = { 150, 150 };  //  ??????? Just a Guess
 
 class Card : public Object {
 

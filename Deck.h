@@ -8,6 +8,7 @@
 #include "OptionCard.h"
 
 enum DeckType { program = 0, option = 1 };
+enum ProgramCards { cardBack = 0, uturn = 1, rotateLeft = 2, rotateRight = 3, move1 = 4, move2 = 5, move3 = 6, backup = 7 };
 const std::string LIST_HEADER = "resources/lists/";
 
 class Deck : public Object  {
