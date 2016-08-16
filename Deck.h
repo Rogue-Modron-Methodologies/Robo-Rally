@@ -12,18 +12,18 @@ enum ProgramCards { cardBack = 0, uturn = 1, rotateLeft = 2, rotateRight = 3, mo
 const std::string LIST_HEADER = "resources/lists/";
 
 class Deck : public Object  {
-	std::vector<Card> deck;
+	std::vector<Card*> deck;
 	
 public:
 	Deck(std::string spriteSheet, std::string cardList, sf::Vector2f pos, DeckType type)
-		: Object(spriteSheet, pos, sf::Vector2i(0, 0), CARD_SOURCE_SIZE) { loadDeck(spriteSheet, cardList, pos, type); }
+		: Object(spriteSheet, pos, sf::Vector2i(0, 0), CARD_SOURCE_SIZE) { /*loadDeck(spriteSheet, cardList, pos, type);*/ }
 	~Deck() { unloadDeck(); }
 	void deal() {};
 	void shuffle() {};
 
 private:
 	void loadDeck(std::string spriteSheet, std::string cardList, sf::Vector2f pos, DeckType type);
-	void unloadDeck() { deck.clear(); }
+	void unloadDeck();
 };
 
 #endif // DECK_H

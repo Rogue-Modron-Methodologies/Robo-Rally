@@ -154,7 +154,7 @@ void Tile::drawTile(sf::RenderWindow &window) {
 //*********************
 void Tile::unloadTile() {
 
-	for (int i = 0; i < features.size(); ++i) {
+	for (unsigned i = 0; i < features.size(); ++i) {
 		delete features[i];
 	}
 

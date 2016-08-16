@@ -22,11 +22,20 @@ void Deck::loadDeck(std::string spriteSheet, std::string cardList, sf::Vector2f 
 		std::getline(ss, cardText);
 
 		if(type == DeckType::program)
-			deck.push_back(ProgramCard(spriteSheet, pos, cardText, cardQty));
-		else if (type == DeckType::option)
-			deck.push_back(OptionCard(spriteSheet, pos, cardText, cardQty));
+			deck.push_back(new ProgramCard(spriteSheet, pos, cardText, cardQty));
+		//else if (type == DeckType::option)
+		//	deck.push_back(OptionCard(spriteSheet, pos, cardText, cardQty));
 		ss.str("");
 		ss.clear();
 	}
 	inFile.close();
+}
+
+//*************************************************************
+//  Unloads a Deck.  
+//  Frees deck sprite images and clears the vector.
+void Deck::unloadDeck() {
+	for (unsigned i = 0; i < deck.size(); ++i)
+		delete deck[i];
+	deck.clear();
 }

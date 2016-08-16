@@ -21,9 +21,7 @@ class Object {
 	sf::Vector2i srcSize;		// file source size
 	sf::Vector2i srcPos;		// file source position
 
-
 public:
-
 	Object(	std::string filename, 
 			sf::Vector2f pos, 
 			sf::Vector2i srcPos = { 0, 0 },
@@ -48,7 +46,7 @@ public:
 
 private:
 	// Inline Functions
-	void unloadObject() { /*delete sprite;*/ }
+	void unloadObject() { delete sprite; }
 	// Prototypes
 	void loadObject(std::string filename, sf::Vector2f pos, sf::Vector2i srcPos, sf::Vector2i srcSize);
 	sf::Vector2f convertCoord(sf::RenderWindow &gWindow);

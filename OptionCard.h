@@ -11,8 +11,8 @@
 class OptionCard : public Card {
 
 public:
-	OptionCard(std::string filename, sf::Vector2f pos, std::string text = "", int qty = 1, sf::Vector2i srcPos = { 0,0 }) // srcPos defaults to 0 0  "Back of Card
-		: Card(filename, pos, srcPos, text, qty) {};
+	OptionCard(std::string filename, sf::Vector2f pos, std::string text = "", sf::Vector2i srcPos = { 0,0 }) // srcPos defaults to 0 0  "Back of Card
+		: Card(filename, pos, srcPos, text) {};
 };
 
 #endif // OPTIONCARD_H

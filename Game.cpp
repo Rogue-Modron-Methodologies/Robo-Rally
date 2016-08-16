@@ -6,7 +6,7 @@
 //  Load Game
 void Game::loadGame() {
 	window.create(sf::VideoMode(SCREEN_DIM.x, SCREEN_DIM.y), "RoboRally!");
-	decks.push_back(Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(750, 100), DeckType::program)); /////////////  CHANGE POS TO VARIABLE
+	decks.push_back(new Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(750, 100), DeckType::program)); /////////////  CHANGE POS TO VARIABLE
 	//decks.push_back(Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(200, 700), DeckType::option)); /////////////  CHANGE POS TO VARIABLE
 	//decks[DeckType::option].setColor(sf::Color::Blue);  // only being used to differentiate decks until spritesheets are created
  }
@@ -17,6 +17,8 @@ void Game::unloadGame() {
 	window.close();
 	map.unloadMap();
 	playerList.clear();
+	for (unsigned i = 0; i < decks.size(); ++i)
+		delete decks[i];
 	decks.clear();
 }
 
@@ -32,7 +34,7 @@ void Game::playGame() {
 				window.close();
 				break;
 			case sf::Event::MouseButtonPressed:
-				if (decks[0].isTargeted(window))
+				if (decks[0]->isTargeted(window))
 					std::cout << "Deck Clicked" << std::endl;
 				if (map.mapTargeted(window))
 					std::cout << "Tile Clicked" << std::endl;
@@ -49,6 +51,6 @@ void Game::playGame() {
 void Game::drawGame() {
 	map.drawMap(window);
 	for (auto it = decks.begin(); it != decks.end(); ++it)
-		it->draw(window);
+		(*it)->draw(window);
 
 }
