@@ -130,7 +130,7 @@ void Board::drawBoard(sf::RenderWindow &window) {
 		{
 			//std::cout << "Drawing " << board[i][j]->getPosition().x << "," << board[i][j]->getPosition().y << std::endl;
 			board[i][j]->draw(window);
-			board[i][j]->drawTile(window);
+			board[i][j]->drawTile(window);			//to draw features onto tiles
 		}
 
 }

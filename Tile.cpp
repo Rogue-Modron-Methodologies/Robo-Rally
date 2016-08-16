@@ -132,18 +132,15 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 		sstile >> featureOrientation;
 		sstile >> featureQty;
 
-
-
 		features.push_back(new TileFeature(featureName, featureOrientation, featureQty, spriteSheetFilename, pos, boardOrientation));
 		
-
-
 	}
 
 };
 
 
-
+//*********************
+//*********************
 void Tile::drawTile(sf::RenderWindow &window) {
 
 	int numFeatures = features.size();
@@ -152,3 +149,14 @@ void Tile::drawTile(sf::RenderWindow &window) {
 		features[i]->draw(window);
 	}
 };
+
+//*********************
+//*********************
+void Tile::unloadTile() {
+
+	for (int i = 0; i < features.size(); ++i) {
+		delete features[i];
+	}
+
+	features.clear();
+}
