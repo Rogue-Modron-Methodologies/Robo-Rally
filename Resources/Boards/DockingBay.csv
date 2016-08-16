@@ -1,5 +1,5 @@
 boardSpriteSheet.png,,,,,,,,,,,
-floor start 7,floor ,floor wall 0,floor ,floor wall 0 270,floor ,floor ,floor wall 0 90,floor ,floor wall 0,floor ,floor start 8
-floor ,floor wall 270 start 5,floor wall 270,floor ,floor ,floor ,floor ,floor ,floor ,floor wall 90,floor wall 90 start 6,floor 
-conv 90 1,conv 90 1,convbr 180 1,floor start 3,floor ,floor ,floor wall 270,floor ,floor start 4,convbl 180 1,conv 270 1,conv 270 1
-floor ,floor ,convbl 90 1,conv 90 1,conv 90 1,floor start 1,floor wall 270 start 2,conv 270 1,conv 270 1,convbr 270 1,floor ,floor 
+floor ,floor ,floor wall 0 0,floor ,floor wall 0 0 wall 270 0,floor ,floor ,floor wall 0 0 wall 90 0,floor ,floor wall 0 0,floor ,floor 
+floor ,floor wall 270 0 ,floor wall 270 0,floor ,floor ,floor ,floor ,floor ,floor ,floor wall 90 0,floor wall 90 0 ,floor 
+conv 90 1,conv 90 1,convbr 180 1,floor ,floor ,floor ,floor wall 270 0,floor ,floor ,convbl 180 1,conv 270 1,conv 270 1
+floor ,floor ,convbl 90 1,conv 90 1,conv 90 1,floor ,floor wall 270 0,conv 270 1,conv 270 1,convbr 270 1,floor ,floor 

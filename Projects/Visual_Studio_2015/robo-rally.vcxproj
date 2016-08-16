@@ -26,6 +26,7 @@
     <ClCompile Include="..\..\Map.cpp" />
     <ClCompile Include="..\..\Object.cpp" />
     <ClCompile Include="..\..\Tile.cpp" />
+    <ClCompile Include="..\..\TileFeature.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Board.h" />

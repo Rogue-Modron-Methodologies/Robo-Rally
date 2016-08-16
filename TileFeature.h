@@ -8,6 +8,8 @@
 #include <string>
 #include "Object.h"
 
+enum TILE_FEATURES { wall = 0, laser1 = 1, laser2 = 2, laser3 = 3, gear1 = 4, gear2 = 5 };
+
 const sf::Vector2i TILE_SOURCE_SIZE = { 50, 50 };
 
 class TileFeature : public Object  {
@@ -19,8 +21,20 @@ class TileFeature : public Object  {
 	bool moveRobot;
 
 public:
-	TileFeature(std::string filename, sf::Vector2f pos, sf::Vector2i sPos, sf::Vector2i sSize = TILE_SOURCE_SIZE) 
-		: Object(filename, pos, sPos, sSize) {};
+	TileFeature(std::string featureName, int orientation, int qty, std::string spriteSheetFilename, sf::Vector2f pos, int boardOrientation)
+		: Object(spriteSheetFilename, pos, sf::Vector2i(0, 0), TILE_SOURCE_SIZE) {
+	
+		setPosition(pos);
+		setOrigin();
+
+		loadTileFeature(featureName, orientation, qty, boardOrientation);
+
+	};
+
+
+	void loadTileFeature(std::string featureName, int orientation, int qty, int boardOrientation);
+
+
 
 };
 

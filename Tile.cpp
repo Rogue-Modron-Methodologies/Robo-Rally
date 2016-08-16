@@ -8,31 +8,34 @@
 
 //*********************This function needs to exist
 //*********************It is a constructor.  It needs to set all initial values. The sprite, texture, position, etc
-void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrientation) {
+void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrientation, std::string spriteSheetFilename) {
 
-	std::string tileName;
+	//std::string tileName;
 	int orientation = 0;
 
 	std::stringstream sstile;
 
 	sstile << tileInformation;
 
-	sstile >> tileName;
+	sstile >> this->tileType;
 
-	if (tileName == "floor") {
+
+	if (tileType == "floor") {
 		setSrcPosX(ground);
 
 	}
-	else if (tileName == "pit") {
+	else if (tileType == "pit") {
 		setSrcPosX(pit);			
 
 	}
 
+	if(tileType != "floor" && tileType != "pit"){
 	sstile >> orientation;
 	setRotation(orientation + boardOrientation);
 	sstile >> this->qty;
+	}
 
-	if (tileName == "repair") {		//continue parsing to find repair 1 and 2
+	if (tileType == "repair") {				//continue parsing to find repair 1 and 2
 
 		if (qty == 1) {
 			setSrcPosX(repair1);
@@ -42,17 +45,7 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 		}
 
 	}
-	else if (tileName == "gear") {			//continue parsing to find gear 1 and 2
-
-		if (qty == 0) {
-
-		}
-		else if (qty == 1) {
-
-		}
-
-	}
-	else if (tileName == "conv") {			//continue parsing to find speed 1 and 2 and orientation
+	else if (tileType == "conv") {			//continue parsing to find speed 1 and 2 and orientation
 
 		if (qty == 1) {
 			setSrcPosX(conv1);
@@ -62,7 +55,7 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 		}
 
 	}
-	else if (tileName == "convbr") {			//continue parsing to find speed 1 and 2 and orientation
+	else if (tileType == "convbr") {			//continue parsing to find speed 1 and 2 and orientation
 
 		if (qty == 1) {
 			setSrcPosX(convbr1);
@@ -72,7 +65,7 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 		}
 
 	}
-	else if (tileName == "convbl") {			//continue parsing to find speed 1 and 2 and orientation
+	else if (tileType == "convbl") {			//continue parsing to find speed 1 and 2 and orientation
 
 		if (qty == 1) {
 			setSrcPosX(convbr1);
@@ -84,7 +77,7 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 		setScale({ -1.f,1.f });					//flip sprite for left bend
 
 	}
-	else if (tileName == "convhr") {			//continue parsing to find speed 1 and 2 and orientation
+	else if (tileType == "convhr") {			//continue parsing to find speed 1 and 2 and orientation
 
 		if (qty == 1) {
 			setSrcPosX(convhr1);
@@ -94,7 +87,7 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 		}
 
 	}
-	else if (tileName == "convhl") {			//continue parsing to find speed 1 and 2 and orientation
+	else if (tileType == "convhl") {			//continue parsing to find speed 1 and 2 and orientation
 
 		if (qty == 1) {
 			setSrcPosX(convhr1);
@@ -106,7 +99,7 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 		setScale({ -1.f,1.f });					//flip sprite for left H join
 
 	}
-	else {			//continue parsing to find speed 1 and 2 and orientation	if (tileName == "convt")
+	else if (tileType == "convt") {			//continue parsing to find speed 1 and 2 and orientation	if (tileName == "convt")
 
 		if (qty == 1) {
 			setSrcPosX(convt1);
@@ -116,8 +109,46 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 		}
 
 	}
+	else if (tileType == "gear") {			//continue parsing to find speed 1 and 2 and orientation	if (tileName == "convt")
 
-	
+		if (qty == 0) {
+			setSrcPosX(gearClock);
+		}
+		else if (qty == 1) {
+			setSrcPosX(gearAnti);
+		}
+
+	}
+	//else {
+	//	//if it gets here there is an error do we want to check that? have option that wont error out?
+	//}
+
+	std::string featureName;
+	int featureOrientation, featureQty;
+
+
+
+	while (sstile >> featureName) {
+		sstile >> featureOrientation;
+		sstile >> featureQty;
+
+
+
+		features.push_back(new TileFeature(featureName, featureOrientation, featureQty, spriteSheetFilename, pos, boardOrientation));
+		
+
+
+	}
 
 };
 
+
+
+void Tile::drawTile(sf::RenderWindow &window) {
+
+	int numFeatures = features.size();
+
+	for (int i = 0; i < numFeatures; ++i) {
+		features[i]->draw(window);
+	}
+};
