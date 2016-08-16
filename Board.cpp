@@ -37,10 +37,7 @@ void Board::loadBoard(std::string filename, sf::Vector2i pos, sf::Vector2i dimen
 	int temp;
 	std::getline(inFile, spriteSheet);
 	std::replace(spriteSheet.begin(), spriteSheet.end(), ',', ' ');
-	std::cout << spriteSheet << std::endl;
 
-
-	// Add additional orientation options here.
 	switch (orientation){
 	case left:
 	case right:
@@ -52,20 +49,58 @@ void Board::loadBoard(std::string filename, sf::Vector2i pos, sf::Vector2i dimen
 		break;
 	}
 	board.resize(this->dimensions.x);
-
 	for (auto row = board.begin(); row != board.end(); ++row)
 		row->resize(this->dimensions.y);
 
-	for (int i = 0; i < this->dimensions.x; ++i) {
-		std::getline(inFile, buffer);
-		ss << buffer;
-		for (int j = 0; j < this->dimensions.y; ++j) {
-			std::getline(ss, buffer, ',');
-			board[i][j] = new Tile(buffer, spriteSheet, sf::Vector2f((float)pos.y + j * TILE_SOURCE_SIZE.y, (float)pos.x + i * TILE_SOURCE_SIZE.x), orientation);
-			//std::cout << board[i][j]->getPosition().x << "," << board[i][j]->getPosition().y << std::endl;
+	switch (orientation) {
+	case up:
+		for (int i = 0; i < this->dimensions.x; ++i) {
+			std::getline(inFile, buffer);
+			ss << buffer;
+			for (int j = 0; j < this->dimensions.y; ++j) {
+				std::getline(ss, buffer, ',');
+				board[i][j] = new Tile(buffer, spriteSheet, sf::Vector2f((float)pos.y + j * TILE_SOURCE_SIZE.y, (float)pos.x + i * TILE_SOURCE_SIZE.x), orientation);
+			}
+			ss << "";
+			ss.clear();
 		}
-		ss << "";
-		ss.clear();
+		break;
+	case down:
+		for (int i = this->dimensions.x - 1; i >= 0; --i) {
+			std::getline(inFile, buffer);
+			ss << buffer;
+			for (int j = this->dimensions.y - 1; j >= 0; --j) {
+				std::getline(ss, buffer, ',');
+				board[i][j] = new Tile(buffer, spriteSheet, sf::Vector2f((float)pos.y + j * TILE_SOURCE_SIZE.y, (float)pos.x + i * TILE_SOURCE_SIZE.x), orientation);
+			}
+			ss << "";
+			ss.clear();
+		}
+		break;
+	case left:
+		for (int j = 0; j < this->dimensions.y; ++j) {
+			std::getline(inFile, buffer);
+			ss << buffer;
+			for (int i = this->dimensions.x - 1; i >= 0; --i) {
+				std::getline(ss, buffer, ',');
+				board[i][j] = new Tile(buffer, spriteSheet, sf::Vector2f((float)pos.y + j * TILE_SOURCE_SIZE.y, (float)pos.x + i * TILE_SOURCE_SIZE.x), orientation);
+			}
+			ss << "";
+			ss.clear();
+		}
+		break;
+	case right:
+		for (int j = this->dimensions.y - 1; j >= 0; --j) {
+			std::getline(inFile, buffer);
+			ss << buffer;
+			for (int i = 0; i < this->dimensions.x; ++i) {
+				std::getline(ss, buffer, ',');
+				board[i][j] = new Tile(buffer, spriteSheet, sf::Vector2f((float)pos.y + j * TILE_SOURCE_SIZE.y, (float)pos.x + i * TILE_SOURCE_SIZE.x), orientation);
+			}
+			ss << "";
+			ss.clear();
+		}
+		break;
 	}
 	inFile.close();
 }
