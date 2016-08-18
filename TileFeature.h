@@ -31,10 +31,12 @@ public:
 
 	};
 
+	~TileFeature() {};
 
 	void loadTileFeature(std::string featureName, int orientation, int qty, int boardOrientation);
 
 
+	std::string getFeatureName() { return featureName; };
 
 };
 

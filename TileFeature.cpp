@@ -31,6 +31,6 @@ void TileFeature::loadTileFeature(std::string featureName, int orientation, int 
 			setSrcPosX(wall);
 	}
 
-
-
 }
+
+

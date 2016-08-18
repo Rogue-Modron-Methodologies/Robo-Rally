@@ -35,10 +35,12 @@ public:
 
 	~Tile() { unloadTile(); };
 
-	void drawTile(sf::RenderWindow &window);			//remember tile is an Object and Object already has a draw
-
 	void loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrientation, std::string spriteSheetFilename);
 	void unloadTile();
+
+	void drawTile(sf::RenderWindow &window);			//remember tile is an Object and Object already has a draw
+
+	void drawDebugTile();
 
 };
 

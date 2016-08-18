@@ -138,6 +138,16 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 
 };
 
+//*********************
+//*********************
+void Tile::unloadTile() {
+
+	for (unsigned i = 0; i < features.size(); ++i) {
+		delete features[i];
+	}
+
+	features.clear();
+}
 
 //*********************
 //*********************
@@ -152,11 +162,17 @@ void Tile::drawTile(sf::RenderWindow &window) {
 
 //*********************
 //*********************
-void Tile::unloadTile() {
+void Tile::drawDebugTile() {
 
-	for (unsigned i = 0; i < features.size(); ++i) {
-		delete features[i];
+	std::cout << " Ground Tile: " << tileType << " Tile Features: ";
+
+	if (features.size() == 0) {
+		std::cout << "No tile features.\n\n";
+	}
+	else {
+		for (unsigned i = 0; i < features.size(); ++i) {
+			std::cout << features[i]->getFeatureName() << std::endl;
+		}
 	}
 
-	features.clear();
-}
+};
