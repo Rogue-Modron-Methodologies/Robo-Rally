@@ -23,7 +23,8 @@ class TileFeature : public Object  {
 public:
 	TileFeature(std::string featureName, int orientation, int qty, std::string spriteSheetFilename, sf::Vector2f pos, int boardOrientation)
 		: Object(spriteSheetFilename, pos, sf::Vector2i(0, 0), TILE_SOURCE_SIZE) {
-	
+		this->featureName = featureName;
+		this->qty = qty;
 		setPosition(pos);
 		setOrigin();
 

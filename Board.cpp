@@ -155,3 +155,15 @@ bool Board::boardTargeted(sf::RenderWindow &window) {
 				return true; 
 	return false;
 }
+
+//for bug checking Tile and TileFeature private member variables
+//Game, Map and Board habe printXxxx() functions to reach printTile() function
+void Board::printBoard() {
+	for (int i = 0; i < dimensions.x; ++i)
+		for (int j = 0; j < dimensions.y; ++j)
+		{
+			//std::cout << "Drawing " << board[i][j]->getPosition().x << "," << board[i][j]->getPosition().y << std::endl;
+			//board[i][j]->draw(window);
+			board[i][j]->printTile();			//to draw features onto tiles
+		}
+}

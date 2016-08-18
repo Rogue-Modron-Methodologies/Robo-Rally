@@ -11,6 +11,10 @@
 int main() {
 
 	Game game("robotstew.csv");
+
+	//game.printGame();		//for bug checking Tile and TileFeature private member variables
+							//Game, Map and Board habe printXxxx() functions to reach printTile() function
+
 	game.playGame();
 
 

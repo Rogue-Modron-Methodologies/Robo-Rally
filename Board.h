@@ -28,6 +28,8 @@ public:
 	int getOrientation() { return orientation; }
 	sf::Vector2i getDimensions() { 	return dimensions; }
 	bool boardTargeted(sf::RenderWindow &window);
+
+	void printBoard();
 };
 
 #endif // BOARD_H

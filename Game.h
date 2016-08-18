@@ -33,6 +33,11 @@ public:
 	Game(std::string filename) : map(filename, START_LOC) { loadGame(); }
 
 	void playGame();
+
+	void printGame() { map.printMap(); };	//for bug checking Tile and TileFeature private member variables
+											//Game, Map and Board have printXxxx() functions to reach printTile() function
+
+
 private:
 	void loadGame();
 	void unloadGame();

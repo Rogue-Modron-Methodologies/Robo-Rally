@@ -139,7 +139,7 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 };
 
 //*********************
-//*********************
+//release dynamcally allocated vector of tile features
 void Tile::unloadTile() {
 
 	for (unsigned i = 0; i < features.size(); ++i) {
@@ -150,7 +150,7 @@ void Tile::unloadTile() {
 }
 
 //*********************
-//*********************
+//renders tile floor and tileFeature sprites for one tile
 void Tile::drawTile(sf::RenderWindow &window) {
 
 	this->draw(window);
@@ -161,7 +161,7 @@ void Tile::drawTile(sf::RenderWindow &window) {
 };
 
 //*********************
-//*********************
+//prints to screen the ground tile and, if any, the tile's features
 void Tile::drawDebugTile() {
 
 	std::cout << " Ground Tile: " << tileType << " Tile Features: ";
@@ -180,7 +180,8 @@ void Tile::drawDebugTile() {
 };
 
 
-
+//for bug checking Tile and TileFeature private member variables
+//Game, Map and Board have printXxxx() functions to reach printTile() function
 void Tile::printTile() {
 
 	std::cout << " " << tileType << " " << qty << std::endl;

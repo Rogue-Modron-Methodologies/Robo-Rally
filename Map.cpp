@@ -86,3 +86,12 @@ bool Map::mapTargeted(sf::RenderWindow &window) {
 				return true;
 		return  false;
 }
+
+//for bug checking Tile and TileFeature private member variables
+//Game, Map and Board have printXxxx() functions to reach printTile() function
+void Map::printMap() {
+	for (auto row = map.begin(); row != map.end(); ++row)
+		for (auto col = row->begin(); col != row->end(); ++col)
+			col->printBoard();
+
+}

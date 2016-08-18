@@ -33,6 +33,9 @@ void TileFeature::loadTileFeature(std::string featureName, int orientation, int 
 
 }
 
+
+//for bug checking Tile and TileFeature private member variables
+//Game, Map and Board habe printXxxx() functions to reach printTile() function
 void TileFeature::printTileFeature() {
 
 	std::cout << "\t" << featureName << " " << qty << " ";

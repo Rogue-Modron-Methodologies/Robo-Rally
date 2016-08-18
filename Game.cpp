@@ -61,3 +61,10 @@ void Game::drawGame() {
 		(*it)->draw(window);
 
 }
+
+
+//for bug checking Tile and TileFeature private member variables
+//Game, Map and Board have printXxxx() functions to reach printTile() function
+void Game::printGame() {
+	map.printMap();
+}
