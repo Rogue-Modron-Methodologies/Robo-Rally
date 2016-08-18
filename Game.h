@@ -22,6 +22,7 @@ const sf::Vector2i SCREEN_DIM = { 1000, 1000 };
 
 class Game {
 	sf::RenderWindow window;
+	sf::View view;
 	Map map;
 	std::vector<Player> playerList;
 	std::vector<Deck*> decks;
