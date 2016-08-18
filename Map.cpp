@@ -79,6 +79,7 @@ void Map::drawMap(sf::RenderWindow &window) {
 // Loops through 2D vector and calls isTargeted on each element
 // 
 bool Map::mapTargeted(sf::RenderWindow &window) {
+	// check for out of map bounds.  Return false 
 	for (auto row = map.begin(); row != map.end(); ++row)
 		for (auto col = row->begin(); col != row->end(); ++col)
 			if (col->boardTargeted(window))
