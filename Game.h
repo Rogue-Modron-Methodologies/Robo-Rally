@@ -18,7 +18,10 @@ enum class ResourceType { textures = 0, sounds = 1, fonts = 2 };
 #define OPTION_SPRITESHEET "OptionSpriteSheet.png"
 
 const sf::Vector2f START_LOC = { 75, 75 }; ////////////  For Now
-const sf::Vector2i SCREEN_DIM = { 1000, 1000 };
+const sf::Vector2i SCREEN_DIM = { 800, 800 };
+const float MIN_ZOOM = 300;
+const float MAX_ZOOM = 5000;
+const float ZOOM_QTY = .9f;
 
 class Game {
 	sf::RenderWindow window;
@@ -34,7 +37,7 @@ public:
 
 	void playGame();
 
-	void printGame() { map.printMap(); };	//for bug checking Tile and TileFeature private member variables
+	void printGame();						//for bug checking Tile and TileFeature private member variables
 											//Game, Map and Board have printXxxx() functions to reach printTile() function
 
 
@@ -42,6 +45,7 @@ private:
 	void loadGame();
 	void unloadGame();
 	void drawGame();
+	void zoomView(sf::Vector2i, sf::RenderWindow& window, int inOut);
 
 };
 

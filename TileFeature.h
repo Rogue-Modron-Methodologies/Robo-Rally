@@ -10,7 +10,7 @@
 
 enum TILE_FEATURES { wall = 0, laser1 = 1, laser2 = 2, laser3 = 3, gear1 = 4, gear2 = 5 };
 
-const sf::Vector2i TILE_SOURCE_SIZE = { 50, 50 };
+const sf::Vector2i TILE_SOURCE_SIZE = { 150, 150 };
 
 class TileFeature : public Object  {
 	std::string featureName;

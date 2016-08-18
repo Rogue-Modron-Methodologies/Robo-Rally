@@ -141,8 +141,7 @@ void Board::drawBoard(sf::RenderWindow &window) {
 bool Board::boardTargeted(sf::RenderWindow &window) {
 
 	if (board.size() == 0) return false;
-	sf::Vector2i pixelPos = sf::Mouse::getPosition(window);
-	sf::Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+	sf::Vector2f worldPos = convertCoord(window);
 	// returns false if click is outside of board dimensions.  Won't bother checking each tile individually.
 	//if (worldPos.x < pos.x || worldPos.y < pos.y || 
 	//	worldPos.x > pos.x + dimensions.x * TILE_SOURCE_SIZE.x || 
@@ -166,4 +165,12 @@ void Board::printBoard() {
 			//board[i][j]->draw(window);
 			board[i][j]->printTile();			//to draw features onto tiles
 		}
+}
+
+//*************************************************************
+//  Converts Coordinates to current view
+sf::Vector2f Board::convertCoord(sf::RenderWindow &gWindow) {
+	sf::Vector2i pixelPos = sf::Mouse::getPosition(gWindow);
+	sf::Vector2f worldPos = gWindow.mapPixelToCoords(pixelPos);
+	return worldPos;
 }

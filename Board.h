@@ -28,7 +28,7 @@ public:
 	int getOrientation() { return orientation; }
 	sf::Vector2i getDimensions() { 	return dimensions; }
 	bool boardTargeted(sf::RenderWindow &window);
-
+	sf::Vector2f convertCoord(sf::RenderWindow &gWindow);
 	void printBoard();
 };
 
