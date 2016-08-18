@@ -33,4 +33,22 @@ void TileFeature::loadTileFeature(std::string featureName, int orientation, int 
 
 }
 
+void TileFeature::printTileFeature() {
 
+	std::cout << "\t" << featureName << " " << qty << " ";
+		
+	if (blockLOS)
+		std::cout << "blocks LOS ";
+
+	if (occupies)
+		std::cout << "occupies the tile ";
+
+	if (damages)
+		std::cout << "causes damage ";
+
+	if (moveRobot)
+		std::cout << "moves robot ";	
+		
+		std::cout << std::endl;
+
+}

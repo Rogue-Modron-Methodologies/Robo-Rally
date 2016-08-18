@@ -38,6 +38,8 @@ public:
 
 	std::string getFeatureName() { return featureName; };
 
+	void printTileFeature();
+
 };
 
 

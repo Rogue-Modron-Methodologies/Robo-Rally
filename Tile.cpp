@@ -171,8 +171,23 @@ void Tile::drawDebugTile() {
 	}
 	else {
 		for (unsigned i = 0; i < features.size(); ++i) {
-			std::cout << features[i]->getFeatureName() << std::endl;
+			std::cout << features[i]->getFeatureName() << " "; 
 		}
 	}
 
+	std::cout << std::endl;
+
 };
+
+
+
+void Tile::printTile() {
+
+	std::cout << " " << tileType << " " << qty << std::endl;
+
+	for (unsigned i = 0; i < features.size(); ++i) {
+		features[i]->printTileFeature();
+	}
+
+	std::cout << std::endl;
+}

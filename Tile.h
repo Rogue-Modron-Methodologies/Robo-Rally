@@ -42,6 +42,8 @@ public:
 
 	void drawDebugTile();
 
+	void printTile();					//print private member variables
+
 };
 
 #endif // TILE_H
