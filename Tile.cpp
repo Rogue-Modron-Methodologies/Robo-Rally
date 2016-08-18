@@ -143,9 +143,9 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 //*********************
 void Tile::drawTile(sf::RenderWindow &window) {
 
-	int numFeatures = features.size();
+	this->draw(window);
 
-	for (int i = 0; i < numFeatures; ++i) {
+	for (unsigned i = 0; i < features.size(); ++i) {
 		features[i]->draw(window);
 	}
 };
