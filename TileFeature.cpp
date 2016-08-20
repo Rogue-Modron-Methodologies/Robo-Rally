@@ -6,9 +6,9 @@
 //*************************************************************
 //  
 // 
-void TileFeature::loadTileFeature(std::string featureName, int orientation, int qty, int boardOrientation) {
+void TileFeature::loadTileFeature(std::string featureName, int qty, int orientation) {
 	setSrcPosY(1);
-	setRotation(orientation + boardOrientation);
+	setRotation(orientation);
 
 	if (featureName == "laser") {
 		if (qty == 1) 
@@ -25,7 +25,7 @@ void TileFeature::loadTileFeature(std::string featureName, int orientation, int 
 //for bug checking Tile and TileFeature private member variables
 //Game, Map and Board habe printXxxx() functions to reach printTile() function
 void TileFeature::drawDebugTileFeature() {
-	std::cout << "\t" << featureName << " " << qty << " " << this->getRotation();
+	std::cout << "\t" << name << " " << qty << " " << this->getRotation();
 		
 	if (blockLOS)
 		std::cout << "blocks LOS ";

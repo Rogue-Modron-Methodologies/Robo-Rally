@@ -84,7 +84,7 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 	while (sstile >> featureName) {
 		sstile >> featureOrientation;
 		sstile >> featureQty;
-		features.push_back(new TileFeature(featureName, featureOrientation, featureQty, spriteSheetFilename, pos, boardOrientation));		
+		features.push_back(new TileFeature(featureName, featureQty, spriteSheetFilename, pos, featureOrientation + boardOrientation));
 	}
 };
 

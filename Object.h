@@ -25,7 +25,7 @@ public:
 	Object(	std::string filename, 
 			sf::Vector2f pos, 
 			sf::Vector2i srcPos = { 0, 0 },
-			sf::Vector2i srcSize = { 0, 0 }) { loadObject(filename, pos, srcPos, srcSize); }
+			sf::Vector2i srcSize = { 100, 100 }) { loadObject(filename, pos, srcPos, srcSize); }
 	~Object() { unloadObject(); };
 
 	void setScale(sf::Vector2f scale) { sprite->setScale(scale); }
@@ -39,6 +39,7 @@ public:
 	sf::Vector2i getSrcPos() const { return srcPos; }
 	sf::Vector2f getPosition() const { return sprite->getPosition(); }
 	sf::Vector2f getScale() const { return sprite->getScale(); }
+	sf::FloatRect getSize() const { return sprite->getGlobalBounds(); }
 	float getRotation() { return sprite->getRotation(); }
 	void draw(sf::RenderWindow &window) { window.draw(*sprite); /*std::cout << "Sprite Pos: " << sprite->getPosition().x << "," << sprite->getPosition().y << std::endl;*/ }
 	// Prototypes

@@ -8,6 +8,11 @@ void Game::loadGame() {
 	window.create(sf::VideoMode(SCREEN_DIM.x, SCREEN_DIM.y), "RoboRally!");
 	view.reset(sf::FloatRect(0, 0, SCREEN_DIM.x * 3.f, SCREEN_DIM.y * 3.f));
 	window.setView(view);
+	playerList.push_back(new Player("Twonky", sf::Vector2f(2000, 700))); // Need actual Variables
+	for (unsigned i = 0; i < playerList.size(); ++i) {
+		playerList[i]->placeRobotOnBoard(START_LOC, 0);
+	}
+
 	decks.push_back(new Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(2000, 100), DeckType::program)); /////////////  CHANGE POS TO VARIABLE
 	//decks.push_back(Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(200, 700), DeckType::option)); /////////////  CHANGE POS TO VARIABLE
 	//decks[DeckType::option].setColor(sf::Color::Blue);  // only being used to differentiate decks until spritesheets are created
@@ -36,6 +41,15 @@ void Game::playGame() {
 				window.close();
 				break;
 			case sf::Event::KeyPressed:
+				if (event.key.code == sf::Keyboard::Up)
+					playerList[0]->moveRobot(up);
+				else if (event.key.code == sf::Keyboard::Down)
+					playerList[0]->moveRobot(down);
+				else if (event.key.code == sf::Keyboard::Left)
+					playerList[0]->moveRobot(left);
+				else if (event.key.code == sf::Keyboard::Right)
+					playerList[0]->moveRobot(right);
+
 				if (event.key.code == sf::Keyboard::Num0 || event.key.code == sf::Keyboard::Numpad0) {
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) || sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
 						view.reset(sf::FloatRect(0, 0, SCREEN_DIM.x * 3.f, SCREEN_DIM.y * 3.f));
@@ -79,6 +93,8 @@ void Game::drawGame() {
 	map.drawMap(window);
 	for (auto it = decks.begin(); it != decks.end(); ++it)
 		(*it)->draw(window);
+	for (auto it = playerList.begin(); it != playerList.end(); ++it)
+		(*it)->drawPlayer(window);
 
 }
 

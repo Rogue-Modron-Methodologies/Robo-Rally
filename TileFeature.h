@@ -13,7 +13,7 @@ enum TILE_FEATURES { wall = 0, laser1 = 1, laser2 = 2, laser3 = 3, gear1 = 4, ge
 const sf::Vector2i TILE_SOURCE_SIZE = { 150, 150 };
 
 class TileFeature : public Object  {
-	std::string featureName;
+	std::string name;
 	int qty;
 	bool blockLOS;
 	bool occupies;
@@ -21,18 +21,17 @@ class TileFeature : public Object  {
 	bool moveRobot;
 
 public:
-	TileFeature(std::string featureName, int orientation, int qty, std::string spriteSheetFilename, sf::Vector2f pos, int boardOrientation)
+	TileFeature(std::string featureName, int qty, std::string spriteSheetFilename, sf::Vector2f pos, int orientation)
 		: Object(spriteSheetFilename, pos, sf::Vector2i(0, 0), TILE_SOURCE_SIZE) {
-		this->featureName = featureName;
+		this->name = featureName;
 		this->qty = qty;
-		setPosition(pos);
 		setOrigin();
-		loadTileFeature(featureName, orientation, qty, boardOrientation);
+		loadTileFeature(featureName, qty, orientation);
 	};
 
 	~TileFeature() {};
-	void loadTileFeature(std::string featureName, int orientation, int qty, int boardOrientation);
-	std::string getFeatureName() { return featureName; };
+	void loadTileFeature(std::string featureName, int qty, int orientation);
+	std::string getName() { return name; };
 	void drawDebugTileFeature();
 };
 #endif // TILEFEATURE_H

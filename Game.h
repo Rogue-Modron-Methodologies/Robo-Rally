@@ -27,7 +27,7 @@ class Game {
 	sf::RenderWindow window;
 	sf::View view;
 	Map map;
-	std::vector<Player> playerList;
+	std::vector<Player*> playerList;
 	std::vector<Deck*> decks;
 	ResourceManager<sf::Font> fontList;
 	ResourceManager<sf::Int16> soundList;					// https://gist.github.com/eXpl0it3r/c4edb9bcc1f00e29a79b
