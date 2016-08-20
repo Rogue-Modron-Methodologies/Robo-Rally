@@ -23,8 +23,7 @@ public:
 	void loadMap(std::string filename, sf::Vector2f pos);
 	void unloadMap() { map.clear(); }
 	bool mapTargeted(sf::RenderWindow &window);
-
-	void printMap();
+	void debugDraw(sf::RenderWindow &window);
 };
 
 #endif // MAP_H

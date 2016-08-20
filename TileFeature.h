@@ -27,21 +27,12 @@ public:
 		this->qty = qty;
 		setPosition(pos);
 		setOrigin();
-
 		loadTileFeature(featureName, orientation, qty, boardOrientation);
-
 	};
 
 	~TileFeature() {};
-
 	void loadTileFeature(std::string featureName, int orientation, int qty, int boardOrientation);
-
-
 	std::string getFeatureName() { return featureName; };
-
-	void printTileFeature();
-
+	void drawDebugTileFeature();
 };
-
-
 #endif // TILEFEATURE_H

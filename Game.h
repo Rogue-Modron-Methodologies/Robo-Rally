@@ -34,12 +34,7 @@ class Game {
 
 public:
 	Game(std::string filename) : map(filename, START_LOC) { loadGame(); }
-
 	void playGame();
-
-	void printGame();						//for bug checking Tile and TileFeature private member variables
-											//Game, Map and Board have printXxxx() functions to reach printTile() function
-
 
 private:
 	void loadGame();
@@ -48,5 +43,4 @@ private:
 	void zoomView(sf::Vector2i, sf::RenderWindow& window, int inOut);
 
 };
-
 #endif // GAME_H

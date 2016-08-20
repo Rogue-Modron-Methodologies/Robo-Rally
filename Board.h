@@ -29,7 +29,7 @@ public:
 	sf::Vector2i getDimensions() { 	return dimensions; }
 	bool boardTargeted(sf::RenderWindow &window);
 	sf::Vector2f convertCoord(sf::RenderWindow &gWindow);
-	void printBoard();
+	void debugDraw(sf::RenderWindow &window);
 };
 
 #endif // BOARD_H

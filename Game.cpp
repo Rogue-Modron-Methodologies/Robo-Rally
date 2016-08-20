@@ -54,11 +54,11 @@ void Game::playGame() {
 				}
 				break;
 			case sf::Event::MouseButtonPressed:
+
 				if (decks[0]->isTargeted(window))
 					std::cout << "Deck Clicked" << std::endl;
 				if (map.mapTargeted(window)) {
-					//printGame();
-					std::cout << "Tile Clicked" << std::endl;
+					map.debugDraw(window);
 				}
 
 				break;
@@ -80,13 +80,6 @@ void Game::drawGame() {
 	for (auto it = decks.begin(); it != decks.end(); ++it)
 		(*it)->draw(window);
 
-}
-
-//*************************************************************
-//	for bug checking Tile and TileFeature private member variables
-//	Game, Map and Board have printXxxx() functions to reach printTile() function
-void Game::printGame() {
-	map.printMap();
 }
 
 //*************************************************************
