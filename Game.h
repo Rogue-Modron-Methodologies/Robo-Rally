@@ -41,6 +41,7 @@ private:
 	void unloadGame();
 	void drawGame();
 	void zoomView(sf::Vector2i, sf::RenderWindow& window, int inOut);
+	void placeRobotOnBoard(int playerNum, sf::Vector2i boardNum, sf::Vector2i tileNum);
 
 };
 #endif // GAME_H

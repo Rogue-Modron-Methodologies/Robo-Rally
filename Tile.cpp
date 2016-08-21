@@ -14,8 +14,11 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 
 	if (tileType == "floor") 
 		setSrcPosX(ground);
-	else if (tileType == "pit") 
-		setSrcPosX(pit);			
+	else if (tileType == "pit") {
+		setSrcPosX(pit);
+		causesDeath = true;
+	}
+		
 
 	if(tileType != "floor" && tileType != "pit") {
 		sstile >> orientation;
@@ -108,6 +111,8 @@ void Tile::drawTile(sf::RenderWindow &window) {
 //prints to screen the ground tile and, if any, the tile's features
 void Tile::drawDebugTile() {
 	std::cout << tileType << " " << qty << " " << this->getRotation();
+	if (robot)
+		std::cout << robot->getName() << std::endl;
 	if (features.size() == 0) 
 		std::cout << ": no tile features.\n\n";
 	else {

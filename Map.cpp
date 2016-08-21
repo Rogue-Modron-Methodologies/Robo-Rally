@@ -20,6 +20,7 @@ void Map::loadMap(std::string filename, sf::Vector2f pos) {
 	std::vector<Board> row;
 	mapBounds = { 0,0 };
 
+	origin = pos;
 	while (std::getline(inFile, tempLine)) {
 		if (tempLine.size()) {
 			ssline << tempLine;

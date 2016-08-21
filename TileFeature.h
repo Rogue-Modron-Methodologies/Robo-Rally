@@ -18,7 +18,6 @@ class TileFeature : public Object  {
 	bool blockLOS;
 	bool occupies;
 	bool damages;
-	bool moveRobot;
 
 public:
 	TileFeature(std::string featureName, int qty, std::string spriteSheetFilename, sf::Vector2f pos, int orientation)

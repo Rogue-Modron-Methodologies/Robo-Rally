@@ -8,11 +8,8 @@ void Game::loadGame() {
 	window.create(sf::VideoMode(SCREEN_DIM.x, SCREEN_DIM.y), "RoboRally!");
 	view.reset(sf::FloatRect(0, 0, SCREEN_DIM.x * 3.f, SCREEN_DIM.y * 3.f));
 	window.setView(view);
-	playerList.push_back(new Player("Twonky", sf::Vector2f(2000, 700))); // Need actual Variables
-	for (unsigned i = 0; i < playerList.size(); ++i) {
-		playerList[i]->placeRobotOnBoard(START_LOC, 0);
-	}
-
+	playerList.push_back(new Player("Twonky"));
+	placeRobotOnBoard(0, { 1, 0 }, { 1, 3 });
 	decks.push_back(new Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(2000, 100), DeckType::program)); /////////////  CHANGE POS TO VARIABLE
 	//decks.push_back(Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(200, 700), DeckType::option)); /////////////  CHANGE POS TO VARIABLE
 	//decks[DeckType::option].setColor(sf::Color::Blue);  // only being used to differentiate decks until spritesheets are created
@@ -66,6 +63,15 @@ void Game::playGame() {
 						zoomView(sf::Vector2i(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y), window, -1);
 					}
 				}
+
+				//// DEBUGGING AREA
+				if (event.key.code == sf::Keyboard::X)
+					playerList[0]->resetRobot();
+
+
+
+
+
 				break;
 			case sf::Event::MouseButtonPressed:
 
@@ -120,4 +126,9 @@ void Game::zoomView(sf::Vector2i pos, sf::RenderWindow& window, int inOut) {
 	const sf::Vector2f offset = before - after;
 	view.move(offset);
 	window.setView(view);
+}
+
+void Game::placeRobotOnBoard(int playerNum, sf::Vector2i boardNum, sf::Vector2i tileNum) {
+	playerList[playerNum]->placeRobotOnBoard(map.getTilePos(boardNum, tileNum), 0);
+	map.moveRobotToMap(playerList[playerNum]->getRobot(), boardNum, tileNum);
 }

@@ -33,7 +33,5 @@ void TileFeature::drawDebugTileFeature() {
 		std::cout << "occupies the tile ";
 	if (damages)
 		std::cout << "causes damage ";
-	if (moveRobot)
-		std::cout << "moves robot ";			
-		std::cout << std::endl;
+	std::cout << std::endl;
 }

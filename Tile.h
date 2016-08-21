@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "TileFeature.h"
+#include "Robot.h"
 
 enum FLOOR_TILES { ground = 0, pit = 1, repair1 = 2, repair2 = 3, 
 					conv1 = 4 , convbr1 = 5, convbl1 = 5, convhr1 = 6, convhl1 = 6, convt1 = 7, 
@@ -17,7 +18,10 @@ class Tile : public Object {
 
 	std::vector<TileFeature *> features;
 	std::string tileType;
+	Robot *robot;
 	int qty;
+	bool movesRobot;
+	bool causesDeath;
 
 public:
 	Tile(std::string tileInformation, std::string spriteSheetFilename, sf::Vector2f pos, int boardOrientation)
@@ -32,5 +36,7 @@ public:
 	void unloadTile();
 	void drawTile(sf::RenderWindow &window);	
 	void drawDebugTile();
+	void placeRobot(Robot *rbt) { robot = rbt; }
+
 };
 #endif // TILE_H

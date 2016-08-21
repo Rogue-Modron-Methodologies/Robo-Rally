@@ -25,7 +25,7 @@ public:
 	Object(	std::string filename, 
 			sf::Vector2f pos, 
 			sf::Vector2i srcPos = { 0, 0 },
-			sf::Vector2i srcSize = { 100, 100 }) { loadObject(filename, pos, srcPos, srcSize); }
+			sf::Vector2i srcSize = { 150, 150 }) { loadObject(filename, pos, srcPos, srcSize); }
 	~Object() { unloadObject(); };
 
 	void setScale(sf::Vector2f scale) { sprite->setScale(scale); }

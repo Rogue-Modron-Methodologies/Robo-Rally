@@ -10,6 +10,8 @@
 
 class ProgramCard : public Card {
 	int initiative;
+	int action;
+	int qty;
 	//  Will have a font associated with it
 
 public:

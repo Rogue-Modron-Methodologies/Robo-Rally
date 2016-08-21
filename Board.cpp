@@ -171,3 +171,7 @@ sf::Vector2f Board::convertCoord(sf::RenderWindow &gWindow) {
 	sf::Vector2f worldPos = gWindow.mapPixelToCoords(pixelPos);
 	return worldPos;
 }
+
+void placeRobotOnTile() {
+
+}
