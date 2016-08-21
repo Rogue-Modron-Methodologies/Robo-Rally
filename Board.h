@@ -33,6 +33,9 @@ public:
 	void moveRobotToBoard(Robot *robot, sf::Vector2i tileNum) {
 		board[tileNum.x][tileNum.y]->placeRobot(robot);
 	}
+	void removeRobotFromBoard(sf::Vector2i tileNum) {
+		board[tileNum.x][tileNum.y]->removeRobot();
+	}
 };
 
 #endif // BOARD_H

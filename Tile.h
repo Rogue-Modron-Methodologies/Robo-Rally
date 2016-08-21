@@ -37,6 +37,7 @@ public:
 	void drawTile(sf::RenderWindow &window);	
 	void drawDebugTile();
 	void placeRobot(Robot *rbt) { robot = rbt; }
+	void removeRobot() { robot = NULL; }
 
 };
 #endif // TILE_H
