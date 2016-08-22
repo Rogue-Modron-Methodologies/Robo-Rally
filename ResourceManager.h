@@ -10,8 +10,7 @@
 #include <string>
 
 template <class T>
-class ResourceManager
-{
+class ResourceManager {
 private:
 	std::map<std::string, T> resources;
 
@@ -29,19 +28,15 @@ private:
 };
 
 template <class T>
-const T& ResourceManager<T>::getResource(const std::string &filename)
-{
+const T& ResourceManager<T>::getResource(const std::string &filename) {
 	// If the resource already exists
 	for (typename std::map<std::string, T>::const_iterator it = resources.begin(); it != resources.end(); it++)
-	{
 		if (filename == it->first)
 			return it->second;
-	}
 
 	// Create and save it.
 	T resource;
-	if (resource.loadFromFile(filename))
-	{
+	if (resource.loadFromFile(filename)) {
 		resources[filename] = resource;
 		return resources[filename];
 	}
@@ -53,12 +48,9 @@ const T& ResourceManager<T>::getResource(const std::string &filename)
 }
 
 template <class T>
-void ResourceManager<T>::unloadResource(const T &resource)
-{
-	for (typename std::map<std::string, T>::const_iterator it = resources.begin(); it != resources.end(); it++)
-	{
-		if (&resource == &it->second)
-		{
+void ResourceManager<T>::unloadResource(const T &resource) {
+	for (typename std::map<std::string, T>::const_iterator it = resources.begin(); it != resources.end(); it++) {
+		if (&resource == &it->second) {
 			resources.erase(it);
 			return;
 		}
@@ -66,11 +58,9 @@ void ResourceManager<T>::unloadResource(const T &resource)
 }
 
 template <class T>
-void ResourceManager<T>::unloadResource(const std::string &filename)
-{
+void ResourceManager<T>::unloadResource(const std::string &filename) {
 	typename std::map<std::string, T>::const_iterator it = resources.find(filename);
 	if (it != resources.end())
 		resources.erase(it);
 }
-
 #endif // RESOURCEMANAGER_H

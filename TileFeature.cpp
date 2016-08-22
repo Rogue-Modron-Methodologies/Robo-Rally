@@ -1,13 +1,13 @@
-//
+// Tile Feature Implementation File
 //
 
 #include "TileFeature.h"
 
 //*************************************************************
-//  
+//  Loads a single Tile Feature
 // 
 void TileFeature::loadTileFeature(std::string featureName, int qty, int orientation) {
-	setSrcPosY(1);
+	setSrcPosY(1);  // 2nd row of spritesheet
 	setRotation(orientation);
 
 	if (featureName == "laser") {
@@ -22,6 +22,7 @@ void TileFeature::loadTileFeature(std::string featureName, int qty, int orientat
 			setSrcPosX(wall);
 }
 
+//*************************************************************
 //for bug checking Tile and TileFeature private member variables
 //Game, Map and Board habe printXxxx() functions to reach printTile() function
 void TileFeature::drawDebugTileFeature() {

@@ -1,6 +1,6 @@
 //  Robo Rally Game
 //  Need to get License Info
-//  Jamie and Jordan
+//  Jamie Johnson
 
 #include "Game.h"
 

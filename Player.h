@@ -36,6 +36,7 @@ public:
 		// return the 
 	}
 	sf::Vector2f getRobotPosition() { return robot->getPosition(); }
+	float getRobotOrientation() { return robot->getRotation(); }
 	void setRobotPosition(sf::Vector2f pos, int orientation) {
 		robot->setPosition(pos);
 		robot->setRotation(orientation);
@@ -47,23 +48,6 @@ public:
 	}
 	void resetRobot() {
 		robot->returntoResPoint();
-	}
-	void moveRobot(int direction) {
-		switch (direction)
-		{
-		case up:
-			robot->moveForward();
-			break;
-		case right:
-			robot->turnRight();
-			break;
-		case down:
-			robot->moveBackward();
-			break;
-		case left:
-			robot->turnLeft();
-			break;
-		}
 	}
 	void programRobot() {};
 };

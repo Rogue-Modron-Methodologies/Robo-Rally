@@ -41,7 +41,7 @@ public:
 	sf::Vector2f getScale() const { return sprite->getScale(); }
 	sf::FloatRect getSize() const { return sprite->getGlobalBounds(); }
 	float getRotation() { return sprite->getRotation(); }
-	void draw(sf::RenderWindow &window) { window.draw(*sprite); /*std::cout << "Sprite Pos: " << sprite->getPosition().x << "," << sprite->getPosition().y << std::endl;*/ }
+	void draw(sf::RenderWindow &window) { window.draw(*sprite); }
 	// Prototypes
 	bool isTargeted(sf::RenderWindow &window);
 

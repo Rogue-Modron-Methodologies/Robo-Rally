@@ -10,7 +10,8 @@ void Game::loadGame() {
 	window.setView(view);
 	playerList.push_back(new Player("Twonky"));
 	cPlyr = playerList[0];
-	placeRobotOnBoard({ 1, 0 }, { 2, 9 });  //  will be replaced with "Starting Position Coordinates"
+	cPlyr->initializeRobot(map.getTilePos({ 1, 0 }, { 2, 9 }), 0);
+	//placeRobotOnBoard({ 1, 0 }, { 2, 9 });  //  will be replaced with "Starting Position Coordinates"
 	decks.push_back(new Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(2000, 100), DeckType::program)); /////////////  CHANGE POS TO VARIABLE
 	//decks.push_back(Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(200, 700), DeckType::option)); /////////////  CHANGE POS TO VARIABLE
 	//decks[DeckType::option].setColor(sf::Color::Blue);  // only being used to differentiate decks until spritesheets are created
@@ -91,6 +92,7 @@ void Game::playGame() {
 		window.display();
 	}
 }
+
 //*************************************************************
 //  Draws all game members
 void Game::drawGame() {
@@ -126,30 +128,39 @@ void Game::zoomView(sf::Vector2i pos, sf::RenderWindow& window, int inOut) {
 	window.setView(view);
 }
 
+//*************************************************************
+//  Sets sprite position of robot and adds it to the 
+//  tile at the correct location
 void Game::placeRobotOnBoard(sf::Vector2i boardNum, sf::Vector2i tileNum) {
 	cPlyr->setRobotPosition(map.getTilePos(boardNum, tileNum), 0);
 	map.moveRobotToMap(cPlyr->getRobot(), boardNum, tileNum);
 }
 
+//*************************************************************
+//  Removes the robot reference from the tile
 void Game::removeRobotFromBoard(sf::Vector2i boardNum, sf::Vector2i tileNum)
 {
 	//cPlyr->setRobotPosition(map.getTilePos(boardNum, tileNum), 0);
-	map.removeRobotFromMap(boardNum, tileNum);
+	map.removeRobotFromBoard(boardNum, tileNum);
 }
 
+//*************************************************************
+//  Finds current position and destination position
+//  Checks if destination is out of bounds
+//  Checks if any tileFeatures on source/destination tiles
+//		block movement
 bool Game::moveRobot(int direction) {
-	sf::Vector2i cboard, ctile;
-	sf::Vector2f rPos = cPlyr->getRobotPosition();
-	map.getTileCoordinates(rPos, cboard, ctile);
-	std::cout << "Board " << cboard.x << " " << cboard.y << " Tile " << ctile.x << " " << ctile.y << std::endl;
-	// IF move isn't possible ---> return false
-
-	//removeRobotFromBoard(playerNum, boardNum, tileNum);
-	// If move is on same board
-	// placeRobotOnBoard(int playerNum, sf::Vector2i boardNum, sf::Vector2i tileNum)    NEW LOCATION ON SAME BOARD
-	// If move goes to new board
-	// placeRobotOnBoard(int playerNum, sf::Vector2i boardNum, sf::Vector2i tileNum)    NEW LOCATION ON NEW BOARD
-	// Check for robot death
+	sf::Vector2i cboard, ctile, dboard, dtile;
+	map.getCurrentCoordinates(cPlyr->getRobotPosition(), cboard, ctile);
+	// Checks if destination coordinates exist
+	if (!map.getDestinationCoordinates(cboard, ctile, direction, (int)cPlyr->getRobotOrientation(), dboard, dtile)) {
+		std::cout << "OFF BOARD = DEATH\n";
+		cPlyr->resetRobot();
+		return false;
+	}
+	// Checks if any tileFeatures block movement
+	removeRobotFromBoard(cboard, ctile);
+	placeRobotOnBoard(dboard, dtile);
 
 
 	return true;

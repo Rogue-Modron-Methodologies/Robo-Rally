@@ -19,7 +19,6 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 		causesDeath = true;
 	}
 		
-
 	if(tileType != "floor" && tileType != "pit") {
 		sstile >> orientation;
 		setRotation(orientation + boardOrientation);
