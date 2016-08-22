@@ -35,6 +35,7 @@ public:
 	void removeRobotFromBoard(sf::Vector2i boardNum, sf::Vector2i tileNum) {
 		map[boardNum.x][boardNum.y].removeRobotFromBoard(tileNum);
 	}
+	
 };
 
 #endif // MAP_H

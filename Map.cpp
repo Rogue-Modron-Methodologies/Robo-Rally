@@ -148,58 +148,47 @@ bool Map::getDestinationCoordinates(sf::Vector2i curBoard, sf::Vector2i curTile,
 	desTile = curTile;
 	bool coordinatesAvailable = true;
 
-	switch (orientation)
+	switch (direction + orientation)
 	{
 	case up:
-		switch (direction)
-		{
-		case up:
-			if (desTile.x > 0)
-				desTile.x--;
-			else if (desBoard.x > 0) {
-				desBoard.x--;
-				desTile.x = map[desBoard.x][desBoard.y].getDimensions().x - 1;
-			}
-			else
-				coordinatesAvailable = false;
-			break;
-		case right:
-			if (desTile.y < map[desBoard.x][desBoard.y].getDimensions().y - 1)
-				desTile.y++;
-			else if (desBoard.y < (int)map[desBoard.y].size() - 1) {   //  Errors on larger boards
-				desBoard.y++;
-				desTile.y = 0;
-			}
-			else
-				coordinatesAvailable = false;
-			break;
-		case down:
-			if (desTile.x < map[desBoard.x][desBoard.y].getDimensions().x - 1)
-				desTile.x++;
-			else if (desBoard.x <= (int)map[desBoard.x].size() - 1) {  //  Errors on larger boards
-				desBoard.x++;
-				desTile.x = 0;
-			}
-			else
-				coordinatesAvailable = false;
-			break;
-		case left:
-			if (desTile.y > 0)
-				desTile.y--;
-			else if (desBoard.y > 0) {
-				desBoard.y--;
-				desTile.y = map[desBoard.x][desBoard.y].getDimensions().y - 1;
-			}
-			else
-				coordinatesAvailable = false;
-			break;
+		if (desTile.x > 0)
+			desTile.x--;
+		else if (desBoard.x > 0) {
+			desBoard.x--;
+			desTile.x = map[desBoard.x][desBoard.y].getDimensions().x - 1;
 		}
+		else
+			coordinatesAvailable = false;
 		break;
 	case right:
+		if (desTile.y < map[desBoard.x][desBoard.y].getDimensions().y - 1)
+			desTile.y++;
+		else if (desBoard.y < (int)map[desBoard.y].size() - 1) {   //  Errors on larger boards
+			desBoard.y++;
+			desTile.y = 0;
+		}
+		else
+			coordinatesAvailable = false;
 		break;
 	case down:
+		if (desTile.x < map[desBoard.x][desBoard.y].getDimensions().x - 1)
+			desTile.x++;
+		else if (desBoard.x <= (int)map[desBoard.x].size() - 1) {  //  Errors on larger boards
+			desBoard.x++;
+			desTile.x = 0;
+		}
+		else
+			coordinatesAvailable = false;
 		break;
 	case left:
+		if (desTile.y > 0)
+			desTile.y--;
+		else if (desBoard.y > 0) {
+			desBoard.y--;
+			desTile.y = map[desBoard.x][desBoard.y].getDimensions().y - 1;
+		}
+		else
+			coordinatesAvailable = false;
 		break;
 	}
 	std::cout << desBoard.x << " " << desBoard.y << " | " << desTile.x << " " << desTile.y << std::endl;
