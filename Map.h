@@ -48,6 +48,26 @@ public:
 		tilePos.x += boardPos.y * TILE_SOURCE_SIZE.x;
 		return tilePos;
 	}
+
+	void getTileCoordinates(sf::Vector2f rPos, sf::Vector2i &mapPos, sf::Vector2i &boardPos) {
+		sf::Vector2f diff = rPos - origin;
+		mapPos = boardPos = { 0,0 };
+		int i = 0;
+		while (diff.x / (map[0][i].getDimensions().y * TILE_SOURCE_SIZE.y) > 1) {
+			diff.x -= map[0][i].getDimensions().y * TILE_SOURCE_SIZE.y;
+			mapPos.y++;
+			i++;
+		}
+		boardPos.y = (int)diff.x / TILE_SOURCE_SIZE.y;
+
+		i = 0;
+		while (diff.y / (map[i][0].getDimensions().x * TILE_SOURCE_SIZE.x) > 1) {
+			diff.y -= map[i][0].getDimensions().x * TILE_SOURCE_SIZE.x;
+			mapPos.x++;
+			i++;
+		}
+		boardPos.x = (int)diff.y / TILE_SOURCE_SIZE.x;
+	}
 };
 
 #endif // MAP_H

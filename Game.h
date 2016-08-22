@@ -27,6 +27,7 @@ class Game {
 	sf::RenderWindow window;
 	sf::View view;
 	Map map;
+	Player *cPlyr;
 	std::vector<Player*> playerList;
 	std::vector<Deck*> decks;
 	ResourceManager<sf::Font> fontList;
@@ -41,8 +42,9 @@ private:
 	void unloadGame();
 	void drawGame();
 	void zoomView(sf::Vector2i, sf::RenderWindow& window, int inOut);
-	void placeRobotOnBoard(int playerNum, sf::Vector2i boardNum, sf::Vector2i tileNum);
-	void removeRobotFromBoard(int playerNum, sf::Vector2i boardNum, sf::Vector2i tileNum);
+	bool moveRobot(int direction);
+	void placeRobotOnBoard(sf::Vector2i boardNum, sf::Vector2i tileNum);
+	void removeRobotFromBoard(sf::Vector2i boardNum, sf::Vector2i tileNum);
 
 };
 #endif // GAME_H

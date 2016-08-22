@@ -9,7 +9,8 @@ void Game::loadGame() {
 	view.reset(sf::FloatRect(0, 0, SCREEN_DIM.x * 3.f, SCREEN_DIM.y * 3.f));
 	window.setView(view);
 	playerList.push_back(new Player("Twonky"));
-	placeRobotOnBoard(0, { 1, 0 }, { 2, 9 });
+	cPlyr = playerList[0];
+	placeRobotOnBoard({ 1, 0 }, { 2, 9 });  //  will be replaced with "Starting Position Coordinates"
 	decks.push_back(new Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(2000, 100), DeckType::program)); /////////////  CHANGE POS TO VARIABLE
 	//decks.push_back(Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(200, 700), DeckType::option)); /////////////  CHANGE POS TO VARIABLE
 	//decks[DeckType::option].setColor(sf::Color::Blue);  // only being used to differentiate decks until spritesheets are created
@@ -39,13 +40,13 @@ void Game::playGame() {
 				break;
 			case sf::Event::KeyPressed:
 				if (event.key.code == sf::Keyboard::Up)
-					playerList[0]->moveRobot(up);
+					moveRobot(up);
 				else if (event.key.code == sf::Keyboard::Down)
-					playerList[0]->moveRobot(down);
+					moveRobot(down);
 				else if (event.key.code == sf::Keyboard::Left)
-					playerList[0]->moveRobot(left);
+					moveRobot(left);
 				else if (event.key.code == sf::Keyboard::Right)
-					playerList[0]->moveRobot(right);
+					moveRobot(right);
 
 				if (event.key.code == sf::Keyboard::Num0 || event.key.code == sf::Keyboard::Numpad0) {
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) || sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
@@ -67,9 +68,6 @@ void Game::playGame() {
 				//// DEBUGGING AREA
 				if (event.key.code == sf::Keyboard::X)
 					playerList[0]->resetRobot();
-
-
-
 
 
 				break;
@@ -128,13 +126,31 @@ void Game::zoomView(sf::Vector2i pos, sf::RenderWindow& window, int inOut) {
 	window.setView(view);
 }
 
-void Game::placeRobotOnBoard(int playerNum, sf::Vector2i boardNum, sf::Vector2i tileNum) {
-	playerList[playerNum]->placeRobotOnBoard(map.getTilePos(boardNum, tileNum), 0);
-	map.moveRobotToMap(playerList[playerNum]->getRobot(), boardNum, tileNum);
+void Game::placeRobotOnBoard(sf::Vector2i boardNum, sf::Vector2i tileNum) {
+	cPlyr->setRobotPosition(map.getTilePos(boardNum, tileNum), 0);
+	map.moveRobotToMap(cPlyr->getRobot(), boardNum, tileNum);
 }
 
-void Game::removeRobotFromBoard(int playerNum, sf::Vector2i boardNum, sf::Vector2i tileNum)
+void Game::removeRobotFromBoard(sf::Vector2i boardNum, sf::Vector2i tileNum)
 {
-	playerList[playerNum]->placeRobotOnBoard(map.getTilePos(boardNum, tileNum), 0);
+	//cPlyr->setRobotPosition(map.getTilePos(boardNum, tileNum), 0);
 	map.removeRobotFromMap(boardNum, tileNum);
+}
+
+bool Game::moveRobot(int direction) {
+	sf::Vector2i cboard, ctile;
+	sf::Vector2f rPos = cPlyr->getRobotPosition();
+	map.getTileCoordinates(rPos, cboard, ctile);
+	std::cout << "Board " << cboard.x << " " << cboard.y << " Tile " << ctile.x << " " << ctile.y << std::endl;
+	// IF move isn't possible ---> return false
+
+	//removeRobotFromBoard(playerNum, boardNum, tileNum);
+	// If move is on same board
+	// placeRobotOnBoard(int playerNum, sf::Vector2i boardNum, sf::Vector2i tileNum)    NEW LOCATION ON SAME BOARD
+	// If move goes to new board
+	// placeRobotOnBoard(int playerNum, sf::Vector2i boardNum, sf::Vector2i tileNum)    NEW LOCATION ON NEW BOARD
+	// Check for robot death
+
+
+	return true;
 }

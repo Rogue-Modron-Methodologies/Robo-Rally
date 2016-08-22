@@ -13,11 +13,12 @@
 
 
 class Player : public Object  {
-	std::string name;
-	std::vector<Card> hand;
-	std::vector<Card> program;
+	//std::string name;
+	//std::vector<Card> hand;
+	//std::vector<Card> program;
 	Robot *robot;
-	Card *currentAction;
+	//Card *currentAction;
+
 public:
 	Player(std::string robotName) 
 		: Object(ROBOT_BOARD, { 2000, 700 }, { 0, 0 }, { 300, 300 }) {
@@ -34,8 +35,12 @@ public:
 		// 
 		// return the 
 	}
-
-	void placeRobotOnBoard(sf::Vector2f pos, int orientation) {  
+	sf::Vector2f getRobotPosition() { return robot->getPosition(); }
+	void setRobotPosition(sf::Vector2f pos, int orientation) {
+		robot->setPosition(pos);
+		robot->setRotation(orientation);
+	}
+	void initializeRobot(sf::Vector2f pos, int orientation) {  
 		robot->setResPoint(pos); 
 		robot->returntoResPoint();
 		robot->setRotation(orientation); 
