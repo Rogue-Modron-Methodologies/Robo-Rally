@@ -11,6 +11,7 @@ void Game::loadGame() {
 	playerList.push_back(new Player("Twonky"));
 	cPlyr = playerList[0];
 	cPlyr->initializeRobot(map.getTilePos({ 1, 0 }, { 2, 9 }), 0); //  will be replaced with "Starting Position Coordinates"
+	map.moveRobotToMap(cPlyr->getRobot(), { 1, 0 }, { 2, 9 });
 	decks.push_back(new Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(2000, 100), DeckType::program)); /////////////  CHANGE POS TO VARIABLE
 	//decks.push_back(Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(200, 700), DeckType::option)); /////////////  CHANGE POS TO VARIABLE
 	//decks[DeckType::option].setColor(sf::Color::Blue);  // only being used to differentiate decks until spritesheets are created
@@ -30,6 +31,8 @@ void Game::unloadGame() {
 //*************************************************************
 //  Game Loop
 void Game::playGame() {
+	sf::Vector2i mPosNew, mPosOld;
+	bool drag = false;
 	//map.drawMap(window);			//  Debug:  Only Draws Once  : Uncomment Code in each draw function to use
 	while (window.isOpen()) {
 		sf::Event event;
@@ -56,12 +59,12 @@ void Game::playGame() {
 				}
 				else if (event.key.code == sf::Keyboard::Add) {
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) || sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
-						zoomView(sf::Vector2i(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y), window, 1);
+						zoomView(sf::Vector2i(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y), 1);
 					}
 				}
 				else if (event.key.code == sf::Keyboard::Subtract) {
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) || sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
-						zoomView(sf::Vector2i(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y), window, -1);
+						zoomView(sf::Vector2i(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y), -1);
 					}
 				}
 
@@ -72,20 +75,30 @@ void Game::playGame() {
 
 				break;
 			case sf::Event::MouseButtonPressed:
-
+				drag = true;
 				if (decks[0]->isTargeted(window))
 					std::cout << "Deck Clicked" << std::endl;
 				if (map.mapTargeted(window)) {
 					map.debugDraw(window);
 				}
-
+				break;
+			case sf::Event::MouseButtonReleased:
+				drag = false;
 				break;
 			case sf::Event::MouseWheelScrolled:
-				if (event.mouseWheelScroll.delta)
-					zoomView(sf::Vector2i((int)event.mouseWheelScroll.x, (int)event.mouseWheelScroll.y), window, (int)event.mouseWheelScroll.delta);
+				zoomView(sf::Vector2i((int)event.mouseWheelScroll.x, (int)event.mouseWheelScroll.y), (int)event.mouseWheelScroll.delta);
 				break;
 			}
 		}
+		if (drag) {
+			mPosOld = mPosNew;
+			mPosNew = sf::Mouse::getPosition(window);
+			view.move((mPosOld.x - mPosNew.x) * view.getSize().x / 1000, (mPosOld.y - mPosNew.y) * view.getSize().y / 1000);
+			window.setView(view);
+		}
+		else 
+			mPosNew = sf::Mouse::getPosition(window);
+		
 		window.clear();
 		drawGame();
 		window.display();
@@ -106,9 +119,9 @@ void Game::drawGame() {
 //*************************************************************
 //	zooms in or out focused on where mouse position is
 //  will only zoom in or out up to a max value 
-void Game::zoomView(sf::Vector2i pos, sf::RenderWindow& window, int inOut) {
+void Game::zoomView(sf::Vector2i pos, int inOut) {
 	const sf::Vector2f before = window.mapPixelToCoords(pos);
-	sf::View view = window.getView();
+	view = window.getView();
 	inOut > 0 ? view.zoom(ZOOM_QTY) : view.zoom(1 / ZOOM_QTY);
 	window.setView(view);
 
@@ -126,6 +139,7 @@ void Game::zoomView(sf::Vector2i pos, sf::RenderWindow& window, int inOut) {
 	view.move(offset);
 	window.setView(view);
 }
+
 
 //*************************************************************
 //  Sets sprite position of robot and adds it to the 
