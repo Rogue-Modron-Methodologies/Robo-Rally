@@ -16,6 +16,7 @@ class TileFeature : public Object  {
 	std::string name;
 	int qty;
 	bool blockLOS;
+	bool blockMove;
 	bool occupies;
 	bool damages;
 
@@ -32,5 +33,10 @@ public:
 	void loadTileFeature(std::string featureName, int qty, int orientation);
 	std::string getName() { return name; };
 	void drawDebugTileFeature();
+	bool blockMovement(int direction) {
+		if (name == "wall" && getRotation() == direction)
+			return true;
+		return false;
+	}
 };
 #endif // TILEFEATURE_H

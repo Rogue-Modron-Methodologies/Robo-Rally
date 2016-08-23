@@ -38,6 +38,11 @@ public:
 	void drawDebugTile();
 	void placeRobot(Robot *rbt) { robot = rbt; }
 	void removeRobot() { robot = NULL; }
-
+	bool movementBlocked(int direction) {
+		for (unsigned i = 0; i < features.size(); ++i)
+			if (features[i]->blockMovement(direction))
+				return true;
+		return false;
+	}
 };
 #endif // TILE_H

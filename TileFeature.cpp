@@ -17,9 +17,13 @@ void TileFeature::loadTileFeature(std::string featureName, int qty, int orientat
 			setSrcPosX(laser2);
 		else if (qty == 3) 
 			setSrcPosX(laser3);
+		blockMove = false;
 	}
-	else if (featureName == "wall") 
-			setSrcPosX(wall);
+	else if (featureName == "wall") {
+		blockMove = true;
+		setSrcPosX(wall);
+	}
+
 }
 
 //*************************************************************
@@ -29,10 +33,12 @@ void TileFeature::drawDebugTileFeature() {
 	std::cout << "\t" << name << " " << qty << " " << this->getRotation();
 		
 	if (blockLOS)
-		std::cout << "blocks LOS ";
+		std::cout << " blocks LOS ";
 	if (occupies)
-		std::cout << "occupies the tile ";
+		std::cout << " occupies the tile ";
 	if (damages)
-		std::cout << "causes damage ";
+		std::cout << " causes damage ";
+	if(blockMove)
+		std::cout << " blocks move ";
 	std::cout << std::endl;
 }

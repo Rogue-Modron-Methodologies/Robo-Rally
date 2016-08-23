@@ -191,6 +191,6 @@ bool Map::getDestinationCoordinates(sf::Vector2i curBoard, sf::Vector2i curTile,
 			coordinatesAvailable = false;
 		break;
 	}
-	std::cout << desBoard.x << " " << desBoard.y << " | " << desTile.x << " " << desTile.y << std::endl;
+	//std::cout << desBoard.x << " " << desBoard.y << " | " << desTile.x << " " << desTile.y << std::endl;
 	return coordinatesAvailable;
 }

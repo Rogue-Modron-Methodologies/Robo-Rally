@@ -10,8 +10,7 @@ void Game::loadGame() {
 	window.setView(view);
 	playerList.push_back(new Player("Twonky"));
 	cPlyr = playerList[0];
-	cPlyr->initializeRobot(map.getTilePos({ 1, 0 }, { 2, 9 }), 0);
-	//placeRobotOnBoard({ 1, 0 }, { 2, 9 });  //  will be replaced with "Starting Position Coordinates"
+	cPlyr->initializeRobot(map.getTilePos({ 1, 0 }, { 2, 9 }), 0); //  will be replaced with "Starting Position Coordinates"
 	decks.push_back(new Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(2000, 100), DeckType::program)); /////////////  CHANGE POS TO VARIABLE
 	//decks.push_back(Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(200, 700), DeckType::option)); /////////////  CHANGE POS TO VARIABLE
 	//decks[DeckType::option].setColor(sf::Color::Blue);  // only being used to differentiate decks until spritesheets are created
@@ -150,17 +149,21 @@ void Game::removeRobotFromBoard(sf::Vector2i boardNum, sf::Vector2i tileNum)
 //  Checks if any tileFeatures on source/destination tiles
 //		block movement
 bool Game::moveRobot(int direction) {
-	sf::Vector2i cboard, ctile, dboard, dtile;
-	map.getCurrentCoordinates(cPlyr->getRobotPosition(), cboard, ctile);
+	sf::Vector2i cBoard, cTile, dBoard, dTile;
+	map.getCurrentCoordinates(cPlyr->getRobotPosition(), cBoard, cTile);
 	// Checks if destination coordinates exist
-	if (!map.getDestinationCoordinates(cboard, ctile, direction, (int)cPlyr->getRobotOrientation(), dboard, dtile)) {
+	if (!map.getDestinationCoordinates(cBoard, cTile, direction, (int)cPlyr->getRobotOrientation(), dBoard, dTile) &&
+		!(map.movementBlocked(direction, cBoard, cTile) || map.movementBlocked(direction >= 180 ? direction - 180 : direction + 180, dBoard, dTile))) {
 		std::cout << "OFF BOARD = DEATH\n";
 		cPlyr->resetRobot();
 		return false;
 	}
-	// Checks if any tileFeatures block movement
-	removeRobotFromBoard(cboard, ctile);
-	placeRobotOnBoard(dboard, dtile);
+
+	// Checks if any current tileFeatures block movement
+	if (map.movementBlocked(direction, cBoard, cTile) || map.movementBlocked(direction >= 180 ? direction - 180 : direction + 180, dBoard, dTile))
+		return false;
+	removeRobotFromBoard(cBoard, cTile);
+	placeRobotOnBoard(dBoard, dTile);
 
 
 	return true;

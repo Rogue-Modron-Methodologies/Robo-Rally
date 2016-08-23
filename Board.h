@@ -36,6 +36,9 @@ public:
 	void removeRobotFromBoard(sf::Vector2i tileNum) {
 		board[tileNum.x][tileNum.y]->removeRobot();
 	}
+	bool movementBlocked(int direction, sf::Vector2i tilePos) {
+		return board[tilePos.x][tilePos.y]->movementBlocked(direction);
+	}
 };
 
 #endif // BOARD_H
