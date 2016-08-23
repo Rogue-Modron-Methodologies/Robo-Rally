@@ -43,6 +43,7 @@ private:
 	void drawGame();
 	void zoomView(sf::Vector2i, int inOut);
 	bool moveRobot(int direction);
+	void Game::checkRobotDeath();
 	void placeRobotOnBoard(sf::Vector2i boardNum, sf::Vector2i tileNum);
 	void removeRobotFromBoard(sf::Vector2i boardNum, sf::Vector2i tileNum);
 

@@ -31,6 +31,7 @@ public:
 	}
 	std::string getName() { return name; }
 	void setResPoint(sf::Vector2f pos) { resPoint = pos; }
+	sf::Vector2f getResPoint() { return resPoint; }
 	void returntoResPoint() { setPosition(resPoint); }
 
 };

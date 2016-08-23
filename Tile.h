@@ -21,7 +21,7 @@ class Tile : public Object {
 	Robot *robot;
 	int qty;
 	bool movesRobot;
-	bool causesDeath;
+	bool causeDeath;
 
 public:
 	Tile(std::string tileInformation, std::string spriteSheetFilename, sf::Vector2f pos, int boardOrientation)
@@ -38,6 +38,7 @@ public:
 	void drawDebugTile();
 	void placeRobot(Robot *rbt) { robot = rbt; }
 	void removeRobot() { robot = NULL; }
+	bool causesDeath() { return causeDeath; }
 	bool movementBlocked(int direction) {
 		for (unsigned i = 0; i < features.size(); ++i)
 			if (features[i]->blockMovement(direction))

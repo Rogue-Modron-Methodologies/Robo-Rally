@@ -90,14 +90,18 @@ void Game::playGame() {
 				break;
 			}
 		}
+		// Check for Robot Death ---- Currently only checks for pits.
+		checkRobotDeath();
+
 		if (drag) {
 			mPosOld = mPosNew;
 			mPosNew = sf::Mouse::getPosition(window);
-			view.move((mPosOld.x - mPosNew.x) * view.getSize().x / 1000, (mPosOld.y - mPosNew.y) * view.getSize().y / 1000);
+			view.move((mPosOld.x - mPosNew.x) * view.getSize().x / 1000, (mPosOld.y - mPosNew.y) * view.getSize().y / 1000); // 1000 is a scaling ratio.  To be replaced
 			window.setView(view);
 		}
 		else 
 			mPosNew = sf::Mouse::getPosition(window);
+
 		
 		window.clear();
 		drawGame();
@@ -140,7 +144,6 @@ void Game::zoomView(sf::Vector2i pos, int inOut) {
 	window.setView(view);
 }
 
-
 //*************************************************************
 //  Sets sprite position of robot and adds it to the 
 //  tile at the correct location
@@ -178,7 +181,23 @@ bool Game::moveRobot(int direction) {
 		return false;
 	removeRobotFromBoard(cBoard, cTile);
 	placeRobotOnBoard(dBoard, dTile);
-
-
 	return true;
+}
+
+//*************************************************************
+//  Checks each robot to see if it's still running
+//  Resets them if not.
+void Game::checkRobotDeath() {
+	sf::Vector2i cBoard, cTile;
+	for (auto it = playerList.begin(); it != playerList.end(); ++it) {
+		map.getCurrentCoordinates((*it)->getRobotPosition(), cBoard, cTile);
+		if (map.causesDeath(cBoard, cTile)) {
+			std::cout << "PIT = DEATH\n";
+			(*it)->resetRobot();
+			removeRobotFromBoard(cBoard, cTile);
+			map.getCurrentCoordinates((*it)->getRobotPosition(), cBoard, cTile);
+			placeRobotOnBoard(cBoard, cTile);
+
+		}
+	}
 }

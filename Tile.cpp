@@ -16,7 +16,7 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 		setSrcPosX(ground);
 	else if (tileType == "pit") {
 		setSrcPosX(pit);
-		causesDeath = true;
+		causeDeath = true;
 	}
 		
 	if(tileType != "floor" && tileType != "pit") {
@@ -112,6 +112,8 @@ void Tile::drawDebugTile() {
 	std::cout << tileType << " " << qty << " " << this->getRotation() << " ";
 	if (robot)
 		std::cout << robot->getName() << " ";
+	if (causeDeath)
+		std::cout << " Causes Death!!! ";
 	if (features.size() == 0) 
 		std::cout << ": no tile features.\n\n";
 	else {

@@ -38,6 +38,7 @@ public:
 	bool movementBlocked(int direction, sf::Vector2i boardPos, sf::Vector2i tilePos) {
 		return map[boardPos.x][boardPos.y].movementBlocked(direction, tilePos);
 	}
+	bool causesDeath(sf::Vector2i boardPos, sf::Vector2i tilePos) { return map[boardPos.x][boardPos.y].causesDeath(tilePos); }
 	
 };
 
