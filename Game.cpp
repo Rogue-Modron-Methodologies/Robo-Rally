@@ -102,7 +102,9 @@ void Game::playGame() {
 		case robotMove:
 			//checkRobotDamage();
 			checkRobotDeath();
-		default:
+			break;
+		case boardMove:
+			activateBoard();
 			break;
 		}
 
@@ -143,8 +145,6 @@ void Game::phaseSetup() {
 				map.addRobotToPlay(cPlyr->getRobot(), cBoard, cTile);
 			}
 		}
-
-
 		break;
 	case robotMove:
 		std::cout << "Robot Movement Start:\n";
@@ -269,15 +269,34 @@ bool Game::moveRobot(int direction) {
 //  Resets them if not.
 void Game::checkRobotDeath() {
 	sf::Vector2i cBoard, cTile;
+	const Tile *curTile;
 	for (auto it = playerList.begin(); it != playerList.end(); ++it) {
 		map.getCurrentCoordinates((*it)->getRobotPosition(), cBoard, cTile);
-		if (map.causesDeath(cBoard, cTile)) {
+		curTile = map.getTile(cBoard, cTile);
+		if(curTile->causesDeath()) {
 			std::cout << "PIT = DEATH\n";
-			(*it)->resetRobot();
 			removeRobotFromPlay(cBoard, cTile);
-			map.getCurrentCoordinates((*it)->getRobotPosition(), cBoard, cTile);
+		}
+	}
+}
+
+//*************************************************************
+//  Activate the Board Elements that the Robots are on.
+//  
+void Game::activateBoard() {
+	sf::Vector2i cBoard, cTile;
+	const Tile *curTile;
+	for (auto it = playerList.begin(); it != playerList.end(); ++it) {
+		map.getCurrentCoordinates((*it)->getRobotPosition(), cBoard, cTile);
+		curTile = map.getTile(cBoard, cTile);
+		if(curTile->movesRobot()) {
+			std::cout << "MOVEMENT\n";
+			//(*it)->resetRobot();
+			//removeRobotFromPlay(cBoard, cTile);
+			//map.getCurrentCoordinates((*it)->getRobotPosition(), cBoard, cTile);
 			////////////////////////////////repositionRobot(cBoard, cTile);
 
 		}
 	}
+	flag[phaseComplete] = true;
 }

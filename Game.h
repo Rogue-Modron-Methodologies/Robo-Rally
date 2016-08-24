@@ -20,6 +20,7 @@ enum flagTypes
 {
 	phaseSetupComplete,				//  Flag:  Phase Setup Complete
 	phaseComplete					//  Flag:  Phase Complete
+
 };
 
 #define PROGRAM_CARD_LIST "ProgramList.txt"
@@ -61,6 +62,7 @@ private:
 	void addRobotToPlay(sf::Vector2i desBoard, sf::Vector2i desTile);
 	void repositionRobot(sf::Vector2i desBoard, sf::Vector2i desTile, sf::Vector2i curBoard, sf::Vector2i curTile);
 	void removeRobotFromPlay(sf::Vector2i boardNum, sf::Vector2i tileNum);
+	void activateBoard();
 
 };
 #endif // GAME_H

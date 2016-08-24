@@ -18,68 +18,67 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 		setSrcPosX(pit);
 		causeDeath = true;
 	}
-		
-	if(tileType != "floor" && tileType != "pit") {
+	else if (tileType == "repair") {				//continue parsing to find repair 1 and 2
 		sstile >> orientation;
 		setRotation(orientation + boardOrientation);
 		sstile >> this->qty;
-	}
-
-	if (tileType == "repair") {				//continue parsing to find repair 1 and 2
-		if (qty == 1) 
+		if (qty == 1)
 			setSrcPosX(repair1);
 		else //if (qty == 2) 
 			setSrcPosX(repair2);
 	}
-	else if (tileType == "conv") {			//continue parsing to find speed 1 and 2 and orientation
-		if (qty == 1) 
-			setSrcPosX(conv1);
-		else //if (qty == 2) 
-			setSrcPosX(conv2);
-	}
-	else if (tileType == "convbr") {			//continue parsing to find speed 1 and 2 and orientation
-		if (qty == 1) 
-			setSrcPosX(convbr1);
-		else //if (qty == 2) 
-			setSrcPosX(convbr2);
-	}
-	else if (tileType == "convbl") {			//continue parsing to find speed 1 and 2 and orientation
-		if (qty == 1) 
-			setSrcPosX(convbr1);
-		else //if (qty == 2) 
-			setSrcPosX(convbr2);
-		setScale({ -1.f,1.f });					//flip sprite for left bend
-	}
-	else if (tileType == "convhr") {			//continue parsing to find speed 1 and 2 and orientation
-		if (qty == 1) 
-			setSrcPosX(convhr1);
-		else //if (qty == 2) 
-			setSrcPosX(convhr2);
-	}
-	else if (tileType == "convhl") {			//continue parsing to find speed 1 and 2 and orientation
-		if (qty == 1) 
-			setSrcPosX(convhr1);
-		else //if (qty == 2) 
-			setSrcPosX(convhr2);
-		setScale({ -1.f,1.f });					//flip sprite for left H join
-	}
-	else if (tileType == "convt") {			//continue parsing to find speed 1 and 2 and orientation	if (tileName == "convt")
-		if (qty == 1) 
-			setSrcPosX(convt1);
-		else //if (qty == 2) 
-			setSrcPosX(convt2);
-	}
-	else if (tileType == "gear") {			//continue parsing to find speed 1 and 2 and orientation	if (tileName == "convt")
-		if (qty == 0) 
-			setSrcPosX(gearClock);
-		else //if (qty == 1) 
-			setSrcPosX(gearAnti);
-	}
 	else {
-		if(tileType != "floor" && tileType != "pit")
-			std::cout << "THIS SHOULD NEVER HAPPEN! in Tile.h" << std::endl;
-	}
+		movesBot = true;
+		sstile >> orientation;
+		setRotation(orientation + boardOrientation);
+		sstile >> this->qty;
 
+		if (tileType == "conv") {			//continue parsing to find speed 1 and 2 and orientation
+			if (qty == 1)
+				setSrcPosX(conv1);
+			else //if (qty == 2) 
+				setSrcPosX(conv2);
+		}
+		else if (tileType == "convbr") {			//continue parsing to find speed 1 and 2 and orientation
+			if (qty == 1)
+				setSrcPosX(convbr1);
+			else //if (qty == 2) 
+				setSrcPosX(convbr2);
+		}
+		else if (tileType == "convbl") {			//continue parsing to find speed 1 and 2 and orientation
+			if (qty == 1)
+				setSrcPosX(convbr1);
+			else //if (qty == 2) 
+				setSrcPosX(convbr2);
+			setScale({ -1.f,1.f });					//flip sprite for left bend
+		}
+		else if (tileType == "convhr") {			//continue parsing to find speed 1 and 2 and orientation
+			if (qty == 1)
+				setSrcPosX(convhr1);
+			else //if (qty == 2) 
+				setSrcPosX(convhr2);
+		}
+		else if (tileType == "convhl") {			//continue parsing to find speed 1 and 2 and orientation
+			if (qty == 1)
+				setSrcPosX(convhr1);
+			else //if (qty == 2) 
+				setSrcPosX(convhr2);
+			setScale({ -1.f,1.f });					//flip sprite for left H join
+		}
+		else if (tileType == "convt") {			//continue parsing to find speed 1 and 2 and orientation	if (tileName == "convt")
+			if (qty == 1)
+				setSrcPosX(convt1);
+			else //if (qty == 2) 
+				setSrcPosX(convt2);
+		}
+		else if (tileType == "gear") {			//continue parsing to find speed 1 and 2 and orientation	if (tileName == "convt")
+			if (qty == 0)
+				setSrcPosX(gearClock);
+			else //if (qty == 1) 
+				setSrcPosX(gearAnti);
+		}
+	}
+		
 	std::string featureName;
 	int featureOrientation, featureQty;
 

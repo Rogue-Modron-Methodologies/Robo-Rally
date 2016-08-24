@@ -20,7 +20,7 @@ class Tile : public Object {
 	std::string tileType;
 	const Robot *robot;
 	int qty;
-	bool movesRobot;
+	bool movesBot;
 	bool causeDeath;
 
 public:
@@ -38,7 +38,8 @@ public:
 	void drawDebugTile();
 	void addRobot(const Robot &rbt) { robot = &rbt; }
 	void removeRobot() { robot = NULL; }
-	bool causesDeath() { return causeDeath; }
+	bool causesDeath() const { return causeDeath; }
+	bool movesRobot() const { return movesBot; }
 	bool movementBlocked(int direction) {
 		for (unsigned i = 0; i < features.size(); ++i)
 			if (features[i]->blockMovement(direction))

@@ -39,7 +39,7 @@ public:
 	bool movementBlocked(int direction, sf::Vector2i tilePos) {
 		return board[tilePos.x][tilePos.y]->movementBlocked(direction);
 	}
-	bool causesDeath(sf::Vector2i tilePos) { return board[tilePos.x][tilePos.y]->causesDeath(); }
+	const Tile *getTile(sf::Vector2i tilePos) { return board[tilePos.x][tilePos.y]; }
 };
 
 #endif // BOARD_H
