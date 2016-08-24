@@ -7,7 +7,7 @@ ResourceManager<sf::Texture> GLOBAL::textureList;
 // Creates the sprite for the object.  
 // Sets the inital scale, source position, and screen position.
 void Object::loadObject(std::string filename, sf::Vector2f pos, sf::Vector2i sPos, sf::Vector2i sSize) {
-
+	outOfPlay = false;
 	std::string textureFilename = IMAGE_HEADER + filename;
 	this->srcSize = sSize;
 	this->srcPos = sPos;
@@ -30,6 +30,8 @@ sf::Vector2f Object::convertCoord(sf::RenderWindow &gWindow) {
 //*************************************************************
 //  Check if Mouse Position is within bounds of the sprite
 bool Object::isTargeted(sf::RenderWindow &gWindow) {
+	if (outOfPlay)
+		return false;
 	return sprite->getGlobalBounds().contains(convertCoord(gWindow));
 }
 

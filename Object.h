@@ -20,6 +20,7 @@ class Object {
 	sf::Sprite *sprite;
 	sf::Vector2i srcSize;		// file source size
 	sf::Vector2i srcPos;		// file source position
+	bool outOfPlay;
 
 public:
 	Object(	std::string filename, 
@@ -36,20 +37,22 @@ public:
 	void setColor(sf::Color color) { sprite->setColor(color); }
 	void setRotation(int orientation) { sprite->setRotation((float)orientation); }
 	void setOrigin();
+	void setOutOfPlay(bool oop) { outOfPlay = oop; }
+	bool isOutOfPlay() const { return outOfPlay; }
 	sf::Vector2i getSrcPos() const { return srcPos; }
 	sf::Vector2f getPosition() const { return sprite->getPosition(); }
 	sf::Vector2f getScale() const { return sprite->getScale(); }
 	sf::FloatRect getSize() const { return sprite->getGlobalBounds(); }
 	float getRotation() { return sprite->getRotation(); }
-	void draw(sf::RenderWindow &window) { window.draw(*sprite); }
-	// Prototypes
+	void draw(sf::RenderWindow &window) { if(!outOfPlay) window.draw(*sprite); }
 	bool isTargeted(sf::RenderWindow &window);
 
 
 private:
-	// Inline Functions
-	void unloadObject() { delete sprite; }
-	// Prototypes
+	void unloadObject() { 
+		outOfPlay = true;  
+		delete sprite; 
+	}
 	void loadObject(std::string filename, sf::Vector2f pos, sf::Vector2i srcPos, sf::Vector2i srcSize);
 	sf::Vector2f convertCoord(sf::RenderWindow &gWindow);
 	virtual void updateTextRect();

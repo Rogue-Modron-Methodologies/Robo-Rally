@@ -19,6 +19,7 @@ class Robot : public Object {
 	std::string name;
 	sf::Vector2f resPoint;
 
+
 public:
 	Robot(std::string robotName, sf::Vector2f robotPos, sf::Vector2i sPos = { 0,0 }, int orientation = 0)
 		: Object(ROBOT_SPRITESHEET, robotPos) { loadRobot(robotName, robotPos, sPos, orientation); }
@@ -29,10 +30,14 @@ public:
 		//if else statment for sourcePos by name
 		setRotation(orientation);
 	}
-	std::string getName() { return name; }
+	std::string getName() const { return name; }
 	void setResPoint(sf::Vector2f pos) { resPoint = pos; }
 	sf::Vector2f getResPoint() { return resPoint; }
-	void returntoResPoint() { setPosition(resPoint); }
+	void returntoResPoint() { 
+		setPosition(resPoint); 
+		setOutOfPlay(false);
+	}
+	void removeRobot() { setOutOfPlay(true); }
 
 };
 #endif // ROBOT_H

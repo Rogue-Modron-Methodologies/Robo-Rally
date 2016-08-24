@@ -18,7 +18,7 @@ class Tile : public Object {
 
 	std::vector<TileFeature *> features;
 	std::string tileType;
-	Robot *robot;
+	const Robot *robot;
 	int qty;
 	bool movesRobot;
 	bool causeDeath;
@@ -36,7 +36,7 @@ public:
 	void unloadTile();
 	void drawTile(sf::RenderWindow &window);	
 	void drawDebugTile();
-	void placeRobot(Robot *rbt) { robot = rbt; }
+	void addRobot(const Robot &rbt) { robot = &rbt; }
 	void removeRobot() { robot = NULL; }
 	bool causesDeath() { return causeDeath; }
 	bool movementBlocked(int direction) {

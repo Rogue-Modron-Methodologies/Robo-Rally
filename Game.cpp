@@ -8,10 +8,11 @@ void Game::loadGame() {
 	window.create(sf::VideoMode(SCREEN_DIM.x, SCREEN_DIM.y), "RoboRally!");
 	view.reset(sf::FloatRect(0, 0, SCREEN_DIM.x * 3.f, SCREEN_DIM.y * 3.f));
 	window.setView(view);
+	cPhase = program;
 	playerList.push_back(new Player("Twonky"));
 	cPlyr = playerList[0];
 	cPlyr->initializeRobot(map.getTilePos({ 1, 0 }, { 2, 9 }), 0); //  will be replaced with "Starting Position Coordinates"
-	map.moveRobotToMap(cPlyr->getRobot(), { 1, 0 }, { 2, 9 });
+	map.addRobotToPlay(cPlyr->getRobot(), { 1, 0 }, { 2, 9 });
 	decks.push_back(new Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(2000, 100), DeckType::program)); /////////////  CHANGE POS TO VARIABLE
 	//decks.push_back(Deck(PROGRAM_SPRITESHEET, PROGRAM_CARD_LIST, sf::Vector2f(200, 700), DeckType::option)); /////////////  CHANGE POS TO VARIABLE
 	//decks[DeckType::option].setColor(sf::Color::Blue);  // only being used to differentiate decks until spritesheets are created
@@ -36,21 +37,27 @@ void Game::playGame() {
 	//map.drawMap(window);			//  Debug:  Only Draws Once  : Uncomment Code in each draw function to use
 	while (window.isOpen()) {
 		sf::Event event;
+		if (!flag[phaseSetupComplete])
+			phaseSetup();
 		while (window.pollEvent(event)) {
 			switch (event.type) {
 			case sf::Event::Closed:
 				window.close();
 				break;
 			case sf::Event::KeyPressed:
-				if (event.key.code == sf::Keyboard::Up)
-					moveRobot(up);
-				else if (event.key.code == sf::Keyboard::Down)
-					moveRobot(down);
-				else if (event.key.code == sf::Keyboard::Left)
-					moveRobot(left);
-				else if (event.key.code == sf::Keyboard::Right)
-					moveRobot(right);
-
+				switch (cPhase)
+				{
+				case robotMove:
+					if (event.key.code == sf::Keyboard::Up)
+						moveRobot(up);
+					else if (event.key.code == sf::Keyboard::Down)
+						moveRobot(down);
+					else if (event.key.code == sf::Keyboard::Left)
+						moveRobot(left);
+					else if (event.key.code == sf::Keyboard::Right)
+						moveRobot(right);
+					break;
+				}
 				if (event.key.code == sf::Keyboard::Num0 || event.key.code == sf::Keyboard::Numpad0) {
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) || sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
 						view.reset(sf::FloatRect(0, 0, SCREEN_DIM.x * 3.f, SCREEN_DIM.y * 3.f));
@@ -70,7 +77,7 @@ void Game::playGame() {
 
 				//// DEBUGGING AREA
 				if (event.key.code == sf::Keyboard::X)
-					playerList[0]->resetRobot();
+					flag[phaseComplete] = true;
 
 
 				break;
@@ -90,8 +97,14 @@ void Game::playGame() {
 				break;
 			}
 		}
-		// Check for Robot Death ---- Currently only checks for pits.
-		checkRobotDeath();
+		switch (cPhase)
+		{
+		case robotMove:
+			//checkRobotDamage();
+			checkRobotDeath();
+		default:
+			break;
+		}
 
 		if (drag) {
 			mPosOld = mPosNew;
@@ -102,11 +115,68 @@ void Game::playGame() {
 		else 
 			mPosNew = sf::Mouse::getPosition(window);
 
+		if (flag[phaseComplete])
+			endPhase();
 		
 		window.clear();
 		drawGame();
 		window.display();
 	}
+}
+
+//*************************************************************
+//  inital phase setup
+//
+void Game::phaseSetup() {
+	sf::Vector2i cBoard, cTile;
+	flag[phaseComplete] = false;
+	switch (cPhase)
+	{
+	case programming:
+		std::cout << "Programming Phase Start:\n";
+		std::cout << "Robots are back in Play\n";
+		for (auto it = playerList.begin(); it != playerList.end(); ++it) {
+			if ((*it)->getRobot().isOutOfPlay()) {
+				std::cout << (*it)->getRobot().getName() << " : Coming OnLine\n";
+				(*it)->resetRobot();
+				map.getCurrentCoordinates((*it)->getRobotPosition(), cBoard, cTile);
+				map.addRobotToPlay(cPlyr->getRobot(), cBoard, cTile);
+			}
+		}
+
+
+		break;
+	case robotMove:
+		std::cout << "Robot Movement Start:\n";
+		break;
+	case boardMove:
+		std::cout << "Board Movement Start:\n";
+		break;
+	}
+	flag[phaseSetupComplete] = true;
+}
+
+//*************************************************************
+//  sets cPhase to next phase, checks for end of phases
+//  and sets back to beginning
+void Game::endPhase() {
+	switch (cPhase)
+	{
+	case programming:
+
+		break;
+	case robotMove:
+
+		break;
+	case boardMove:
+
+		break;
+	}
+	cPhase++;
+	if (cPhase == NUM_PHASES)
+		cPhase = 0;
+	flag[phaseComplete] = false;
+	flag[phaseSetupComplete] = false;
 }
 
 //*************************************************************
@@ -147,17 +217,26 @@ void Game::zoomView(sf::Vector2i pos, int inOut) {
 //*************************************************************
 //  Sets sprite position of robot and adds it to the 
 //  tile at the correct location
-void Game::placeRobotOnBoard(sf::Vector2i boardNum, sf::Vector2i tileNum) {
-	cPlyr->setRobotPosition(map.getTilePos(boardNum, tileNum), 0);
-	map.moveRobotToMap(cPlyr->getRobot(), boardNum, tileNum);
+void Game::addRobotToPlay(sf::Vector2i desBoard, sf::Vector2i desTile) {
+	cPlyr->setRobotPosition(map.getTilePos(desBoard, desTile), 0);
+	map.addRobotToPlay(cPlyr->getRobot(), desBoard, desTile);
+}
+
+//*************************************************************
+//  Sets sprite position of robot and adds it to the 
+//  tile at the correct location also removes robot from 
+//  current tile
+void Game::repositionRobot(sf::Vector2i desBoard, sf::Vector2i desTile, sf::Vector2i curBoard, sf::Vector2i curTile) {
+	cPlyr->setRobotPosition(map.getTilePos(desBoard, desTile), 0);
+	map.repositionRobot(cPlyr->getRobot(), desBoard, desTile, curBoard, curTile);
 }
 
 //*************************************************************
 //  Removes the robot reference from the tile
-void Game::removeRobotFromBoard(sf::Vector2i boardNum, sf::Vector2i tileNum)
+void Game::removeRobotFromPlay(sf::Vector2i boardNum, sf::Vector2i tileNum)
 {
-	//cPlyr->setRobotPosition(map.getTilePos(boardNum, tileNum), 0);
-	map.removeRobotFromBoard(boardNum, tileNum);
+	map.removeRobotFromPlay(boardNum, tileNum);
+	cPlyr->removeRobotFromPlay();
 }
 
 //*************************************************************
@@ -167,20 +246,21 @@ void Game::removeRobotFromBoard(sf::Vector2i boardNum, sf::Vector2i tileNum)
 //		block movement
 bool Game::moveRobot(int direction) {
 	sf::Vector2i cBoard, cTile, dBoard, dTile;
+	if (cPlyr->getRobot().isOutOfPlay())
+		return false;
 	map.getCurrentCoordinates(cPlyr->getRobotPosition(), cBoard, cTile);
 	// Checks if destination coordinates exist
 	if (!map.getDestinationCoordinates(cBoard, cTile, direction, (int)cPlyr->getRobotOrientation(), dBoard, dTile) &&
 		!(map.movementBlocked(direction, cBoard, cTile) || map.movementBlocked(direction >= 180 ? direction - 180 : direction + 180, dBoard, dTile))) {
 		std::cout << "OFF BOARD = DEATH\n";
-		cPlyr->resetRobot();
+		removeRobotFromPlay(cBoard, cTile);
 		return false;
 	}
 
 	// Checks if any current tileFeatures block movement
 	if (map.movementBlocked(direction, cBoard, cTile) || map.movementBlocked(direction >= 180 ? direction - 180 : direction + 180, dBoard, dTile))
 		return false;
-	removeRobotFromBoard(cBoard, cTile);
-	placeRobotOnBoard(dBoard, dTile);
+	repositionRobot(dBoard, dTile, cBoard, cTile);
 	return true;
 }
 
@@ -194,9 +274,9 @@ void Game::checkRobotDeath() {
 		if (map.causesDeath(cBoard, cTile)) {
 			std::cout << "PIT = DEATH\n";
 			(*it)->resetRobot();
-			removeRobotFromBoard(cBoard, cTile);
+			removeRobotFromPlay(cBoard, cTile);
 			map.getCurrentCoordinates((*it)->getRobotPosition(), cBoard, cTile);
-			placeRobotOnBoard(cBoard, cTile);
+			////////////////////////////////repositionRobot(cBoard, cTile);
 
 		}
 	}

@@ -25,7 +25,7 @@ public:
 		robot = new Robot(robotName, { 0,0 });
 	};
 	~Player() { delete robot; }
-	Robot *getRobot() { return robot; }
+	const Robot &getRobot() { return *robot; }
 	void drawPlayer(sf::RenderWindow &window) {
 		this->draw(window);
 		robot->draw(window);
@@ -48,8 +48,10 @@ public:
 	}
 	void resetRobot() {
 		robot->returntoResPoint();
+		robot->setOutOfPlay(false);
 	}
 	void programRobot() {};
+	void removeRobotFromPlay() { robot->setOutOfPlay(true); }
 };
 
 #endif // PLAYER_H

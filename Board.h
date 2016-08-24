@@ -30,10 +30,10 @@ public:
 	bool boardTargeted(sf::RenderWindow &window);
 	sf::Vector2f convertCoord(sf::RenderWindow &gWindow);
 	void debugDraw(sf::RenderWindow &window);
-	void moveRobotToBoard(Robot *robot, sf::Vector2i tileNum) {
-		board[tileNum.x][tileNum.y]->placeRobot(robot);
+	void addRobotToPlay(const Robot &robot, sf::Vector2i tileNum) {
+		board[tileNum.x][tileNum.y]->addRobot(robot);
 	}
-	void removeRobotFromBoard(sf::Vector2i tileNum) {
+	void removeRobotFromPlay(sf::Vector2i tileNum) {
 		board[tileNum.x][tileNum.y]->removeRobot();
 	}
 	bool movementBlocked(int direction, sf::Vector2i tilePos) {

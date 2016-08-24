@@ -29,11 +29,15 @@ public:
 	void getCurrentCoordinates(sf::Vector2f rPos, sf::Vector2i &mapPos, sf::Vector2i &boardPos);
 	bool getDestinationCoordinates(sf::Vector2i curBoard, sf::Vector2i curTile, 
 			int direction, int orientation, sf::Vector2i &desBoard, sf::Vector2i &desTile);
-	void moveRobotToMap(Robot *robot, sf::Vector2i boardNum, sf::Vector2i tileNum) { 
-		map[boardNum.x][boardNum.y].moveRobotToBoard(robot, tileNum);
+	void addRobotToPlay(const Robot &robot, sf::Vector2i boardNum, sf::Vector2i tileNum) {
+		map[boardNum.x][boardNum.y].addRobotToPlay(robot, tileNum);
 	}
-	void removeRobotFromBoard(sf::Vector2i boardNum, sf::Vector2i tileNum) {
-		map[boardNum.x][boardNum.y].removeRobotFromBoard(tileNum);
+	void repositionRobot(const Robot &robot, sf::Vector2i desBoard, sf::Vector2i desTile, sf::Vector2i curBoard, sf::Vector2i curTile) {
+		map[desBoard.x][desBoard.y].addRobotToPlay(robot, desTile);
+		map[curBoard.x][curBoard.y].removeRobotFromPlay(curTile);
+	}
+	void removeRobotFromPlay(sf::Vector2i boardNum, sf::Vector2i tileNum) {
+		map[boardNum.x][boardNum.y].removeRobotFromPlay(tileNum);
 	}
 	bool movementBlocked(int direction, sf::Vector2i boardPos, sf::Vector2i tilePos) {
 		return map[boardPos.x][boardPos.y].movementBlocked(direction, tilePos);

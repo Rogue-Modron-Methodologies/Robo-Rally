@@ -12,6 +12,16 @@
 
 enum class ResourceType { textures = 0, sounds = 1, fonts = 2 };
 
+const int NUM_PHASES = 3;
+enum Phase { programming = 0, robotMove = 1, boardMove = 2 };
+
+const int NUM_FLAGS = 2;
+enum flagTypes
+{
+	phaseSetupComplete,				//  Flag:  Phase Setup Complete
+	phaseComplete					//  Flag:  Phase Complete
+};
+
 #define PROGRAM_CARD_LIST "ProgramList.txt"
 #define PROGRAM_SPRITESHEET "ProgramSpriteSheet.png"
 #define OPTION_CARD_LIST "OptionList.txt"
@@ -30,6 +40,8 @@ class Game {
 	Player *cPlyr;
 	std::vector<Player*> playerList;
 	std::vector<Deck*> decks;
+	int cPhase;
+	bool flag[NUM_FLAGS];									//  Hold an array of flags for game decisions	
 	ResourceManager<sf::Font> fontList;
 	ResourceManager<sf::Int16> soundList;					// https://gist.github.com/eXpl0it3r/c4edb9bcc1f00e29a79b
 
@@ -40,12 +52,15 @@ public:
 private:
 	void loadGame();
 	void unloadGame();
+	void phaseSetup();
+	void endPhase();
 	void drawGame();
 	void zoomView(sf::Vector2i, int inOut);
 	bool moveRobot(int direction);
-	void Game::checkRobotDeath();
-	void placeRobotOnBoard(sf::Vector2i boardNum, sf::Vector2i tileNum);
-	void removeRobotFromBoard(sf::Vector2i boardNum, sf::Vector2i tileNum);
+	void checkRobotDeath();
+	void addRobotToPlay(sf::Vector2i desBoard, sf::Vector2i desTile);
+	void repositionRobot(sf::Vector2i desBoard, sf::Vector2i desTile, sf::Vector2i curBoard, sf::Vector2i curTile);
+	void removeRobotFromPlay(sf::Vector2i boardNum, sf::Vector2i tileNum);
 
 };
 #endif // GAME_H
