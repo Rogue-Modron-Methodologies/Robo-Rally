@@ -60,7 +60,7 @@ void Game::playGame() {
 
 						if (flag[actBoard])
 							activateBoard();
-						checkRobotDamage();
+						checkRobotDamaged();
 						checkRobotDeath();
 					}
 					break;
@@ -281,12 +281,16 @@ void Game::checkRobotDeath() {
 			std::cout << "PIT = DEATH\n";
 			removeRobotFromPlay(cBoard, cTile);
 		}
+		if ((*it)->getRobot().getDamage() >= DEATH_HP) {
+			std::cout << "DEATH BY DAMAGE\n";
+			removeRobotFromPlay(cBoard, cTile);
+		}
 	}
 }
 
 //*************************************************************
 //  Checks each robot to see if it received damage from the board
-void Game::checkRobotDamage() {
+void Game::checkRobotDamaged() {
 	sf::Vector2i cBoard, cTile;
 	int qty = 0;
 	const Tile *curTile;
@@ -295,6 +299,7 @@ void Game::checkRobotDamage() {
 		curTile = map.getTile(cBoard, cTile);
 		if (curTile->causesDamage(qty)) {
 			std::cout << "ZAAP!!! " << qty << " damage!\n";
+			(*it)->damageRobot(qty);
 		}
 	}
 }

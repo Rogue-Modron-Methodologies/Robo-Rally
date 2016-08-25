@@ -43,13 +43,14 @@ public:
 	}
 	void initializeRobot(sf::Vector2f pos, int orientation) {  
 		robot->setResPoint(pos); 
-		robot->returntoResPoint();
+		robot->returntoResPoint(0);
 		robot->setRotation(orientation); 
 	}
 	void resetRobot() {
 		robot->returntoResPoint();
 		robot->setOutOfPlay(false);
 	}
+	void damageRobot(int num) { robot->damageRobot(num); }
 	void programRobot() {};
 	void removeRobotFromPlay() { robot->setOutOfPlay(true); }
 };

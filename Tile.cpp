@@ -108,9 +108,9 @@ void Tile::drawTile(sf::RenderWindow &window) {
 //*********************
 //prints to screen the ground tile and, if any, the tile's features
 void Tile::drawDebugTile() {
-	std::cout << tileType << " " << qty << " " << this->getRotation() << " ";
 	if (robot)
-		std::cout << robot->getName() << " ";
+		std::cout << robot->getName() << " DAMAGE: " << robot->getDamage() << std::endl;
+	std::cout << tileType << " " << qty << " " << this->getRotation() << " ";
 	if (causeDeath)
 		std::cout << " Causes Death!!! ";
 	if (features.size() == 0) 
