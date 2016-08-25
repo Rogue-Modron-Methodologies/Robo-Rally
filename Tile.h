@@ -46,5 +46,11 @@ public:
 				return true;
 		return false;
 	}
+	bool causesDamage(int &num) const {
+		for (unsigned i = 0; i < features.size(); ++i)
+			if (features[i]->causesDamage(num))
+				return true;
+		return false;
+	}
 };
 #endif // TILE_H

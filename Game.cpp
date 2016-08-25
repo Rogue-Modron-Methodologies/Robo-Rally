@@ -58,10 +58,10 @@ void Game::playGame() {
 						else if (event.key.code == sf::Keyboard::Right)
 							moveRobot(right);
 
-						//checkRobotDamage();
-						checkRobotDeath();
 						if (flag[actBoard])
 							activateBoard();
+						checkRobotDamage();
+						checkRobotDeath();
 					}
 					break;
 				}
@@ -280,6 +280,21 @@ void Game::checkRobotDeath() {
 		if(curTile->causesDeath()) {
 			std::cout << "PIT = DEATH\n";
 			removeRobotFromPlay(cBoard, cTile);
+		}
+	}
+}
+
+//*************************************************************
+//  Checks each robot to see if it received damage from the board
+void Game::checkRobotDamage() {
+	sf::Vector2i cBoard, cTile;
+	int qty = 0;
+	const Tile *curTile;
+	for (auto it = playerList.begin(); it != playerList.end(); ++it) {
+		map.getCurrentCoordinates((*it)->getRobotPosition(), cBoard, cTile);
+		curTile = map.getTile(cBoard, cTile);
+		if (curTile->causesDamage(qty)) {
+			std::cout << "ZAAP!!! " << qty << " damage!\n";
 		}
 	}
 }

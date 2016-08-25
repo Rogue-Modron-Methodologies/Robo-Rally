@@ -18,9 +18,11 @@ void TileFeature::loadTileFeature(std::string featureName, int qty, int orientat
 		else if (qty == 3) 
 			setSrcPosX(laser3);
 		blockMove = false;
+		damages = true;
 	}
 	else if (featureName == "wall") {
 		blockMove = true;
+		damages = false;
 		setSrcPosX(wall);
 	}
 

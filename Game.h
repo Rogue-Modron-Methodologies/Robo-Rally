@@ -62,6 +62,7 @@ private:
 	void zoomView(sf::Vector2i, int inOut);
 	bool moveRobot(int direction);
 	void checkRobotDeath();
+	void checkRobotDamage();
 	void addRobotToPlay(sf::Vector2i desBoard, sf::Vector2i desTile);
 	void repositionRobot(sf::Vector2i desBoard, sf::Vector2i desTile, sf::Vector2i curBoard, sf::Vector2i curTile);
 	void removeRobotFromPlay(sf::Vector2i boardNum, sf::Vector2i tileNum);

@@ -33,6 +33,7 @@ public:
 	void loadTileFeature(std::string featureName, int qty, int orientation);
 	std::string getName() { return name; };
 	void drawDebugTileFeature();
+	bool causesDamage(int &num) const { num = qty;  return damages; }
 	bool blockMovement(int direction) {
 		if (name == "wall" && getRotation() == direction)
 			return true;
