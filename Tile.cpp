@@ -72,6 +72,8 @@ void Tile::loadTile(std::string tileInformation, sf::Vector2f pos, int boardOrie
 				setSrcPosX(convt2);
 		}
 		else if (tileType == "gear") {			//continue parsing to find speed 1 and 2 and orientation	if (tileName == "convt")
+			movesBot = false;
+			rotatesBot = true;
 			if (qty == 0)
 				setSrcPosX(gearClock);
 			else //if (qty == 1) 
@@ -109,10 +111,14 @@ void Tile::drawTile(sf::RenderWindow &window) {
 //prints to screen the ground tile and, if any, the tile's features
 void Tile::drawDebugTile() {
 	if (robot)
-		std::cout << robot->getName() << " DAMAGE: " << robot->getDamage() << std::endl;
+		std::cout << robot->getName() << " DAMAGE: " << robot->getDamage() << " Orientation: " << robot->getRotation() << std::endl;
 	std::cout << tileType << " " << qty << " " << this->getRotation() << " ";
 	if (causeDeath)
 		std::cout << " Causes Death!!! ";
+	if (movesBot)
+		std::cout << " Moves Bot " << qty << " spaces in direction " << getRotation();
+	if(rotatesBot)
+		std::cout << " Rotates Bot in direction " << getRotation();
 	if (features.size() == 0) 
 		std::cout << ": no tile features.\n\n";
 	else {

@@ -21,6 +21,7 @@ class Tile : public Object {
 	const Robot *robot;
 	int qty;
 	bool movesBot;
+	bool rotatesBot;
 	bool causeDeath;
 
 public:
@@ -39,7 +40,16 @@ public:
 	void addRobot(const Robot &rbt) { robot = &rbt; }
 	void removeRobot() { robot = NULL; }
 	bool causesDeath() const { return causeDeath; }
-	bool movesRobot() const { return movesBot; }
+	bool movesRobot(int &qty, int &orientation) const { 
+		qty = this->qty;
+		orientation = (int)getRotation();
+		return movesBot; 
+
+	}
+	bool rotatesRobot(int &spin) const {
+		spin = this->qty;
+		return rotatesBot;
+	}
 	bool movementBlocked(int direction) {
 		for (unsigned i = 0; i < features.size(); ++i)
 			if (features[i]->blockMovement(direction))

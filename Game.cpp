@@ -50,13 +50,13 @@ void Game::playGame() {
 				case movePhase:
 					if (flag[actRobot]) {
 						if (event.key.code == sf::Keyboard::Up)
-							moveRobot(up);
+							moveRobot(cPlyr, up);
 						else if (event.key.code == sf::Keyboard::Down)
-							moveRobot(down);
+							moveRobot(cPlyr, down);
 						else if (event.key.code == sf::Keyboard::Left)
-							moveRobot(left);
+							moveRobot(cPlyr, left);
 						else if (event.key.code == sf::Keyboard::Right)
-							moveRobot(right);
+							moveRobot(cPlyr, right);
 
 						if (flag[actBoard])
 							activateBoard();
@@ -83,10 +83,26 @@ void Game::playGame() {
 				}
 
 				//// DEBUGGING AREA
-				if (event.key.code == sf::Keyboard::X)
-					flag[phaseComplete] = true;
+				if (event.key.code == sf::Keyboard::X) {
+					switch (cPhase)
+					{
 
-
+					case movePhase:
+						if (cRegPhase <= 4) {
+							flag[actBoard] = true;
+						}
+						else {
+							cRegPhase = 0;
+							flag[actRobot] = false;
+							flag[actBoard] = false;
+							flag[phaseComplete] = true;
+						}
+						break;
+					case codePhase:
+					case endOfTurnPhase:
+						flag[phaseComplete] = true;
+					}
+				}
 				break;
 			case sf::Event::MouseButtonPressed:
 				drag = true;
@@ -246,15 +262,15 @@ void Game::removeRobotFromPlay(sf::Vector2i boardNum, sf::Vector2i tileNum)
 //  Checks if destination is out of bounds
 //  Checks if any tileFeatures on source/destination tiles
 //		block movement
-bool Game::moveRobot(int direction) {
+bool Game::moveRobot(Player *plyr, int direction) {
 	flag[actRobot] = false;
 	flag[actBoard] = true;
 	sf::Vector2i cBoard, cTile, dBoard, dTile;
-	if (cPlyr->getRobot().isOutOfPlay())
+	if (plyr->getRobot().isOutOfPlay())
 		return false;
-	map.getCurrentCoordinates(cPlyr->getRobotPosition(), cBoard, cTile);
+	map.getCurrentCoordinates(plyr->getRobotPosition(), cBoard, cTile);
 	// Checks if destination coordinates exist
-	if (!map.getDestinationCoordinates(cBoard, cTile, direction, (int)cPlyr->getRobotOrientation(), dBoard, dTile) &&
+	if (!map.getDestinationCoordinates(cBoard, cTile, direction, (int)plyr->getRobotOrientation(), dBoard, dTile) &&
 		!(map.movementBlocked(direction, cBoard, cTile) || map.movementBlocked(direction >= 180 ? direction - 180 : direction + 180, dBoard, dTile))) {
 		std::cout << "OFF BOARD = DEATH\n";
 		removeRobotFromPlay(cBoard, cTile);
@@ -310,13 +326,21 @@ void Game::checkRobotDamaged() {
 void Game::activateBoard() {
 	std::cout << "BOARD ACTIVE: ";
 	sf::Vector2i cBoard, cTile;
+	int qty = 0, orientation = 0;
 	const Tile *curTile;
-	for (auto it = playerList.begin(); it != playerList.end(); ++it) {
-		map.getCurrentCoordinates((*it)->getRobotPosition(), cBoard, cTile);
+	for (auto plyr = playerList.begin(); plyr != playerList.end(); ++plyr) {
+		map.getCurrentCoordinates((*plyr)->getRobotPosition(), cBoard, cTile);
 		curTile = map.getTile(cBoard, cTile);
-		if(curTile->movesRobot()) {
-			std::cout << "MOVEMENT\n";
+		if (curTile->movesRobot(qty, orientation)) {
+			std::cout << "MOVES " << qty << " spaces " << orientation << "\n";
+			for (int i = 0; i < qty; ++i) {
+				moveRobot((*plyr), orientation);
+				if (curTile->rotatesRobot(orientation))
+					(*plyr)->rotateRobot(orientation);
+			}
 		}
+		else if (curTile->rotatesRobot(orientation))
+			(*plyr)->rotateRobot(orientation);
 	}
 		cRegPhase++;
 		std::cout << "Register Phase #" << cRegPhase << std::endl;

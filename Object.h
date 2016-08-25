@@ -43,7 +43,7 @@ public:
 	sf::Vector2f getPosition() const { return sprite->getPosition(); }
 	sf::Vector2f getScale() const { return sprite->getScale(); }
 	sf::FloatRect getSize() const { return sprite->getGlobalBounds(); }
-	float getRotation() { return sprite->getRotation(); }
+	float getRotation() const { return sprite->getRotation(); }
 	void draw(sf::RenderWindow &window) { if(!outOfPlay) window.draw(*sprite); }
 	bool isTargeted(sf::RenderWindow &window);
 

@@ -60,7 +60,7 @@ private:
 	void endPhase();
 	void drawGame();
 	void zoomView(sf::Vector2i, int inOut);
-	bool moveRobot(int direction);
+	bool moveRobot(Player *plyr, int direction);
 	void checkRobotDeath();
 	void checkRobotDamaged();
 	void addRobotToPlay(sf::Vector2i desBoard, sf::Vector2i desTile);
