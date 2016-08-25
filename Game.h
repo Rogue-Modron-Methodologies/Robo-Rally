@@ -13,13 +13,15 @@
 enum class ResourceType { textures = 0, sounds = 1, fonts = 2 };
 
 const int NUM_PHASES = 3;
-enum Phase { programming = 0, robotMove = 1, boardMove = 2 };
+enum Phase { codePhase = 0, movePhase = 1, endOfTurnPhase = 2 };
 
-const int NUM_FLAGS = 2;
+const int NUM_FLAGS = 4;
 enum flagTypes
 {
 	phaseSetupComplete,				//  Flag:  Phase Setup Complete
-	phaseComplete					//  Flag:  Phase Complete
+	phaseComplete,					//  Flag:  Phase Complete
+	actRobot,						//  Flag:  Robot Activated
+	actBoard						//  Flag:  Board Activated
 
 };
 
@@ -42,6 +44,7 @@ class Game {
 	std::vector<Player*> playerList;
 	std::vector<Deck*> decks;
 	int cPhase;
+	int cRegPhase;
 	bool flag[NUM_FLAGS];									//  Hold an array of flags for game decisions	
 	ResourceManager<sf::Font> fontList;
 	ResourceManager<sf::Int16> soundList;					// https://gist.github.com/eXpl0it3r/c4edb9bcc1f00e29a79b

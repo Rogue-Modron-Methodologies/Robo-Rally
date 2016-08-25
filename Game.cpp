@@ -47,15 +47,22 @@ void Game::playGame() {
 			case sf::Event::KeyPressed:
 				switch (cPhase)
 				{
-				case robotMove:
-					if (event.key.code == sf::Keyboard::Up)
-						moveRobot(up);
-					else if (event.key.code == sf::Keyboard::Down)
-						moveRobot(down);
-					else if (event.key.code == sf::Keyboard::Left)
-						moveRobot(left);
-					else if (event.key.code == sf::Keyboard::Right)
-						moveRobot(right);
+				case movePhase:
+					if (flag[actRobot]) {
+						if (event.key.code == sf::Keyboard::Up)
+							moveRobot(up);
+						else if (event.key.code == sf::Keyboard::Down)
+							moveRobot(down);
+						else if (event.key.code == sf::Keyboard::Left)
+							moveRobot(left);
+						else if (event.key.code == sf::Keyboard::Right)
+							moveRobot(right);
+
+						//checkRobotDamage();
+						checkRobotDeath();
+						if (flag[actBoard])
+							activateBoard();
+					}
 					break;
 				}
 				if (event.key.code == sf::Keyboard::Num0 || event.key.code == sf::Keyboard::Numpad0) {
@@ -97,16 +104,6 @@ void Game::playGame() {
 				break;
 			}
 		}
-		switch (cPhase)
-		{
-		case robotMove:
-			//checkRobotDamage();
-			checkRobotDeath();
-			break;
-		case boardMove:
-			activateBoard();
-			break;
-		}
 
 		if (drag) {
 			mPosOld = mPosNew;
@@ -132,9 +129,11 @@ void Game::playGame() {
 void Game::phaseSetup() {
 	sf::Vector2i cBoard, cTile;
 	flag[phaseComplete] = false;
+	flag[actRobot] = false;
+	flag[actBoard] = false;
 	switch (cPhase)
 	{
-	case programming:
+	case codePhase:
 		std::cout << "Programming Phase Start:\n";
 		std::cout << "Robots are back in Play\n";
 		for (auto it = playerList.begin(); it != playerList.end(); ++it) {
@@ -144,13 +143,16 @@ void Game::phaseSetup() {
 				map.getCurrentCoordinates((*it)->getRobotPosition(), cBoard, cTile);
 				map.addRobotToPlay(cPlyr->getRobot(), cBoard, cTile);
 			}
+			std::cout << "Heal Powered Down Robots\n";
+			std::cout << "Deal Cards / Program Bots / Program Options / Announce Power Down\n\n";
 		}
 		break;
-	case robotMove:
-		std::cout << "Robot Movement Start:\n";
+	case movePhase:
+		std::cout << "Robot/Board Movement Start:\n\n";
+		flag[actRobot] = true;
 		break;
-	case boardMove:
-		std::cout << "Board Movement Start:\n";
+	case endOfTurnPhase:
+		std::cout << "End of Turn Effects:\n\n";
 		break;
 	}
 	flag[phaseSetupComplete] = true;
@@ -162,13 +164,13 @@ void Game::phaseSetup() {
 void Game::endPhase() {
 	switch (cPhase)
 	{
-	case programming:
+	case codePhase:
 
 		break;
-	case robotMove:
+	case movePhase:
 
 		break;
-	case boardMove:
+	case endOfTurnPhase:
 
 		break;
 	}
@@ -245,6 +247,8 @@ void Game::removeRobotFromPlay(sf::Vector2i boardNum, sf::Vector2i tileNum)
 //  Checks if any tileFeatures on source/destination tiles
 //		block movement
 bool Game::moveRobot(int direction) {
+	flag[actRobot] = false;
+	flag[actBoard] = true;
 	sf::Vector2i cBoard, cTile, dBoard, dTile;
 	if (cPlyr->getRobot().isOutOfPlay())
 		return false;
@@ -284,6 +288,7 @@ void Game::checkRobotDeath() {
 //  Activate the Board Elements that the Robots are on.
 //  
 void Game::activateBoard() {
+	std::cout << "BOARD ACTIVE: ";
 	sf::Vector2i cBoard, cTile;
 	const Tile *curTile;
 	for (auto it = playerList.begin(); it != playerList.end(); ++it) {
@@ -291,12 +296,17 @@ void Game::activateBoard() {
 		curTile = map.getTile(cBoard, cTile);
 		if(curTile->movesRobot()) {
 			std::cout << "MOVEMENT\n";
-			//(*it)->resetRobot();
-			//removeRobotFromPlay(cBoard, cTile);
-			//map.getCurrentCoordinates((*it)->getRobotPosition(), cBoard, cTile);
-			////////////////////////////////repositionRobot(cBoard, cTile);
-
 		}
 	}
-	flag[phaseComplete] = true;
+		cRegPhase++;
+		std::cout << "Register Phase #" << cRegPhase << std::endl;
+	if (cRegPhase <= 4) {
+		flag[actRobot] = true;
+	}
+	else {
+		cRegPhase = 0;
+		flag[actRobot] = false;
+		flag[phaseComplete] = true;
+	}
+	flag[actBoard] = false;
 }
