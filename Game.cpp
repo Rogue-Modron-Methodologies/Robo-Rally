@@ -140,7 +140,6 @@ void Game::playGame() {
 
 		if (flag[actBoard] && cTime >= DELAY) {
 			activateBoard();
-			checkRobotDamaged();
 			checkRobotDeath();
 			cTime = 0;
 			timerActive = false;
@@ -261,7 +260,7 @@ void Game::addRobotToPlay(sf::Vector2i desBoard, sf::Vector2i desTile) {
 //  tile at the correct location also removes robot from 
 //  current tile
 void Game::repositionRobot(sf::Vector2i desBoard, sf::Vector2i desTile, sf::Vector2i curBoard, sf::Vector2i curTile) {
-	cPlyr->setRobotPosition(map.getTilePos(desBoard, desTile), 0);
+	cPlyr->setRobotPosition(map.getTilePos(desBoard, desTile), (int)cPlyr->getRobotOrientation());
 	map.repositionRobot(cPlyr->getRobot(), desBoard, desTile, curBoard, curTile);
 }
 
@@ -279,24 +278,33 @@ void Game::removeRobotFromPlay(sf::Vector2i boardNum, sf::Vector2i tileNum)
 //  Checks if any tileFeatures on source/destination tiles
 //		block movement
 bool Game::moveRobot(Player *plyr, int direction) {
+	std::cout << "Trying to move " << direction << "...";
 	flag[actRobot] = false;
 	flag[actBoard] = true;
 	sf::Vector2i cBoard, cTile, dBoard, dTile;
 	if (plyr->getRobot().isOutOfPlay())
 		return false;
 	map.getCurrentCoordinates(plyr->getRobotPosition(), cBoard, cTile);
+	map.getDestinationCoordinates(cBoard, cTile, direction, (int)plyr->getRobotOrientation(), dBoard, dTile);
+	const Tile *curTile = map.getTile(cBoard, cTile);
+	const Tile *desTile = map.getTile(dBoard, dTile);
+
 	// Checks if destination coordinates exist
 	if (!map.getDestinationCoordinates(cBoard, cTile, direction, (int)plyr->getRobotOrientation(), dBoard, dTile) &&
-		!(map.movementBlocked(direction, cBoard, cTile) || map.movementBlocked(direction >= 180 ? direction - 180 : direction + 180, dBoard, dTile))) {
+		!(curTile->movementBlocked(direction) || desTile->movementBlocked(direction >= 180 ? direction - 180 : direction + 180))) {
 		std::cout << "OFF BOARD = DEATH\n";
 		removeRobotFromPlay(cBoard, cTile);
 		return false;
 	}
 
 	// Checks if any current tileFeatures block movement
-	if (map.movementBlocked(direction, cBoard, cTile) || map.movementBlocked(direction >= 180 ? direction - 180 : direction + 180, dBoard, dTile))
+	if (curTile->movementBlocked(direction) || desTile->movementBlocked(direction >= 180 ? direction - 180 : direction + 180)) {
+		std::cout << " blocked\n";
 		return false;
+	}
+
 	repositionRobot(dBoard, dTile, cBoard, cTile);
+	std::cout << " success!\n";
 	return true;
 }
 
@@ -321,11 +329,44 @@ void Game::checkRobotDeath() {
 }
 
 //*************************************************************
-//  Checks each robot to see if it received damage from the board
-void Game::checkRobotDamaged() {
+//  Activate the Board Elements that the Robots are on.
+//  
+void Game::activateBoard() {
+	std::cout << "BOARD ACTIVE: ";
 	sf::Vector2i cBoard, cTile;
-	int qty = 0;
+	int qty = 0, orientation = 0;
 	const Tile *curTile;
+	// Express Conveyors
+	for (auto plyr = playerList.begin(); plyr != playerList.end(); ++plyr) {
+		map.getCurrentCoordinates((*plyr)->getRobotPosition(), cBoard, cTile);
+		curTile = map.getTile(cBoard, cTile);
+		if (curTile->movesRobot(qty, orientation) && qty > 1) {
+			moveRobot((*plyr), orientation);
+			if (curTile->rotatesRobot(orientation))
+				(*plyr)->rotateRobot(orientation);
+		}
+
+	}
+	// Regular Conveyors
+	for (auto plyr = playerList.begin(); plyr != playerList.end(); ++plyr) {
+		map.getCurrentCoordinates((*plyr)->getRobotPosition(), cBoard, cTile);
+		curTile = map.getTile(cBoard, cTile);
+		if (curTile->movesRobot(qty, orientation)) {
+			moveRobot((*plyr), orientation);
+			if (curTile->rotatesRobot(orientation))
+				(*plyr)->rotateRobot(orientation);
+		}
+	}
+	// Pushers  //////////////////////////  Need to implement
+
+	//// Gears
+	//for (auto plyr = playerList.begin(); plyr != playerList.end(); ++plyr) {
+	//	map.getCurrentCoordinates((*plyr)->getRobotPosition(), cBoard, cTile);
+	//	curTile = map.getTile(cBoard, cTile);
+	//	if (curTile->rotatesRobot(orientation))
+	//		(*plyr)->rotateRobot(orientation);
+	//}
+	// Robot and Board Lasers Fire  ////////////////////////////////// Still need to implement robot lasers
 	for (auto it = playerList.begin(); it != playerList.end(); ++it) {
 		map.getCurrentCoordinates((*it)->getRobotPosition(), cBoard, cTile);
 		curTile = map.getTile(cBoard, cTile);
@@ -334,30 +375,8 @@ void Game::checkRobotDamaged() {
 			(*it)->damageRobot(qty);
 		}
 	}
-}
+	// Robots touch flags     //////////////////////////  Need to implement
 
-//*************************************************************
-//  Activate the Board Elements that the Robots are on.
-//  
-void Game::activateBoard() {
-	std::cout << "BOARD ACTIVE: ";
-	sf::Vector2i cBoard, cTile;
-	int qty = 0, orientation = 0;
-	const Tile *curTile;
-	for (auto plyr = playerList.begin(); plyr != playerList.end(); ++plyr) {
-		map.getCurrentCoordinates((*plyr)->getRobotPosition(), cBoard, cTile);
-		curTile = map.getTile(cBoard, cTile);
-		if (curTile->movesRobot(qty, orientation)) {
-			std::cout << "MOVES " << qty << " spaces " << orientation << "\n";
-			for (int i = 0; i < qty; ++i) {
-				moveRobot((*plyr), orientation);
-				if (curTile->rotatesRobot(orientation))
-					(*plyr)->rotateRobot(orientation);
-			}
-		}
-		else if (curTile->rotatesRobot(orientation))
-			(*plyr)->rotateRobot(orientation);
-	}
 		cRegPhase++;
 		std::cout << "Register Phase #" << cRegPhase << std::endl;
 	if (cRegPhase <= 4) {

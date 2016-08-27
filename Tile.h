@@ -50,7 +50,7 @@ public:
 		spin = this->qty;
 		return rotatesBot;
 	}
-	bool movementBlocked(int direction) {
+	bool movementBlocked(int direction) const {
 		for (unsigned i = 0; i < features.size(); ++i)
 			if (features[i]->blockMovement(direction))
 				return true;

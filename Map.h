@@ -39,9 +39,6 @@ public:
 	void removeRobotFromPlay(sf::Vector2i boardNum, sf::Vector2i tileNum) {
 		map[boardNum.x][boardNum.y].removeRobotFromPlay(tileNum);
 	}
-	bool movementBlocked(int direction, sf::Vector2i boardPos, sf::Vector2i tilePos) {
-		return map[boardPos.x][boardPos.y].movementBlocked(direction, tilePos);
-	}
 	const Tile *getTile(sf::Vector2i boardPos, sf::Vector2i tilePos) { return map[boardPos.x][boardPos.y].getTile(tilePos); }
 	
 };
