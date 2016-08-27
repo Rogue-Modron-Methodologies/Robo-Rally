@@ -35,7 +35,10 @@ public:
 	void setSrcPosX(int num) { this->srcPos.x = num; updateTextRect(); }
 	void setSrcPosY(int num) { this->srcPos.y = num; updateTextRect(); }
 	void setColor(sf::Color color) { sprite->setColor(color); }
-	void setRotation(int orientation) { sprite->setRotation((float)orientation); }
+	void setRotation(int orientation) { 
+		sprite->setRotation((float)orientation); 
+		//setSrcPos(orientation);
+	}
 	void setOrigin();
 	void setOutOfPlay(bool oop) { outOfPlay = oop; }
 	bool isOutOfPlay() const { return outOfPlay; }

@@ -33,10 +33,12 @@ void Game::unloadGame() {
 //  Game Loop
 void Game::playGame() {
 	sf::Vector2i mPosNew, mPosOld;
-	bool drag = false;
-	//map.drawMap(window);			//  Debug:  Only Draws Once  : Uncomment Code in each draw function to use
+	bool drag = false, timerActive = false;
+	sf::Event event;
+	cTime = 0;
 	while (window.isOpen()) {
-		sf::Event event;
+		if (timerActive) 
+			cTime += clock.getElapsedTime().asSeconds();
 		if (!flag[phaseSetupComplete])
 			phaseSetup();
 		while (window.pollEvent(event)) {
@@ -49,19 +51,25 @@ void Game::playGame() {
 				{
 				case movePhase:
 					if (flag[actRobot]) {
-						if (event.key.code == sf::Keyboard::Up)
+						switch (event.key.code)
+						{
+						case sf::Keyboard::Up:
 							moveRobot(cPlyr, up);
-						else if (event.key.code == sf::Keyboard::Down)
+							timerActive = true;
+							break;
+						case sf::Keyboard::Down:
 							moveRobot(cPlyr, down);
-						else if (event.key.code == sf::Keyboard::Left)
+							timerActive = true;
+							break;
+						case sf::Keyboard::Left:
 							moveRobot(cPlyr, left);
-						else if (event.key.code == sf::Keyboard::Right)
+							timerActive = true;
+							break;
+						case sf::Keyboard::Right:
 							moveRobot(cPlyr, right);
-
-						if (flag[actBoard])
-							activateBoard();
-						checkRobotDamaged();
-						checkRobotDeath();
+							timerActive = true;
+							break;
+						}
 					}
 					break;
 				}
@@ -129,6 +137,14 @@ void Game::playGame() {
 		}
 		else 
 			mPosNew = sf::Mouse::getPosition(window);
+
+		if (flag[actBoard] && cTime >= DELAY) {
+			activateBoard();
+			checkRobotDamaged();
+			checkRobotDeath();
+			cTime = 0;
+			timerActive = false;
+		}
 
 		if (flag[phaseComplete])
 			endPhase();

@@ -35,10 +35,13 @@ const sf::Vector2i SCREEN_DIM = { 800, 800 };
 const float MIN_ZOOM = 300;
 const float MAX_ZOOM = 5000;
 const float ZOOM_QTY = .9f;
+const float DELAY = 4000;
 
 class Game {
 	sf::RenderWindow window;
 	sf::View view;
+	sf::Clock clock;
+	float cTime;
 	Map map;
 	Player *cPlyr;
 	std::vector<Player*> playerList;

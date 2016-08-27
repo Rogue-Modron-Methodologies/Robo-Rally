@@ -50,7 +50,7 @@ public:
 		robot->returntoResPoint();
 		robot->setOutOfPlay(false);
 	}
-	void rotateRobot(int direction) { robot->setRotation(robot->getRotation() + 90/*direction ? left : right*/); }
+	void rotateRobot(int direction) { robot->setRotation(robot->getRotation() + 90.f/*direction ? left : right*/); }
 	void damageRobot(int num) { robot->damageRobot(num); }
 	void programRobot() {};
 	void removeRobotFromPlay() { robot->setOutOfPlay(true); }
